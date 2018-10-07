@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('referral_code');
+            //$table->string('referral_code');
             $table->tinyInteger('type');
             $table->rememberToken();
             $table->timestamps();

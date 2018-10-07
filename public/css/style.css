@@ -1,0 +1,163 @@
+@import url(https://fonts.googleapis.com/css?family=Nunito);
+*{
+	margin: 0;
+	padding: 0;
+}
+
+body, html {
+    height: 100%;
+    font-family: Nunito;
+}
+
+.btn-orange{
+	background-color: #ffc000;
+	color:#ffffff;
+	border-radius: 20px;
+	border:3px solid #d9d9da;
+}
+
+.btn-navy-blue{
+	color: #fff;
+	background-color: #17375e;
+	border-color: #17375e;
+	border-radius: 20px;
+}
+
+.modaltitle{
+	color: #79a335;
+	font-weight: bolder;
+	margin-bottom: 10px;
+}
+
+#login:hover{
+	cursor:pointer;
+}
+
+/*** HOME ***/
+
+#hero{
+	height: 60%;
+	background-position: center;
+	background-size: cover;
+	background-image: url('../images/buildings.png');
+}
+
+#hero .card{
+	width: 60%;
+	margin: auto;
+	border: 2px solid #274f81;
+}
+
+#hero .card-title, #hero .card-subtitle{
+	font-weight: bolder;
+}
+
+.btnLoanSearch{
+	width: 60%;
+}
+
+#phoneTabs{
+	height: 270px;
+	width: 400px;
+}
+
+#loan-section h5{
+	color:#3771e6;
+	font-weight: bolder;
+}
+
+
+#description-section p:first-child,#description-section p:last-child{
+	color:#2664ee;
+}
+
+.icons-label{
+	color: #2f51fb;
+	font-size: 20px;
+	font-weight: bolder;
+}
+
+#featured-section img{
+	width: 90%;
+	margin: auto;
+	height: 180px;
+}
+
+#featured-section h5{
+	font-weight: bolder;
+	color:#616361;
+}
+
+#testimonial-section{
+	background-image: linear-gradient(#b4e9fc, #fff);
+}
+
+#testimonial-section h3{
+	color:#787878;
+	font-weight: bolder;
+}
+
+#expanding{
+	color:#6a9fd4;
+	font-size: 30px;
+	font-weight: bold;
+}
+
+footer{
+	background-color: #4e4c4c;
+}
+
+footer ul{
+	list-style: none;
+}
+
+footer ul li:first-child{
+	color:#0fc8c6;
+	font-weight: bolder;
+}
+
+footer ul li:not(:first-child), footer p{
+	color: #e0dddd;
+}
+
+
+/*** LOAN PAGE ***/
+#loan-search-section #search-form{
+	background-color: #ebeaea;
+}
+
+#loan-search-section h5{
+	font-weight: bolder;
+	color:#625f5f;
+}
+
+#client-searching{
+	color:#04549e;
+}
+
+#search-result-section h5{
+	color:#464545;
+}
+
+.result-box{
+	border: 1px solid #b3b3b3;
+}
+
+.result-box img{
+	width: 60%;
+	height: 80px;
+}
+
+.result-box p{
+	margin-bottom: 0px;
+	
+}
+
+.result-box button{
+	width: 50%;
+	color: #3e2f26;
+}
+
+#loan-note{
+	color:#fc4040;
+}
