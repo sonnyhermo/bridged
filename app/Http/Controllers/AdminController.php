@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class OfferController extends Controller
+class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +13,7 @@ class OfferController extends Controller
      */
     public function index()
     {
-        return view('offers');
+        return view('layouts.app_admin');
     }
 
     /**
@@ -32,7 +32,7 @@ class OfferController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-	public function store(Request $request)
+    public function store(Request $request)
     {
         //
     }

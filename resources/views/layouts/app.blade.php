@@ -31,8 +31,9 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
+
+                    <!-- Right Side Of Navbar -->
+                    <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
                             <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                         </li>
@@ -43,20 +44,14 @@
                             <a class="nav-link" href="#">Partners</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">My Accounts</a>
+                            <a class="nav-link" href="#">Promos</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">News & Blogs</a>
                         </li>
-                    </ul>
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
-                            <li class="nav-item">
-                                <a class="nav-link" >My Account</a>
-                            </li>
                             <li class="nav-item">
                                 @if (Route::has('register'))
                                     <a class="nav-link loginModalTrigger" data-toggle="modal" data-target="#loginModal">
@@ -69,7 +64,7 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    My Account <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -276,7 +271,8 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-user"></i></span>
                                         </div>
-                                        <input type="text" class="form-control" placeholder="Username or Email" name="username">
+                                        <input type="email" class="form-control" placeholder="Username or Email" name="email" id="loginEmail">
+                                        <span class="invalid-feedback" role="alert" id="emailFeedback"></span>
                                     </div>
                                 </div>
 
@@ -285,7 +281,8 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-unlock"></i></span>
                                         </div>
-                                        <input type="text" class="form-control" placeholder="Password" name="password">
+                                        <input type="password" class="form-control" placeholder="Password" name="password" id="loginPassword">
+                                        <span class="invalid-feedback" role="alert" id="passwordFeedback"></span>
                                     </div>
                                 </div>
 
@@ -316,13 +313,6 @@
     
     <script type="text/javascript">
         $(document).ready(function(){
-            
-            //setting up ajax
-            /*$.ajaxSetup({
-                headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });*/
 
             //register and login modal
             $('.loginModalTrigger').click(function(){
@@ -361,6 +351,35 @@
                     },
                     error:function(xhr){
                         console.log(xhr);
+                    }
+                });
+            });
+
+            $('#loginForm').on('submit',function(e){
+                e.preventDefault();
+                $.ajax({
+                    url: 'login',
+                    method: 'post',
+                    data: $(this).serialize(),
+                    dataType: 'json',
+                    success: function(res){
+                        if(res.auth){
+                            location.href = res.intended;
+                        }else{
+                            swal('Login Failed', 'Email or Password is not correct', 'error');
+                        }
+                    },
+                    error: function(xhr){
+                        console.log(JSON.parse(xhr.responseText));
+                        let error = JSON.parse(xhr.responseText);
+                        if(error.errors.hasOwnProperty('email')){
+                            let msg = '';
+                            $('#loginEmail').addClass('is-invalid');
+                            $.each(error.errors.email, function(key, val){
+                                msg += val;
+                            });
+                            $('#emailFeedback').html(msg);
+                        }
                     }
                 });
             });
