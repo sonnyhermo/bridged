@@ -15,10 +15,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@index')->name('home')->middleware('admin');
+Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 
-Route::resource('/offers','OfferController');
+Route::resource('/offers','OfferController')->middleware('verified');
 
 Route::resource('/admin','AdminController');
+
+Route::get('test', function() {
+    Mail::send('Email.test', [], function ($message) {
+        $message->to('jc29advincula@gmail.com', 'HisName')->subject('Welcome!');
+    });
+});
