@@ -8,34 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminLoginController extends Controller
 {
-<<<<<<< HEAD
-    /**
-     * Show the application’s login form.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function showLoginForm()
-    {
-        return view('auth.admin-login');
-    }
 
-
-    /*public function logout()
-    {
-
-        $this->guard()->logout();
-
-        //$request->session()->invalidate();
-
-        return redirect('/admin/login');
-    }*/
-
-
-    protected function guard(){
-        return Auth::guard('admin');
-    }
-=======
->>>>>>> 44c831806d786b4b11d86e756c5cda1b9019dbe7
     
     use AuthenticatesUsers;
     /**
