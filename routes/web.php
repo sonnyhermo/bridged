@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
+Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/offers','OfferController')->middleware('verified');
 
@@ -26,4 +26,9 @@ Route::prefix('admin')->group(function() {
     Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
     Route::post('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
     Route::get('/home', 'AdminController@index')->name('admin.home');
+
+    //routes for loans
+    Route::resource('/loans', 'LoanController');
+    Route::post('/loans/specification', 'LoanController@storeSpecs')->name('loan.spec');
+    Route::post('/loans/purpose', 'LoanController@storePurpose')->name('loan.purpose');
 });
