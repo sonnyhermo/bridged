@@ -43,6 +43,7 @@ class LoanController extends Controller
         //
     }
 
+
     /**
      * Store a newly created resource in storage.
      *
@@ -60,6 +61,19 @@ class LoanController extends Controller
             return redirect()->route('loans.index')->with('success','New Loan type has been added!');
         }
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Loan $loan)
+    {
+        //route model binding
+        return $loan;
+    }
+
 
     /**
      * Show the form for editing the specified resource.
