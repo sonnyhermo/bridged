@@ -104,37 +104,8 @@ class LoanController extends Controller
      */
     public function destroy(Loan $loan)
     {
-<<<<<<< HEAD
         return $loan;
-=======
-        //
-    }
-
-
-    /**
-     * Functions that are not in resource
-     *
-     *
-     */
-
-    public function storeSpecs(StoreNewSpec $request, Specification $spec){
-        $data = $request->validated();
-
-        $newSpec = $spec->create($data);
->>>>>>> 167d6e71db78ef33b06f95aea014dde12aa4bb92
 
     }
 
-<<<<<<< HEAD
-=======
-    public function storePurpose(StoreNewPurpose $request, Purpose $purpose){
-        $data = $request->validated();
-
-        $newPurpose = $purpose->create($data);
-
-        if( $newPurpose ){
-            return redirect()->route('loans.index')->with('success','New loan purpose has been added!');
-        }
-    }
->>>>>>> 167d6e71db78ef33b06f95aea014dde12aa4bb92
 }
