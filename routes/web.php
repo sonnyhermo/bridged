@@ -29,6 +29,11 @@ Route::prefix('admin')->group(function() {
 
     //routes for loans
     Route::resource('/loans', 'LoanController');
-    Route::post('/loans/specification', 'LoanController@storeSpecs')->name('loan.spec');
-    Route::post('/loans/purpose', 'LoanController@storePurpose')->name('loan.purpose');
+    Route::post('/loans/specification', 'LoanController@storeSpecs')->name('loans.spec');
+
+    //routes for purposes
+    Route::resource('/purposes', 'PurposeController');
+
+    //routes for specification
+    Route::resource('/specifications', 'SpecificationController');
 });
