@@ -9,19 +9,6 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminLoginController extends Controller
 {
-    /**
-     * Show the application’s login form.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function showLoginForm()
-    {
-        return view('auth.admin-login');
-    }
-
-    protected function guard(){
-        return Auth::guard('admin');
-    }
     
     use AuthenticatesUsers;
     /**
@@ -38,5 +25,19 @@ class AdminLoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest:admin')->except('logout');
+    }
+
+    /**
+     * Show the application’s login form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showLoginForm()
+    {
+        return view('auth.admin-login');
+    }
+
+    protected function guard(){
+        return Auth::guard('admin');
     }
 }

@@ -133,128 +133,6 @@
         </footer>
     </div>
 
-    <!-- Modal of register -->
-    <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="col-md-12 text-center">
-                        <img src="{{asset('images/logo.png')}}" class="pt-5">
-                        <p class="modaltitle">ACCOUNT CREATION</p>
-                        <form method="POST" action="{{ route('register') }}" id="registerForm" >
-                            @csrf
-
-                            <div class="form-group row">
-                                <label for="firstName" class="col-md-4 col-form-label text-md-right">First Name</label>
-
-                                <div class="col-md-7">
-                                    <input id="firstName" type="text" class="form-control{{ $errors->has('firstName') ? ' is-invalid' : '' }}" name="firstName" value="{{ old('firstName') }}" required autofocus>
-
-                                    @if ($errors->has('firstName'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('firstName') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="middleName" class="col-md-4 col-form-label text-md-right">Middle Name</label>
-
-                                <div class="col-md-7">
-                                    <input id="middleName" type="text" class="form-control{{ $errors->has('middleName') ? ' is-invalid' : '' }}" name="middleName" value="{{ old('middleName') }}" required autofocus>
-
-                                    @if ($errors->has('middleName'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('middleName') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="lastName" class="col-md-4 col-form-label text-md-right">Last Name</label>
-
-                                <div class="col-md-7">
-                                    <input id="lastName" type="text" class="form-control{{ $errors->has('lastName') ? ' is-invalid' : '' }}" name="lastName" value="{{ old('lastName') }}" required autofocus>
-
-                                    @if ($errors->has('lastName'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('lastName') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                                <div class="col-md-7">
-                                    <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
-
-                                    @if ($errors->has('email'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('email') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                                <div class="col-md-7">
-                                    <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-
-                                    @if ($errors->has('password'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('password') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                                <div class="col-md-7">
-                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="referralCode" class="col-md-4 col-form-label text-md-right">Referral Code</label>
-
-                                <div class="col-md-7">
-                                    <input id="referralCode" type="text" class="form-control{{ $errors->has('referralCode') ? ' is-invalid' : '' }}" name="referralCode" value="{{ old('referralCode') }}" required autofocus>
-
-                                    @if ($errors->has('referralCode'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('referralCode') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <div class="col-md-12 text-center">
-                                    <button type="submit" class="btn btn-orange" id="signup">
-                                        SIGN UP
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-md-12 text-center">
-                                    Already have Account? Click here to <a href="#" class="loginModalTrigger" data-toggle="modal" data-target="#loginModal">Login</a>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Modal of login -->
     <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -295,7 +173,7 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-12 text-center">
-                                        Don't have an account? <a href="#" class="registerModalTrigger" data-toggle="modal" data-target="#registerModal">Sign Up</a>
+                                        Don't have an account? <a href="/register">Sign Up</a>
                                     </div>
                                 </div>
                             </form>
@@ -316,43 +194,7 @@
 
             //register and login modal
             $('.loginModalTrigger').click(function(){
-                $('#registerModal').modal('hide');
                 $('#loginModal').modal('show');
-            });
-
-             $('.registerModalTrigger').click(function(){
-                $('#registerModal').modal('show');
-                $('#loginModal').modal('hide');
-            });
-
-            $('#registerForm').on('submit', function(e){
-                e.preventDefault();
-                $.ajax({
-                    url:'register',
-                    method:'post',
-                    data: $(this).serialize(),
-                    dataType: 'json',
-                    success:function(res){
-                        console.log(res);
-                        switch(res.status){
-                            case 0:
-                                swal('Failed',res.message,'error');
-                                break;
-                            case 1:
-                                swal({
-                                    title: 'Success',
-                                    text: res.message,
-                                    icon: 'success'
-                                }).then((value) => {
-                                    $('#registerModal').modal('hide');
-                                });
-                                break;
-                        }
-                    },
-                    error:function(xhr){
-                        console.log(xhr);
-                    }
-                });
             });
 
             $('#loginForm').on('submit',function(e){
