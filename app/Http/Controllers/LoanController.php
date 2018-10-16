@@ -14,14 +14,11 @@ class LoanController extends Controller
 {
 
     protected $loan;
-    protected $spec;
 
-    public function __construct(Loan $loan, Specification $spec, Purpose $purpose)
+    public function __construct(Loan $loan)
     {
         $this->middleware('auth:admin');
         $this->loan = $loan;
-        $this->spec = $spec;
-        $this->purpose = $purpose;
     }
 
 
@@ -105,20 +102,20 @@ class LoanController extends Controller
      *
      */
 
-    public function storeSpecs(StoreNewSpec $request){
+    public function storeSpecs(StoreNewSpec $request, Specification $spec){
         $data = $request->validated();
 
-        $newSpec = $this->spec->create($data);
+        $newSpec = $spec->create($data);
 
         if( $newSpec ){
             return redirect()->route('loans.index')->with('success','New loan specification has been added!');
         }
     }
 
-    public function storePurpose(StoreNewPurpose $request){
+    public function storePurpose(StoreNewPurpose $request, Purpose $purpose){
         $data = $request->validated();
 
-        $newPurpose = $this->purpose->create($data);
+        $newPurpose = $purpose->create($data);
 
         if( $newPurpose ){
             return redirect()->route('loans.index')->with('success','New loan purpose has been added!');
