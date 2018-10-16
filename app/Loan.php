@@ -15,4 +15,5 @@ class Loan extends Model
     public function purposes(){
     	return $this->hasMany('App\Purpose');
     }
+
 }

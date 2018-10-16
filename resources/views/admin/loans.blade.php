@@ -159,7 +159,7 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<form action="/admin/loans/specification" method="POST">
+					<form action="/admin/specifications" method="POST">
 						@csrf
 
 						<div class="form-group">
@@ -198,7 +198,7 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<form action="/admin/loans/purpose" method="POST">
+					<form action="/admin/purposes" method="POST">
 						@csrf
 
 						<div class="form-group">
@@ -222,3 +222,15 @@
 		</div>
 	</div>
 @endsection
+
+
+@push('script')
+<script>
+	$('#loanSpecTable').DataTable({
+		searching: false,
+		lengthChange: false,
+		pageLength: 5,
+		pagingType: 'simple'
+	});
+</script>
+@endpush
