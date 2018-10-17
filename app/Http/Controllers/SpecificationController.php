@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreNewSpec;
 use App\Specification;
 
+use Yajra\Datatables\Datatables;;
+
 
 class SpecificationController extends Controller
 {
@@ -89,5 +91,9 @@ class SpecificationController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getAll(){
+        return Datatables::of(Specification::with('loan'))->make();
     }
 }

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreBankRequest;
+use Illuminate\Support\Facades\Log;
+use App\Bank;
 
 class BankController extends Controller
 {
@@ -13,7 +16,7 @@ class BankController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.banks', ['module' => 'Banks']);
     }
 
     /**
@@ -32,9 +35,20 @@ class BankController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreBankRequest $request, Bank $bank)
     {
-        //
+        /*$data = $request->validated();
+
+        $newBank = $bank->create($data);
+
+        if($newBank){
+            return redirect()->route('banks.index')->with('success','New Bank has been added!');
+        }else{*/
+
+            Log::error('Failed to add Bank!');
+            return redirect()->route('banks.index')->with('error','Failed to add Bank!');
+        //}
+
     }
 
     /**

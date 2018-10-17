@@ -31,7 +31,7 @@ class LoanController extends Controller
         $loans = $this->loan->all();
         $specs = Specification::all();
         $purposes = Purpose::all();
-        return view('admin.loans', ['loans' => $loans, 'module' => 'Loans', 'specs' => $specs, 'purposes' => $purposes]);
+        return view('admin.loans', ['loans' => $loans, 'module' => 'Loans']);
     }
 
     /**
@@ -57,6 +57,7 @@ class LoanController extends Controller
         $data = $request->validated();
 
         $this->loan->type = $request->loan;
+        $this->loan->slug = str_slug($request->loan, '-');
 
         if($this->loan->save()){
             return redirect()->route('loans.index')->with('success','New Loan type has been added!');
