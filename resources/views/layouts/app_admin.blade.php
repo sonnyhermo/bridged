@@ -38,7 +38,7 @@
                 </div>
                 <ul class="nav">
                     <li>
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="/dashboard">
                             <i class="fas fa-tachometer-alt"></i>
                             <p>Dashboard</p>
                         </a>
@@ -50,7 +50,13 @@
                         </a>
                     </li>
                     <li>
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="/admin/loans">
+                            <i class="fas fa-file-alt"></i>
+                            <p>Loans</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="/admin/banks">
                             <i class="fas fa-building"></i>
                             <p>Banks</p>
                         </a>
@@ -95,7 +101,7 @@
 <script src="{{ asset('js/bootstrap.min.js') }}" type="text/javascript"></script>
 <!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
 <script src="{{ asset('js/light-bootstrap-dashboard.js?v=2.0.1') }}" type="text/javascript"></script>
-<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
 
 @stack('script')
 
