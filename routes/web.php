@@ -28,7 +28,9 @@ Route::prefix('admin')->group(function() {
     Route::get('/dashboard', 'AdminController@index')->name('admin.dashboard');
 
     //routes for loans
-    Route::resource('/loans', 'LoanController');
+    Route::resource('/loans', 'LoanController', [
+        'except' => [ 'show', 'create', 'edit' ]
+    ]);
 
     //routes for purposes
     Route::resource('/purposes', 'PurposeController');
