@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreNewPurpose;
 use App\Purpose;
+use Yajra\Datatables\Datatables;
+use DB;
 
 class PurposeController extends Controller
 {
@@ -53,7 +55,7 @@ class PurposeController extends Controller
      */
     public function show($id)
     {
-        //
+        return $id;
     }
 
     /**
@@ -88,5 +90,15 @@ class PurposeController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    public function getAll(){
+
+        /*$specification = DB::table('specifications')->join('loans', 'specifications.loan_id', '=', 'loans.id')
+            ->select(['specifications.id', 'loans.type', 'specifications.description']);
+        return Datatables::of($specification)->make();*/
+
+        return Datatables::of(Purpose::with('loan'))->make();
     }
 }

@@ -7,7 +7,7 @@
 	<div class="row">
 		<div class="col-md-12 mb-3">
 			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newLoanModal">
-				Add Loans <span class="fas fa-plus fa-sm">
+				Add Loans <span class="fas fa-plus fa-sm"></span>
 			</button>
 			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loanListModal">
 				Loan List <span class="fas fa-list fa-sm"></span>
@@ -36,15 +36,7 @@
 	           			</thead>
 
 	           			<tbody>
-           				@foreach($loans as $loan)
-           					@foreach($loan->specifications as $spec)
-           					<tr>
-           						<td>{{ $loan->type}}</td>
-           						<td>{{ $spec->description }}</td>
-           						<td>{{ $spec->collateral }}</td>
-           					</tr>
-           					@endforeach
-           				@endforeach
+
 	           			</tbody>
 	           		</table>
 		        </div>
@@ -71,14 +63,7 @@
 	           				</tr>
 	           			</thead>
 	           			<tbody>	
-	           				@foreach($loans as $loan)
-           					@foreach($loan->purposes as $purpose)
-           					<tr>
-           						<td>{{ $loan->type}}</td>
-           						<td>{{ $purpose->purpose }}</td>
-           					</tr>
-           					@endforeach
-           				@endforeach
+
 	           			</tbody>
 	           		</table>
 		        </div>
@@ -227,10 +212,18 @@
 @push('script')
 <script>
 	$('#loanSpecTable').DataTable({
-		searching: false,
-		lengthChange: false,
-		pageLength: 5,
-		pagingType: 'simple'
+		processing: true,
+        serverSide: true,
+        pagingType: 'simple',
+        pageLength: 1,
+        searching: false,
+        lengthChange: false,
+        ajax: '/admin/all_loan_specifications',
+        columns: [
+            {data: 'loan.type', name: 'loan.type'},
+            {data: 'description', name: 'description'},
+            {data: 'collateral', name: 'collateral'},
+        ]
 	});
 </script>
 @endpush
