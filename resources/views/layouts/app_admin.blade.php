@@ -20,7 +20,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="{{ asset('css/light-bootstrap-dashboard.css?v=2.0.1') }}" rel="stylesheet" />
-    <link rel="stylesheet" href="{{ asset('css/bootstrap-multiselect.css') }}" type="text/css">
+
 
 </head>
 <body>
@@ -39,27 +39,33 @@
                 </div>
                 <ul class="nav">
                     <li>
-                        <a class="nav-link" href="/dashboard">
-                            <i class="fas fa-tachometer-alt"></i>
+                        <a class="nav-link" href="/admin/dashboard">
+                            <i class="fa fa-tachometer" aria-hidden="true"></i>
                             <p>Dashboard</p>
                         </a>
                     </li>
                     <li>
-                        <a class="nav-link" href="#">
-                            <i class="fas fa-users"></i>
+                        <a class="nav-link" href="/admin/users">
+                            <i class="fa fa-users" aria-hidden="true"></i>
                             <p>Users</p>
                         </a>
                     </li>
                     <li>
                         <a class="nav-link" href="/admin/loans">
-                            <i class="fas fa-file-alt"></i>
+                            <i class="fa fa-file-archive-o" aria-hidden="true"></i>
                             <p>Loans</p>
                         </a>
                     </li>
                     <li>
                         <a class="nav-link" href="/admin/banks">
-                            <i class="fas fa-building"></i>
+                            <i class="fa fa-building" aria-hidden="true"></i>
                             <p>Banks</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="#">
+                            <i class="fa fa-tags" aria-hidden="true"></i>
+                            <p>Offers</p>
                         </a>
                     </li>
                 </ul>
@@ -95,15 +101,16 @@
             </div>
         </div>
     </div>
+
+    <!--   Core JS Files   -->
+    <script src="{{ asset('js/jquery.3.2.1.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/popper.min.js') }}" type="text/javascript"></script>
+    
+    <!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
+    <script src="{{ asset('js/light-bootstrap-dashboard.js?v=2.0.1') }}" type="text/javascript"></script>
+    <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </body>
-<!--   Core JS Files   -->
-<script src="{{ asset('js/jquery.3.2.1.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('js/popper.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('js/bootstrap.min.js') }}" type="text/javascript"></script>
-<!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
-<script src="{{ asset('js/light-bootstrap-dashboard.js?v=2.0.1') }}" type="text/javascript"></script>
-<script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="{{ asset('js/bootstrap-multiselect.js') }}"></script>
 
 @stack('script')
 

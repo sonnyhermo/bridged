@@ -6,11 +6,11 @@
 	
 	<div class="row">
 		<div class="col-md-12 mb-3">
-			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newLoanModal">
-				Add Loans <span class="fas fa-plus fa-sm"></span>
+			<button type="button" class="btn btn-primary btn-fill" data-toggle="modal" data-target="#newLoanModal">
+				Add Loans <span class="fa fa-plus" aria-hidden="true"></span>
 			</button>
-			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loanListModal">
-				Loan List <span class="fas fa-list fa-sm"></span>
+			<button type="button" class="btn btn-primary btn-fill" data-toggle="modal" data-target="#loanListModal">
+				Loan List <span class="fa fa-list-alt" aria-hidden="true"></span>
 			</button>
 		</div>
 
@@ -19,7 +19,7 @@
 		        <div class="card-header">
 		        	<div class="clearfix">
 						<button type="button" class="btn btn-primary btn-sm float-right" data-toggle="modal" data-target="#newSpecModal">
-							<i class="fas fa-plus fa-sm"></i>
+							<i class="fa fa-plus" aria-hidden="true"></i>
 						</button>
 			            <h4 class="card-title">Specification</h4>
 					</div>
@@ -32,6 +32,7 @@
 	           					<th>Loan Type</th>
 	           					<th>Specfication</th>
 	           					<th>Collateral</th>
+	           					<th>Action</th>
 	           				</tr>
 	           			</thead>
 
@@ -48,7 +49,7 @@
 		        <div class="card-header">
 		            <div class="clearfix">
 						<button type="button" class="btn btn-primary btn-sm float-right" data-toggle="modal" data-target="#newPurposeModal">
-							<i class="fas fa-plus fa-sm"></i>
+							<i class="fa fa-list-alt" aria-hidden="true"></i>
 						</button>
 			            <h4 class="card-title">Purpose</h4>
 					</div>
@@ -183,7 +184,7 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<form action="/admin/purposes" method="POST">
+					<form action="/admin/purposes" method="POST" id="purposeForm">
 						@csrf
 
 						<div class="form-group">
@@ -223,7 +224,19 @@
             {data: 'loan.type', name: 'loan.type'},
             {data: 'description', name: 'description'},
             {data: 'collateral', name: 'collateral'},
-        ]
+            {
+            	data: null,
+			    render: function ( data, type, row ) {
+			        return '<button class="btn btn-sm btn-danger" data-id="'+row['loan.id']+'"><span class="fa-trash"></span></button>'+
+			        '<button class="btn btn-sm btn-info" data-id="'+row['loan.id']+'"><span class="fa-edit"></span></button>';;
+		    	}
+		    }
+        ],
 	});
+
+	$('#purposeForm').submit(function(e){
+		e.preventDefault();
+		$('#newPurposeModal').modal('hide');
+	})
 </script>
 @endpush

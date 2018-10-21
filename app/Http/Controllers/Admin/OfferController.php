@@ -1,14 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreNewPurpose;
-use App\Purpose;
-use Yajra\Datatables\Datatables;
-use DB;
+use App\Http\Controllers\Controller;
 
-class PurposeController extends Controller
+class OfferController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +14,7 @@ class PurposeController extends Controller
      */
     public function index()
     {
-        //
+        return view('offers');
     }
 
     /**
@@ -36,15 +33,9 @@ class PurposeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreNewPurpose $request, Purpose $purpose)
+	public function store(Request $request)
     {
-        $data = $request->validated();
-
-        $newPurpose = $purpose->create($data);
-
-        if( $newPurpose ){
-            return redirect()->route('loans.index')->with('success','New loan purpose has been added!');
-        }
+        //
     }
 
     /**
@@ -55,7 +46,7 @@ class PurposeController extends Controller
      */
     public function show($id)
     {
-        return $id;
+        //
     }
 
     /**
@@ -90,15 +81,5 @@ class PurposeController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-
-    public function getAll(){
-
-        /*$specification = DB::table('specifications')->join('loans', 'specifications.loan_id', '=', 'loans.id')
-            ->select(['specifications.id', 'loans.type', 'specifications.description']);
-        return Datatables::of($specification)->make();*/
-
-        return Datatables::of(Purpose::with('loan'))->make();
     }
 }

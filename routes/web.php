@@ -25,22 +25,25 @@ Route::prefix('admin')->group(function() {
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
     Route::post('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
-    Route::get('/dashboard', 'AdminController@index')->name('admin.dashboard');
+    Route::get('/dashboard', 'DashboardController@index')->name('admin.dashboard');
+
+    //routes for users
+    Route::resource('/users','Admin\AdminController');
 
     //routes for loans
-    Route::resource('/loans', 'LoanController', [
+    Route::resource('/loans', 'Admin\LoanController', [
         'except' => [ 'show', 'create', 'edit' ]
     ]);
 
     //routes for purposes
-    Route::resource('/purposes', 'PurposeController');
+    Route::resource('/purposes', 'Admin\PurposeController');
     Route::get('/all_loan_purposes', 'PurposeController@getAll')->name('purpose.all');
 
     //routes for specification
-    Route::resource('/specifications', 'SpecificationController');
-    Route::get('/all_loan_specifications', 'SpecificationController@getAll')->name('spec.all');
+    Route::resource('/specifications', 'Admin\SpecificationController');
+    Route::get('/all_loan_specifications', 'Admin\SpecificationController@getAll')->name('spec.all');
 
     //routes for banks and bank employees
-    Route::resource('/banks','BankController');
+    Route::resource('/banks','Admin\BankController');
     
 });

@@ -3,13 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreNewSpec;
-use App\Specification;
 
-use Yajra\Datatables\Datatables;;
-
-
-class SpecificationController extends Controller
+class CreditorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -37,15 +32,9 @@ class SpecificationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreNewSpec $request, Specification $spec)
+    public function store(Request $request)
     {
-        $data = $request->validated();
-
-        $newSpec = $spec->create($data);
-
-        if( $newSpec ){
-            return redirect()->route('loans.index')->with('success','New loan specification has been added!');
-        }
+        //
     }
 
     /**
@@ -91,9 +80,5 @@ class SpecificationController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function getAll(){
-        return Datatables::of(Specification::with('loan'))->make();
     }
 }
