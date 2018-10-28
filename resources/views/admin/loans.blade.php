@@ -21,16 +21,17 @@
 						<button type="button" class="btn btn-primary btn-sm float-right" data-toggle="modal" data-target="#newSpecModal">
 							<i class="fa fa-plus" aria-hidden="true"></i>
 						</button>
-			            <h4 class="card-title">Specification</h4>
+			            <h4 class="card-title">Classification</h4>
 					</div>
-		            <p class="card-category">List of Specification</p>
+		            <p class="card-category">List of Classification</p>
 		        </div>
 	            <div class="card-body">
 	           		<table class="table table-striped" id="loanSpecTable">
 	           			<thead>
 	           				<tr>
+	           					<th></th>
 	           					<th>Loan Type</th>
-	           					<th>Specfication</th>
+	           					<th>Classifications</th>
 	           					<th>Collateral</th>
 	           					<th>Action</th>
 	           				</tr>
@@ -61,6 +62,7 @@
 	           				<tr>
 	           					<th>Loan Type</th>
 	           					<th>Purpose</th>
+	           					<th>Action</th>
 	           				</tr>
 	           			</thead>
 	           			<tbody>	
@@ -139,7 +141,7 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title">Modal title</h5>
+					<h5 class="modal-title">New Specification</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 					</button>
@@ -178,7 +180,7 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title">Modal title</h5>
+					<h5 class="modal-title">New Purpose</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 					</button>
@@ -211,32 +213,5 @@
 
 
 @push('script')
-<script>
-	$('#loanSpecTable').DataTable({
-		processing: true,
-        serverSide: true,
-        pagingType: 'simple',
-        pageLength: 1,
-        searching: false,
-        lengthChange: false,
-        ajax: '/admin/all_loan_specifications',
-        columns: [
-            {data: 'loan.type', name: 'loan.type'},
-            {data: 'description', name: 'description'},
-            {data: 'collateral', name: 'collateral'},
-            {
-            	data: null,
-			    render: function ( data, type, row ) {
-			        return '<button class="btn btn-sm btn-danger" data-id="'+row['loan.id']+'"><span class="fa-trash"></span></button>'+
-			        '<button class="btn btn-sm btn-info" data-id="'+row['loan.id']+'"><span class="fa-edit"></span></button>';;
-		    	}
-		    }
-        ],
-	});
-
-	$('#purposeForm').submit(function(e){
-		e.preventDefault();
-		$('#newPurposeModal').modal('hide');
-	})
-</script>
+<script src="{{ asset('js/loans.js') }}"></script>
 @endpush

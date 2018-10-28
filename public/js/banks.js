@@ -62,4 +62,42 @@ $(document).ready(function(){
 			}
 		});
 	});
+
+	$('#banksTable').DataTable({
+		processing: true,
+        serverSide: true,
+        pagingType: 'simple',
+        pageLength: 1,
+        searching: false,
+        lengthChange: false,
+        ajax: '/admin/all_banks',
+        columns: [
+            {
+            	data: 'logo',
+            	render: function ( data, type, row ) {
+			        return '<img src="/storage/'+data+'" class="logo"/>';
+		    	}
+            },
+            {data: 'name', name: 'name'},
+            {data: 'email', name: 'email'},
+            {data: 'description', name: 'description'},
+            {data: 'coverage', name: 'coverage'},
+            {
+            	data: null,
+			    render: function ( data, type, row ) {
+			        return '<button class="btn btn-sm btn-danger bank-delete" data-id="'+row['slug']+'"><span class="fa fa-trash"></span></button>'+
+			        '<button class="btn btn-sm btn-info bank-edit" data-id="'+row['slug']+'"><span class="fa fa-pencil-square-o"></span></button>';;
+		    	}
+		    }
+        ],
+	});
+
+	$('.bank-delete').click(function(e){
+		e.preventDefault();
+		$.ajax({
+			type: url
+		});
+	});
+
+
 });

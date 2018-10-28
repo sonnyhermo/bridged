@@ -9,7 +9,7 @@
 			<button type="button" class="btn btn-primary btn-fill" data-toggle="modal" data-target="#newBankModal">
 				Add Banks <span class="fa fa-plus" aria-hidden="true"></span>
 			</button>
-			<button type="button" class="btn btn-primary btn-fill" data-toggle="modal" data-target="#bankListModal">
+			<button type="button" class="btn btn-primary btn-fill" data-toggle="modal" data-target="#branchListModal">
 				Banks List <span class="fa fa-list-alt" aria-hidden="true"></span>
 			</button>
 		</div>
@@ -21,20 +21,19 @@
 						<button type="button" class="btn btn-primary btn-sm float-right" data-toggle="modal" data-target="#newPurposeModal">
 							<i class="fa fa-plus" aria-hidden="true"></i>
 						</button>
-			            <h4 class="card-title">Offers</h4>
+			            <h4 class="card-title">Banks</h4>
 					</div>
-		            <p class="card-category">List of Banks Offers</p>
+		            <p class="card-category">List of Banks and Coverage</p>
 		        </div>
 	            <div class="card-body">
-	           		<table class="table table-striped" id="loanPurposeTable">
+	           		<table class="table table-striped" id="banksTable">
 	           			<thead>
 	           				<tr>
+	           					<th>Logo</th>
 	           					<th>Bank</th>
-	           					<th>Loan Type</th>
-	           					<th>Loan Type</th>
-	           					<th>Product</th>
-	           					<th>Terms</th>
-	           					<th>Interest</th>
+	           					<th>Email</th>
+	           					<th>Description</th>
+	           					<th>Coverage</th>
 	           					<th>Actions</th>
 	           				</tr>
 	           			</thead>
@@ -115,43 +114,8 @@
 		</div>
 	</div>
 
-	<!-- Modal For Bank List-->
-	<div class="modal fade" id="bankListModal" tabindex="-1" role="dialog" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title">List of Bank Partners</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<ul>
-					<table class="table table-striped">
-	           			<thead>
-	           				<tr>
-	           					<th>Bank Name</th>
-	           					<th>Action</th>
-	           				</tr>
-	           			</thead>
-
-	           			<tbody>
-	           				@foreach($banks as $bank)
-	           				<tr>
-	           					<td>{{ $bank->name }}</td>
-	           					<td><button type="button" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></i></button></td>
-	           				</tr>
-	           				@endforeach
-	           			</tbody>
-	           		</table>
-					</ul>	
-				</div>
-			</div>
-		</div>
-	</div>
-
 @endsection
 
 @push('script')
-	<script type="text/javascript" src="{{ asset('js/bank.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/banks.js') }}"></script>
 @endpush

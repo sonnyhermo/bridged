@@ -19,7 +19,10 @@ class CreateBranchesTable extends Migration
             $table->string('branch');
             $table->string('address');
             $table->string('telephone');
+            $table->string('region');
+            $table->string('slug')->unique();
             $table->timestamps();
+           
         });
     }
 

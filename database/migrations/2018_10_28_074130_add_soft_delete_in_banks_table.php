@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddEmailIntoBanksTable extends Migration
+class AddSoftDeleteInBanksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddEmailIntoBanksTable extends Migration
     public function up()
     {
         Schema::table('banks', function (Blueprint $table) {
-           $table->string('email');
+            $table->softDeletes();
         });
     }
 
@@ -26,7 +26,7 @@ class AddEmailIntoBanksTable extends Migration
     public function down()
     {
         Schema::table('banks', function (Blueprint $table) {
-           $table->dropColumn('email');
+            $table->dropSoftDeletes();
         });
     }
 }

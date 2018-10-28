@@ -9,17 +9,22 @@
 
     <title>{{ config('app.name', 'Bridged') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="{{ asset('css/light-bootstrap-dashboard.css?v=2.0.1') }}" rel="stylesheet" />
+
+    <style>
+        .logo{
+            width: 100px;
+            height: 50px;
+        }
+    </style>
 
 
 </head>
@@ -63,7 +68,7 @@
                         </a>
                     </li>
                     <li>
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="/admin/offers">
                             <i class="fa fa-tags" aria-hidden="true"></i>
                             <p>Offers</p>
                         </a>
@@ -107,12 +112,21 @@
     <script src="{{ asset('js/popper.min.js') }}" type="text/javascript"></script>
     
     <!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
-    <script src="{{ asset('js/light-bootstrap-dashboard.js?v=2.0.1') }}" type="text/javascript"></script>
     <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/light-bootstrap-dashboard.js?v=2.0.1') }}" type="text/javascript"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-</body>
+    <script type="text/javascript">
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
 
-@stack('script')
+    </script>
+    @stack('script')
+    
+</body>
 
 
 </body>

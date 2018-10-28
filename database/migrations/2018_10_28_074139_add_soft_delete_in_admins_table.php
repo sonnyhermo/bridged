@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddSlugColumnOnLoanTable extends Migration
+class AddSoftDeleteInAdminsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddSlugColumnOnLoanTable extends Migration
      */
     public function up()
     {
-        Schema::table('loans', function (Blueprint $table) {
-            $table->string('slug')->unique();
+        Schema::table('admins', function (Blueprint $table) {
+            $table->softDeletes();
         });
     }
 
@@ -25,8 +25,8 @@ class AddSlugColumnOnLoanTable extends Migration
      */
     public function down()
     {
-        Schema::table('loans', function($table) {
-            $table->dropColumn('slug');
+        Schema::table('admins', function (Blueprint $table) {
+            $table->dropSoftDeletes();
         });
     }
 }

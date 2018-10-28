@@ -17,7 +17,9 @@ class CreatePurposesTable extends Migration
             $table->increments('id');
             $table->integer('loan_id');
             $table->string('purpose');
+            $table->string('slug')->unique();
             $table->timestamps();
+           
         });
     }
 

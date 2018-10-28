@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddRegionToBranchesTable extends Migration
+class AddSoftDeleteInBranchesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddRegionToBranchesTable extends Migration
     public function up()
     {
         Schema::table('branches', function (Blueprint $table) {
-           $table->string('region');
+            $table->softDeletes();
         });
     }
 
@@ -26,7 +26,7 @@ class AddRegionToBranchesTable extends Migration
     public function down()
     {
         Schema::table('branches', function (Blueprint $table) {
-            $table->dropColumn('region');
+            $table->dropSoftDeletes();
         });
     }
 }

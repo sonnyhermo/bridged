@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreNewPurpose;
 use App\Purpose;
-use Yajra\Datatables\Datatables;
-use DB;
 
 class PurposeController extends Controller
 {
@@ -39,13 +37,13 @@ class PurposeController extends Controller
      */
     public function store(StoreNewPurpose $request, Purpose $purpose)
     {
-        $data = $request->validated();
+        /*$data = $request->validated();
 
         $newPurpose = $purpose->create($data);
 
         if( $newPurpose ){
             return redirect()->route('loans.index')->with('success','New loan purpose has been added!');
-        }
+        }*/
     }
 
     /**
@@ -91,15 +89,5 @@ class PurposeController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-
-    public function getAll(){
-
-        /*$specification = DB::table('specifications')->join('loans', 'specifications.loan_id', '=', 'loans.id')
-            ->select(['specifications.id', 'loans.type', 'specifications.description']);
-        return Datatables::of($specification)->make();*/
-
-        return Datatables::of(Purpose::with('loan'))->make();
     }
 }

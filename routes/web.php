@@ -31,19 +31,26 @@ Route::prefix('admin')->group(function() {
     Route::resource('/users','Admin\AdminController');
 
     //routes for loans
-    Route::resource('/loans', 'Admin\LoanController', [
-        'except' => [ 'show', 'create', 'edit' ]
-    ]);
+    Route::resource('/loans', 'Admin\LoanController', ['except' => [ 'create' ] ]);
 
     //routes for purposes
     Route::resource('/purposes', 'Admin\PurposeController');
-    Route::get('/all_loan_purposes', 'PurposeController@getAll')->name('purpose.all');
 
     //routes for specification
     Route::resource('/specifications', 'Admin\SpecificationController');
-    Route::get('/all_loan_specifications', 'Admin\SpecificationController@getAll')->name('spec.all');
+
 
     //routes for banks and bank employees
     Route::resource('/banks','Admin\BankController');
+
+    //routes for offers
+    Route::resource('/offers','Admin\OfferController');
+
+
+    //routes for datatables
+    Route::get('/all_banks', 'Admin\DataTableController@fetchBanks')->name('datatable.banks');
+    Route::get('/all_loans', 'Admin\DataTableController@fetchLoans')->name('datatable.loans');
+    Route::get('/all_loan_purposes', 'Admin\DataTableController@fetchPurposes')->name('datatable.purposes');
+    Route::get('/all_loan_specifications', 'Admin\DataTableController@fetchSpecifications')->name('datatable.specifications');
     
 });
