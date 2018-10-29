@@ -1,8 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Bank;
+use App\Loan;
 
 class OfferController extends Controller
 {
@@ -13,7 +16,10 @@ class OfferController extends Controller
      */
     public function index()
     {
-        return view('offers');
+
+        $banks = Bank::all();
+        $loans = Loan::all();
+        return view('admin.offers', ['module' => 'Offers', 'banks' => $banks, 'loans' => $loans]);
     }
 
     /**
@@ -32,7 +38,7 @@ class OfferController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+	public function store(Request $request)
     {
         //
     }
@@ -45,7 +51,7 @@ class OfferController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**

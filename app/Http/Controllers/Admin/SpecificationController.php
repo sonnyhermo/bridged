@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreNewSpec;
 use App\Specification;
 
@@ -40,6 +41,7 @@ class SpecificationController extends Controller
     public function store(StoreNewSpec $request, Specification $spec)
     {
         $data = $request->validated();
+        $data = array_merge($data, ['slug' => str_slug($request->description, '-')]);
 
         $newSpec = $spec->create($data);
 
@@ -54,9 +56,9 @@ class SpecificationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Specification $specification)
     {
-        //
+        return $specification->toJson();
     }
 
     /**
@@ -77,9 +79,15 @@ class SpecificationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreNewSpec $request, Specification $specification)
     {
-        //
+        $data = $request->validated();
+        $is_updated = $specification->update($data);
+        if(!$is_updated){
+            return redirect()->route('loans.index')->with('error','Specification failed to update');
+        }
+        
+        return redirect()->route('loans.index')->with('success','Specification Updated');
     }
 
     /**
@@ -88,12 +96,9 @@ class SpecificationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Specification $specification)
     {
-        //
-    }
-
-    public function getAll(){
-        return Datatables::of(Specification::with('loan'))->make();
+        $specification->delete();
+        return json_encode(['a'=>'b']);
     }
 }

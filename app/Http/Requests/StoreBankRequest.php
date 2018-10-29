@@ -25,7 +25,11 @@ class StoreBankRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'email' => 'required'
+            'email' => 'required',
+            'description' => 'required',
+            'coverage' => 'required',
+            'logo' => 'required|mimes:jpeg,bmp,png',
+            'branches' => 'required|mimes:xlsx,xls'
         ];
     }
 

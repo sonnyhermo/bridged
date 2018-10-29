@@ -18,7 +18,9 @@ class CreateSpecificationsTable extends Migration
             $table->integer('loan_id');
             $table->string('description');
             $table->string('collateral');
+            $table->string('slug')->unique();
             $table->timestamps();
+            
         });
     }
 

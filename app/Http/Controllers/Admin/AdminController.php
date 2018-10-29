@@ -1,37 +1,29 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreNewLoan;
-use App\Loan;
-use App\Specification;
-use App\Purpose;
+use App\Http\Controllers\Controller;
 
-
-class LoanController extends Controller
+class AdminController extends Controller
 {
-
-    protected $loan;
-
-    public function __construct(Loan $loan)
-    {
+      /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {   
         $this->middleware('auth:admin');
-        $this->loan = $loan;
     }
-
-
     /**
-     * Display a listing of the resource.
+     * Show the application dashboard.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $loans = $this->loan->all();
-        $specs = Specification::all();
-        $purposes = Purpose::all();
-        return view('admin.loans', ['loans' => $loans, 'module' => 'Loans']);
+        return view('admin.users', ['module' => 'Users']);
     }
 
     /**
@@ -44,24 +36,15 @@ class LoanController extends Controller
         //
     }
 
-
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreNewLoan $request)
+    public function store(Request $request)
     {
-
-        $data = $request->validated();
-
-        $this->loan->type = $request->loan;
-        $this->loan->slug = str_slug($request->loan, '-');
-
-        if($this->loan->save()){
-            return redirect()->route('loans.index')->with('success','New Loan type has been added!');
-        }
+        //
     }
 
     /**
@@ -70,12 +53,9 @@ class LoanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Loan $loan)
+    public function show($id)
     {
-
-        //route model binding
-        return $loan;
-
+        //
     }
 
     /**
@@ -107,10 +87,9 @@ class LoanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Loan $loan)
+    public function destroy($id)
     {
-        return $loan;
-
+        //
     }
 
 }

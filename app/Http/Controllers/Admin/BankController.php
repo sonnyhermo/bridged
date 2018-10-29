@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreBankRequest;
 use App\Bank;
 use Storage;
@@ -48,7 +49,7 @@ class BankController extends Controller
         $data['coverage'] = implode(', ',$data['coverage']);
         $data['slug'] = str_slug($data['name']);
 
-        $path = $request->file('logo')->store('banks_logo');
+        $path = $request->file('logo')->store('banks_logo','public');
         $data['logo'] = $path;
 
         $newBank = $bank->create($data);
@@ -61,6 +62,7 @@ class BankController extends Controller
                     'address' => $line['address'],
                     'telephone' => $line['telephone'],
                     'region' => $line['region'],
+                    'slug' => str_slug($line['branch'])
                 ]);
             });
 
@@ -77,9 +79,9 @@ class BankController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Bank $bank)
     {
-        //
+        return $bank->toJson();
     }
 
     /**

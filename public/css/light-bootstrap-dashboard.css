@@ -821,12 +821,6 @@ body>.navbar-collapse[data-color="purple"]:after {
     right: -15px;
 }
 
-.modal.show .modal-dialog {
-    -webkit-transform: translate(0, 30%);
-    -o-transform: translate(0, 30%);
-    transform: translate(0, 30%);
-}
-
 .modal.modal-mini .modal-dialog {
     max-width: 255px;
     margin: 0 auto;
@@ -1776,6 +1770,10 @@ fieldset[disabled] .form-control {
     background-color: #fc727a;
 }
 
+.table{
+    width: 100% !important;
+}
+
 .table .radio,
 .table .checkbox {
     position: relative;
@@ -1877,7 +1875,6 @@ fieldset[disabled] .form-control {
     position: absolute;
     width: 19px;
     height: 19px;
-    margin-top: -12px;
     margin-left: -23px;
     font-size: 21px;
     cursor: pointer;
@@ -2975,7 +2972,7 @@ Copyright (c) 2015 Daniel Eden
     padding-left: 15px;
 }
 
-.card .table tbody td:last-child,
+
 .card .table thead th:last-child {
     padding-right: 15px;
     display: inline-flex;
@@ -3921,32 +3918,7 @@ Copyright (c) 2015 Daniel Eden
         padding-left: 5px;
         padding-right: 5px;
     }
-    .navbar-nav .nav-item .dropdown-menu,
-    .dropdown .dropdown-menu {
-        -webkit-transform: scale(0);
-        -moz-transform: scale(0);
-        -o-transform: scale(0);
-        -ms-transform: scale(0);
-        transform: scale(0);
-        -webkit-transition: all 370ms cubic-bezier(0.34, 1.61, 0.7, 1);
-        -moz-transition: all 370ms cubic-bezier(0.34, 1.61, 0.7, 1);
-        -o-transition: all 370ms cubic-bezier(0.34, 1.61, 0.7, 1);
-        -ms-transition: all 370ms cubic-bezier(0.34, 1.61, 0.7, 1);
-        transition: all 370ms cubic-bezier(0.34, 1.61, 0.7, 1);
-    }
-    .navbar-nav .nav-item.show .dropdown-menu,
-    .dropdown.show .dropdown-menu {
-        -webkit-transform: scale(1);
-        -moz-transform: scale(1);
-        -o-transform: scale(1);
-        -ms-transform: scale(1);
-        transform: scale(1);
-        -webkit-transform-origin: 29px -50px;
-        -moz-transform-origin: 29px -50px;
-        -o-transform-origin: 29px -50px;
-        -ms-transform-origin: 29px -50px;
-        transform-origin: 29px -50px;
-    }
+   
     .close-layer,
     .nav-mobile-menu {
         display: none !important;
@@ -3960,34 +3932,7 @@ Copyright (c) 2015 Daniel Eden
     .footer .copyright {
         float: right;
     }
-    .navbar-nav .nav-item .dropdown-menu:before {
-        border-bottom: 11px solid rgba(0, 0, 0, 0.2);
-        border-left: 11px solid transparent;
-        border-right: 11px solid transparent;
-        content: "";
-        display: inline-block;
-        position: absolute;
-        left: 12px;
-        top: -11px;
-    }
-    .navbar-nav .nav-item .dropdown-menu:after {
-        border-bottom: 11px solid #FFFFFF;
-        border-left: 11px solid transparent;
-        border-right: 11px solid transparent;
-        content: "";
-        display: inline-block;
-        position: absolute;
-        left: 12px;
-        top: -10px;
-    }
-    .navbar-nav.navbar-right .nav-item .dropdown-menu:before {
-        left: auto;
-        right: 12px;
-    }
-    .navbar-nav.navbar-right .nav-item .dropdown-menu:after {
-        left: auto;
-        right: 12px;
-    }
+    
     .footer:not(.footer-big) nav>ul li:first-child {
         margin-left: 0;
     }
@@ -5399,4 +5344,28 @@ License - nucleoapp.com/license/
     background: -o-linear-gradient(top, #9561e2 0%, #0c0c0c 100%);
     background: linear-gradient(to bottom, #9561e2 0%, #0c0c0c 100%);
     box-shadow: inset 0 0 3px #111
+}
+
+.dataTables_empty{
+    text-align: center;
+}
+
+.dataTables_processing{
+    position:absolute;
+    top:50%;
+    left:50%;
+    width:100%;
+    height:40px;
+    margin-left:-50%;
+    margin-top:-25px;
+    padding-top:20px;
+    text-align:center;
+    font-size:1.2em;
+    background-color:white;
+    background:-webkit-gradient(linear, left top, right top, color-stop(0%, rgba(255,255,255,0)), color-stop(25%, rgba(255,255,255,0.9)), color-stop(75%, rgba(255,255,255,0.9)), color-stop(100%, rgba(255,255,255,0)));
+    background:-webkit-linear-gradient(left, rgba(255,255,255,0) 0%, rgba(255,255,255,0.9) 25%, rgba(255,255,255,0.9) 75%, rgba(255,255,255,0) 100%);
+    background:-moz-linear-gradient(left, rgba(255,255,255,0) 0%, rgba(255,255,255,0.9) 25%, rgba(255,255,255,0.9) 75%, rgba(255,255,255,0) 100%);
+    background:-ms-linear-gradient(left, rgba(255,255,255,0) 0%, rgba(255,255,255,0.9) 25%, rgba(255,255,255,0.9) 75%, rgba(255,255,255,0) 100%);
+    background:-o-linear-gradient(left, rgba(255,255,255,0) 0%, rgba(255,255,255,0.9) 25%, rgba(255,255,255,0.9) 75%, rgba(255,255,255,0) 100%);
+    background:linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.9) 25%, rgba(255,255,255,0.9) 75%, rgba(255,255,255,0) 100%)
 }
