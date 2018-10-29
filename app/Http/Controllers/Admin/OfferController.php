@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Bank;
 use App\Loan;
+use App\Offer;
+use App\Http\Requests\StoreNewOfferRequest;
 
 class OfferController extends Controller
 {
@@ -38,9 +40,20 @@ class OfferController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-	public function store(Request $request)
+	public function store(StoreNewOfferRequest $request, Offer $offer)
     {
-        //
+        $data = $request->validated();
+        $data['terms'] = json_encode([3,6,9,12,18,24,36]);
+        $data['interest'] = json_decode([7,6,5,4,3,2,1]);
+
+        $newOffer = $offer->create($data);
+
+        if($newOffer){
+            return ['status' => 1, 'title' => 'Success','message' => 'New Offer has been added!'];
+        }else{
+            return ['status' => 0, 'title' => 'Error', 'message' => 'Failed to add Offer!'];
+        }
+
     }
 
     /**

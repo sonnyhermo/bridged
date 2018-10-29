@@ -19,4 +19,8 @@ class Specification extends Model
     public function loan(){
     	return $this->belongsTo('App\Loan');
     }
+
+    public function offers(){
+    	return $this->hasMany('App\Offer');
+    }
 }

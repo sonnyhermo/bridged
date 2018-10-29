@@ -62,7 +62,7 @@ class BankController extends Controller
                     'address' => $line['address'],
                     'telephone' => $line['telephone'],
                     'region' => $line['region'],
-                    'slug' => str_slug($line['branch'])
+                    'slug' => str_slug($newBank->name.' '.$line['branch'])
                 ]);
             });
 

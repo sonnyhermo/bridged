@@ -16,4 +16,8 @@ class Bank extends Model
     public function branches(){
     	return $this->hasMany('App\Branch');
     }
+
+    public function offers(){
+    	return $this->hasMany('App\Offers');
+    }
 }

@@ -26,11 +26,11 @@ class StoreNewOfferRequest extends FormRequest
         return [
             'bank_id' => 'required|integer',
             'loan_id' => 'required|integer',
-            'purpose_id' => 'required|integer',
             'product' => 'required',
             'min' => 'required|numeric',
-            'max' => 'required|numeric'
-            'terms_rate' => 'required|mimes:xlsx,xls'
+            'max' => 'required|numeric',
+            'min_income' => 'required|numeric'
+            //'terms_rate' => 'required|mimes:xlsx,xls'
         ];
     }
 }

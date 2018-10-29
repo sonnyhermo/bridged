@@ -21,4 +21,8 @@ class Loan extends Model
     	return $this->hasMany('App\Purpose');
     }
 
+    public function offers(){
+    	return $this->hasMany('App\Offers');
+    }
+
 }
