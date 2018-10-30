@@ -8,12 +8,6 @@ $(document).ready(function(){
         lengthChange: false,
         ajax: '/admin/all_loan_specifications',
         columns: [
-            {
-                "class":          "details-control",
-                "orderable":      false,
-                "data":           null,
-                "defaultContent": ""
-            },
             {data: 'loan.type', name: 'loan.type'},
             {data: 'description', name: 'description'},
             {data: 'collateral', name: 'collateral'},

@@ -14,15 +14,16 @@
 		            <p class="card-category">List of Partners Offers</p>
 		        </div>
 	            <div class="card-body">
-	           		<table class="table table-striped" id="banksTable">
+	           		<table class="table table-striped" id="offersTable">
 	           			<thead>
 	           				<tr>
+	           					<th></th>
 	           					<th>Bank</th>
 	           					<th>Loan Type</th>
-	           					<th>Specification</th>
+	           					<th>Classification</th>
 	           					<th>Product Name</th>
-	           					<th>Minimum Loan</th>
-	           					<th>Maximum Loan</th>
+	           					<th>Min.Loan</th>
+	           					<th>Max. Loan</th>
 	           					<th>Action</th>
 	           				</tr>
 	           			</thead>

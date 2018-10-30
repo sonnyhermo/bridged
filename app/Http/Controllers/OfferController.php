@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Offer;
 
 class OfferController extends Controller
 {
@@ -80,5 +81,17 @@ class OfferController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function search(){
+
+        return view('offers');
+        /*$offers =  Offer::whereHas('specification', function($query) use($request){
+            $query->where('id', '=', $request->type);
+        })
+        ->with(['bank:id,name,logo'])
+        ->paginate();
+
+        return view('offers', ['offers'])*/
     }
 }

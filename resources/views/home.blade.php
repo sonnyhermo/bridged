@@ -10,12 +10,13 @@
                         <h5 class="card-title">LOAN SEARCH</h5>
                         <h6 class="card-subtitle mb-4">Find the best loan for your needs!</h6>
                         <div class="col-md-12">
-                            <form>
+                            <form method="GET" action="/offers/search">
+                                @csrf
                                 <input type="text" class="form-control" name="txtLoanType" placeholder="Loan Type">
                                 <input type="text" class="form-control" name="txtLoanClass" placeholder="Loan Classification">
                                 <input type="text" class="form-control" name="txtLoanAmount" placeholder="Loan Amount">
                                 <input type="number" class="form-control" name="txtTerms" placeholder="Terms (months)">
-                                <button class="btnLoanSearch btn btn-orange mt-5">SEARCH</button>
+                                <button type="submit" class="btnLoanSearch btn btn-orange mt-5">SEARCH</button>
                             </form>
                         </div>
                     </div>

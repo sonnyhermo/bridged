@@ -9,6 +9,7 @@ use App\Purpose;
 use App\Loan;
 use App\Specification;
 use App\Bank;
+use App\Offer;
 
 class DataTableController extends Controller
 {
@@ -27,5 +28,13 @@ class DataTableController extends Controller
 
     public function fetchBanks(){
         return Datatables::of(Bank::all())->make();
+    }
+
+    public function fetchOffers(){
+        return Datatables::of(Offer::with([
+            'bank:id,name',
+            'specification:id,loan_id,description', 
+            'specification.loan:id,type']))
+        ->make();
     }
 }

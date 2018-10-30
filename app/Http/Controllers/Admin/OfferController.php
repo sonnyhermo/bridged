@@ -11,6 +11,12 @@ use App\Http\Requests\StoreNewOfferRequest;
 
 class OfferController extends Controller
 {
+
+    public function __construct()
+    {   
+        $this->middleware('auth:admin');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -42,9 +48,10 @@ class OfferController extends Controller
      */
 	public function store(StoreNewOfferRequest $request, Offer $offer)
     {
+
         $data = $request->validated();
         $data['terms'] = json_encode([3,6,9,12,18,24,36]);
-        $data['interest'] = json_decode([7,6,5,4,3,2,1]);
+        $data['interest'] = json_encode([7,6,5,4,3,2,1]);
 
         $newOffer = $offer->create($data);
 
@@ -64,7 +71,7 @@ class OfferController extends Controller
      */
     public function show($id)
     {
-
+        
     }
 
     /**

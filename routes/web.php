@@ -11,15 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index')->name('home');
 
 Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('/offers','OfferController')->middleware('verified');
+Route::resource('/offers','OfferController');//->middleware('verified');
+
+Route::get('offers/search/{type}/{classification}', 'OfferController@search');
 
 Route::prefix('admin')->group(function() {
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
@@ -52,5 +52,6 @@ Route::prefix('admin')->group(function() {
     Route::get('/all_loans', 'Admin\DataTableController@fetchLoans')->name('datatable.loans');
     Route::get('/all_loan_purposes', 'Admin\DataTableController@fetchPurposes')->name('datatable.purposes');
     Route::get('/all_loan_specifications', 'Admin\DataTableController@fetchSpecifications')->name('datatable.specifications');
+    Route::get('/all_offers', 'Admin\DataTableController@fetchOffers')->name('datatable.offers');
     
 });

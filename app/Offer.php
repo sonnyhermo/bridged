@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Offer extends Model
 {
-    protected $fillable = ['name', 'email','description','coverage','slug','logo'];
+    protected $fillable = ['bank_id', 'specification_id','product','min','max','terms', 'interest', 'min_income'];
 
     public function bank(){
     	return $this->belongsTo('App\Bank');
