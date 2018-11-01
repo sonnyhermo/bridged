@@ -29,7 +29,6 @@
 	           		<table class="table table-striped" id="loanSpecTable">
 	           			<thead>
 	           				<tr>
-	           					<th></th>
 	           					<th>Loan Type</th>
 	           					<th>Classifications</th>
 	           					<th>Collateral</th>
