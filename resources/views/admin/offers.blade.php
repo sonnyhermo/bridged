@@ -72,7 +72,7 @@
 
 						<div class="form-group">
 							<label>Loan Classification</label>
-							<select class="form-control" name="specification_id" id="selectClassification">
+							<select class="form-control" name="classification_id" id="selectClassification">
 								<option value="">Select Loan Type</option>
 							</select>
 						</div>

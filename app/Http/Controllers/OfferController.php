@@ -44,9 +44,16 @@ class OfferController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Offer $offer)
     {
-        //
+        $offer->with([
+            'bank:id,logo,name',
+            'classification:id,loan_id,description,collateral',
+            'classification.loan:id,type',
+            'classification.loan.purposes'
+        ])->get();
+
+        return view('chosen_offer', ['offer' => $offer]);
     }
 
     /**
@@ -83,15 +90,26 @@ class OfferController extends Controller
         //
     }
 
-    public function search(){
 
-        return view('offers');
-        /*$offers =  Offer::whereHas('specification', function($query) use($request){
-            $query->where('id', '=', $request->type);
+    public function search(Request $request){
+
+        $offers = Offer::with([
+            'bank:id,name,logo',
+            'classification:id,loan_id,description,collateral', 
+            'classification.loan:id,type',
+            'terms'=>function($query){
+                $query->where('term', '=', '3');
+            }
+        ])
+        ->whereHas('terms', function($query){
+            $query->where('term', '=', '3');
         })
-        ->with(['bank:id,name,logo'])
-        ->paginate();
+        ->whereHas('classification', function($query){
+            $query->where('loan_id', '=', '1');
+        })
+        ->where('classification_id', '=', '1')
+        ->paginate(2);
 
-        return view('offers', ['offers'])*/
+        return view('offers',['offers' => $offers, 'amount' => '500000']);
     }
 }

@@ -8,7 +8,7 @@ $(document).ready(function(){
 				console.log(res);
 				let options = "<option value=''>Select Loan Type</option>";
 				$.each(res, function(key, val){
-					$.each(val.specifications, function(skey, sval){
+					$.each(val.classifications, function(skey, sval){
 						options += "<option value='"+sval.id+"'>"+sval.description+"</option>"
 					})
 				});
@@ -38,8 +38,8 @@ $(document).ready(function(){
                 "width":"8%"
             },
             {data: 'bank.name', name: 'bank.name',width:"12%"},
-            {data: 'specification.description', name: 'specification.description',width:"17%"},
-            {data: 'specification.loan.type', name: 'specification.loan.type',width:"18%"},
+            {data: 'classification.classification', name: 'classification.classification',width:"17%"},
+            {data: 'classification.loan.type', name: 'classification.loan.type',width:"18%"},
             {data: 'product', name: 'product',width:"13%"},
             {data: 'min', name: 'min',width:"12%"},
             {data: 'max', name: 'max', width:"12%"},
@@ -90,8 +90,15 @@ $(document).ready(function(){
 
 
 function format ( d ) {
-    return 'Set of Terms: '+d.terms+'<br>'+
-        'Set of rates %: '+d.interest+'<br>'+
+    let terms = '';
+    let interests = '';
+    $.each(d.terms,function(key, value){
+        terms += value.term+', ';
+        interests += value.interest_rate+', ';
+    });
+
+    return 'Set of Terms: '+terms.substring(0, terms.length - 2)+'<br>'+
+        'Set of rates %: '+interests.substring(0, interests.length - 2)+'<br>'+
         'Minimum Income Required: '+d.min_income+'<br>';
 }
 
