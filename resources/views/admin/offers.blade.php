@@ -10,24 +10,20 @@
 		<div class="col-md-12">
 			<div class="card">
 		        <div class="card-header">
-		            <div class="clearfix">
-						<button type="button" class="btn btn-primary btn-sm float-right" data-toggle="modal" data-target="#newOfferModal">
-							<i class="fa fa-plus" aria-hidden="true"></i>
-						</button>
-			            <h4 class="card-title">Offers</h4>
-					</div>
+		            <h4 class="card-title">Offers</h4>
 		            <p class="card-category">List of Partners Offers</p>
 		        </div>
 	            <div class="card-body">
-	           		<table class="table table-striped" id="banksTable">
+	           		<table class="table table-striped" id="offersTable">
 	           			<thead>
 	           				<tr>
+	           					<th></th>
 	           					<th>Bank</th>
 	           					<th>Loan Type</th>
-	           					<th>Specification</th>
+	           					<th>Classification</th>
 	           					<th>Product Name</th>
-	           					<th>Minimum Loan</th>
-	           					<th>Maximum Loan</th>
+	           					<th>Min.Loan</th>
+	           					<th>Max. Loan</th>
 	           					<th>Action</th>
 	           				</tr>
 	           			</thead>
@@ -52,7 +48,7 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<form action="/admin/banks" method="POST" enctype="multipart/form-data" id="bankForm">
+					<form action="/admin/offers" method="POST" enctype="multipart/form-data" id="offerForm">
 						@csrf
 
 						<div class="form-group">
@@ -81,25 +77,35 @@
 							</select>
 						</div>
 
-						<div class="form-group">
-							<label>Product Name</label>
-							<input type="tex" name="product" class="form-control" id="txtProduct" placeholder="Product Name">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Product Name</label>
+									<input type="text" name="product" class="form-control" id="txtProduct" placeholder="Product Name">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Minimum Amount</label>
+									<input type="text" name="min_income" class="form-control" id="txtMinIncome" placeholder="Minimum Income Required">
+								</div>
+							</div>
 						</div>
-
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>Minimum Loan</label>
-									<input type="text" class="form-control" name="minimun" id="txtMinLoan" placeholder="Min. Loan">
+									<input type="text" class="form-control" name="min" id="txtMinLoan" placeholder="Min. Loan">
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>Maximum Loan</label>
-									<input type="text" class="form-control" name="minimun" id="txtMaxLoan" placeholder="Max. Loan">
+									<input type="text" class="form-control" name="max" id="txtMaxLoan" placeholder="Max. Loan">
 								</div>
 							</div>
 						</div>
+
 
 						<div class="form-group">
 							<label>Terms and Interest</label>

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreNewLoan;
 use App\Loan;
-use App\Specification;
+use App\Classification;
 use App\Purpose;
 
 
@@ -30,7 +30,7 @@ class LoanController extends Controller
     public function index()
     {
         $loans = $this->loan->all();
-        $specs = Specification::all();
+        $specs = Classification::all();
         $purposes = Purpose::all();
         return view('admin.loans', ['loans' => $loans, 'module' => 'Loans']);
     }
@@ -75,7 +75,7 @@ class LoanController extends Controller
     {
 
         //route model binding
-        return $loan->with('specifications')->get()->toJson();
+        return $loan->with('classifications')->get()->toJson();
 
     }
 

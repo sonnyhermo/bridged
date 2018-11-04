@@ -7,8 +7,9 @@ use App\Http\Controllers\Controller;
 use Yajra\Datatables\Datatables;
 use App\Purpose;
 use App\Loan;
-use App\Specification;
+use App\Classification;
 use App\Bank;
+use App\Offer;
 
 class DataTableController extends Controller
 {
@@ -21,11 +22,21 @@ class DataTableController extends Controller
         return Datatables::of(Purpose::with('loan'))->make();
     }
 
-    public function fetchSpecifications(){
-        return Datatables::of(Specification::with('loan'))->make();
+    public function fetchClassifications(){
+        return Datatables::of(Classification::with('loan'))->make();
     }
 
     public function fetchBanks(){
         return Datatables::of(Bank::all())->make();
+    }
+
+    public function fetchOffers(){
+        return Datatables::of(Offer::with([
+            'bank:id,name',
+            'classification:id,loan_id,classification', 
+            'classification.loan:id,type',
+            'terms'
+        ]))
+        ->make();
     }
 }

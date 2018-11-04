@@ -6,9 +6,17 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Bank;
 use App\Loan;
+use App\Offer;
+use App\Http\Requests\StoreNewOfferRequest;
 
 class OfferController extends Controller
 {
+
+    public function __construct()
+    {   
+        $this->middleware('auth:admin');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -38,9 +46,20 @@ class OfferController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-	public function store(Request $request)
+	public function store(StoreNewOfferRequest $request, Offer $offer)
     {
-        //
+
+        $data = $request->validated();
+        $data['slug'] = str_slug($data['product']);
+
+        $newOffer = $offer->create($data);
+
+        if($newOffer){
+            return ['status' => 1, 'title' => 'Success','message' => 'New Offer has been added!'];
+        }else{
+            return ['status' => 0, 'title' => 'Error', 'message' => 'Failed to add Offer!'];
+        }
+
     }
 
     /**
@@ -51,7 +70,7 @@ class OfferController extends Controller
      */
     public function show($id)
     {
-
+        
     }
 
     /**

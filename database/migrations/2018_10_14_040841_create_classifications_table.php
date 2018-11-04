@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSpecificationsTable extends Migration
+class CreateClassificationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateSpecificationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('specifications', function (Blueprint $table) {
+        Schema::create('classifications', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('loan_id');
-            $table->string('description');
+            $table->string('classification');
             $table->string('collateral');
+            $table->text('description');
             $table->string('slug')->unique();
             $table->timestamps();
             
@@ -31,6 +32,6 @@ class CreateSpecificationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('specifications');
+        Schema::dropIfExists('classifications');
     }
 }

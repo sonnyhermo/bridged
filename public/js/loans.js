@@ -1,21 +1,21 @@
 $(document).ready(function(){
-	var dt = $('#loanSpecTable').DataTable({
+	let dt = $('#loanSpecTable').DataTable({
 		processing: true,
         serverSide: true,
         pagingType: 'simple',
         pageLength: 1,
         searching: false,
         lengthChange: false,
-        ajax: '/admin/all_loan_specifications',
+        ajax: '/admin/all_loan_classifications',
         columns: [
             {
                 "class":          "details-control",
                 "orderable":      false,
                 "data":           null,
-                "defaultContent": ""
+                "defaultContent": "",
             },
             {data: 'loan.type', name: 'loan.type'},
-            {data: 'description', name: 'description'},
+            {data: 'classification', name: 'classification'},
             {data: 'collateral', name: 'collateral'},
             {
             	data: null,
@@ -27,6 +27,38 @@ $(document).ready(function(){
         ],
 	});
 
+     // Array to track the ids of the details displayed rows
+    var detailRows = [];
+ 
+    $('#loanSpecTable tbody').on( 'click', 'tr td.details-control', function () {
+        var tr = $(this).closest('tr');
+        var row = dt.row( tr );
+        var idx = $.inArray( tr.attr('id'), detailRows );
+ 
+        if ( row.child.isShown() ) {
+            tr.removeClass( 'details' );
+            row.child.hide();
+ 
+            // Remove from the 'open' array
+            detailRows.splice( idx, 1 );
+        }
+        else {
+            tr.addClass( 'details' );
+            row.child( format( row.data() ) ).show();
+ 
+            // Add to the 'open' array
+            if ( idx === -1 ) {
+                detailRows.push( tr.attr('id') );
+            }
+        }
+    } );
+
+    dt.on( 'draw', function () {
+        $.each( detailRows, function ( i, id ) {
+            $('#'+id+' td.details-control').trigger( 'click' );
+        } );
+    } );
+
     
 	$('#purposeForm').submit(function(e){
 		e.preventDefault();
@@ -37,14 +69,14 @@ $(document).ready(function(){
 
 function retrieveSpec(id){
     $.ajax({
-        url:'/admin/specifications/'+id,
+        url:'/admin/classifications/'+id,
         type:'get',
         dataType: 'json',
         success:function(response){
             console.log(response);
-            $('#newSpecModal').find('h5').html('Edit Specification');
+            $('#newSpecModal').find('h5').html('Edit Classification');
             $('#newSpecModal').find('form').prepend('<input type="hidden" name="_method" value="PUT">');
-            $('#newSpecModal').find('form').attr('action','/admin/specifications/'+response.id);
+            $('#newSpecModal').find('form').attr('action','/admin/classifications/'+response.id);
             $('#newSpecModal').find('select').val(response.loan_id);
             $('#txtLoanDescription').val(response.description);
             $('#txtCollateral').val(response.collateral);
@@ -58,7 +90,7 @@ function retrieveSpec(id){
 
 function removeSpec(id){
     $.ajax({
-        url:'/admin/specifications/'+id,
+        url:'/admin/classifications/'+id,
         type:'delete',
         data:{_token : $('meta[name="csrf-token"]').attr('content')},
         dataType: 'json',
@@ -69,4 +101,8 @@ function removeSpec(id){
             console.log(xhr.responseText);
         }
     });
+}
+
+function format ( d ) {
+    return 'Description: '+d.description+'<br>';
 }
