@@ -105,10 +105,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="form-group">
-							<label>Description</label>
-							<textarea class="form-control" name="requirements" id="txtRequirements" placeholder="Enter Offer Description"></textarea>
-						</div>
+
 
 						<div class="form-group">
 							<label>Terms and Interest</label>
