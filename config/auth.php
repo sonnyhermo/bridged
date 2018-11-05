@@ -55,6 +55,16 @@ return [
            'driver' => 'token',
            'provider' => 'admins',
         ],
+
+        'creditor' => [
+           'driver' => 'session',
+           'provider' => 'creditors',
+        ],
+
+        'creditor-api' => [
+           'driver' => 'token',
+           'provider' => 'creditors',
+        ],
     ],
 
     /*
@@ -83,6 +93,11 @@ return [
         'admins' => [
             'driver' => 'eloquent',
             'model' => App\Admin::class,
+        ],
+
+        'creditors' => [
+            'driver' => 'eloquent',
+            'model' => App\Creditor::class,
         ],
 
         // 'users' => [

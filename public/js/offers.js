@@ -38,8 +38,8 @@ $(document).ready(function(){
                 "width":"8%"
             },
             {data: 'bank.name', name: 'bank.name',width:"12%"},
-            {data: 'classification.classification', name: 'classification.classification',width:"17%"},
             {data: 'classification.loan.type', name: 'classification.loan.type',width:"18%"},
+            {data: 'classification.classification', name: 'classification.classification',width:"17%"},
             {data: 'product', name: 'product',width:"13%"},
             {data: 'min', name: 'min',width:"12%"},
             {data: 'max', name: 'max', width:"12%"},

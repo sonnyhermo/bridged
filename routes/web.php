@@ -19,11 +19,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/offers','OfferController');//->middleware('verified');
 
-<<<<<<< HEAD
-Route::get('/search', 'OfferController@search');
-=======
 Route::get('/search/offers', 'OfferController@search');
->>>>>>> dca261d83ba042e3076f547898d11d6d86174678
+
 
 Route::prefix('admin')->group(function() {
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
@@ -58,4 +55,9 @@ Route::prefix('admin')->group(function() {
     Route::get('/all_loan_classifications', 'Admin\DataTableController@fetchClassifications')->name('datatable.classifications');
     Route::get('/all_offers', 'Admin\DataTableController@fetchOffers')->name('datatable.offers');
     
+});
+
+Route::prefix('/creditor')->group(function(){
+    Route::get('/login', 'Auth\CreditorLoginController@showLoginForm')->name('creditor.login');
+    Route::post('/login', 'Auth\CreditorLoginController@login')->name('creditor.login.submit');
 });

@@ -161,11 +161,16 @@
 						</div>
 						<div class="form-group">
 							<label>Description</label>
-							<input class="form-control" name="description" id="txtLoanDescription" placeholder="Enter New Loan Type">
+							<input class="form-control" name="classification" id="txtLoanClassification" placeholder="Enter New Loan Type">
 						</div>
 						<div class="form-group">
 							<label>Collateral</label>
 							<input class="form-control" name="collateral" id="txtCollateral" placeholder="Enter Loan Description">
+						</div>
+
+						<div class="form-group">
+							<label>Description</label>
+							<textarea class="form-control" name="description" id="txtDescription" placeholder="Enter Offer Description"></textarea>
 						</div>
 
 						<button type="submit" class="btn btn-primary">Submit</button>

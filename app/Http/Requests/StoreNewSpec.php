@@ -26,7 +26,8 @@ class StoreNewSpec extends FormRequest
         return [
             'loan_id' => 'required',
             'description' => 'required',
-            'collateral' => 'required'
+            'collateral' => 'required',
+            'description' => 'required'
         ];
     }
 
