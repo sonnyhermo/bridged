@@ -46,7 +46,7 @@ class OfferController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('chosen_offer');
     }
 
     /**
@@ -83,15 +83,29 @@ class OfferController extends Controller
         //
     }
 
-    public function search(){
+    public function search(Request $request){
 
-        return view('offers');
-        /*$offers =  Offer::whereHas('specification', function($query) use($request){
-            $query->where('id', '=', $request->type);
+
+        $offers = Offer::with([
+            'bank:id,name,logo',
+            'specification:id,loan_id',
+            'specification.loan:id,type',
+            'terms' => function($query){
+                $query->where('term', '=', '4');
+            }
+        ])
+        ->where('bank_id','=', '4')
+        ->whereHas('specification',function($query){
+            $query->where('loan_id', '=', '1');
         })
-        ->with(['bank:id,name,logo'])
-        ->paginate();
+        ->whereHas('terms',function($query){
+            $query->where('term', '=', '4');
+        })
+        ->where('min','<=', 50000)
+        ->where('max','>=', 50000)
+        ->paginate(2);
+        
 
-        return view('offers', ['offers'])*/
+        return view('offers', ['offers' => $offers, 'amount'=>$request->query('amount')]);
     }
 }

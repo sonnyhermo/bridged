@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+{{request()->query('txtLoanAmount')}}
 	<section class="container my-5" id="loan-search-section">
 		<div class="col-md-12 text-center">
 			<p class="font-weight-bold">Your journey to easy-access to financial products starts here!</p>
@@ -29,51 +30,23 @@
 		</div>
 		<div class="clearfix"></div>
 		<div class="my-3">
+			@foreach($offers as $offer)
 			<div class="col-md-12 result-box p-3 mb-2">
 				<div class="row">
+					<div class="col-md-4">
+						<img src="/storage/{{ $offer->bank->logo }}">
+					</div>
 					<div class="col-md-5">
-						<img src="images/bank.png">
+						<p><i class="fas fa-percent"></i>&nbsp{{ $offer->terms[0]->interest_rate }}</p>
+						<p><i class="fas fa-hand-holding-usd"></i>&nbspNone</p>
+						<p><i class="fas fa-calculator"></i>&nbspPhp {{ (($offer->terms[0]->interest_rate * $offer->terms[0]->term) + $amount) / $offer->terms[0]->term }}</p>
 					</div>
 					<div class="col-md-3">
-						<p><i class="fas fa-percent"></i>&nbsp1.12%</p>
-						<p><i class="fas fa-hand-holding-usd"></i>&nbspNone</p>
-						<p><i class="fas fa-calculator"></i>&nbspPhp 143,000.00</p>
-					</div>
-					<div class="col-md-4">
-						<button class="btn btn-orange mt-3 font-weight-bold">APPLY</button>
+						<a href="/offers/{{ $offer->id }}" target="_blank"><button class="btn btn-orange mt-3 font-weight-bold">APPLY</button></a>
 					</div>
 				</div>
 			</div>
-			<div class="col-md-12 result-box p-3 mb-2">
-				<div class="row">
-					<div class="col-md-5">
-						<img src="images/bank.png">
-					</div>
-					<div class="col-md-3">
-						<p><i class="fas fa-percent"></i>&nbsp1.12%</p>
-						<p><i class="fas fa-hand-holding-usd"></i>&nbspNone</p>
-						<p><i class="fas fa-calculator"></i>&nbspPhp 143,000.00</p>
-					</div>
-					<div class="col-md-4">
-						<button class="btn btn-orange mt-3 font-weight-bold">APPLY</button>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-12 result-box p-3 mb-2">
-				<div class="row">
-					<div class="col-md-5">
-						<img src="images/bank.png">
-					</div>
-					<div class="col-md-3">
-						<p><i class="fas fa-percent"></i>&nbsp1.12%</p>
-						<p><i class="fas fa-hand-holding-usd"></i>&nbspNone</p>
-						<p><i class="fas fa-calculator"></i>&nbspPhp 143,000.00</p>
-					</div>
-					<div class="col-md-4">
-						<button class="btn btn-orange mt-3 font-weight-bold">APPLY</button>
-					</div>
-				</div>
-			</div>
+			@endforeach
 		</div>
 		<div class="col-md-12 text-center">
 			<p id="loan-note">Note:  You can select only up to  10 Banks at a time per Loan Classification</p>

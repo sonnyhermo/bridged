@@ -161,3 +161,8 @@ footer ul li:not(:first-child), footer p{
 #loan-note{
 	color:#fc4040;
 }
+
+/**** OFFERs ****/
+#product_summary p{
+	margin-bottom: 0px;
+}

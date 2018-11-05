@@ -13,9 +13,9 @@
                             <form method="GET" action="/offers/search">
                                 @csrf
                                 <input type="text" class="form-control" name="txtLoanType" placeholder="Loan Type">
-                                <input type="text" class="form-control" name="txtLoanClass" placeholder="Loan Classification">
-                                <input type="text" class="form-control" name="txtLoanAmount" placeholder="Loan Amount">
-                                <input type="number" class="form-control" name="txtTerms" placeholder="Terms (months)">
+                                <input type="text" class="form-control" name="classification" placeholder="Loan Classification">
+                                <input type="text" class="form-control" name="amount" placeholder="Loan Amount">
+                                <input type="number" class="form-control" name="terms" placeholder="Terms (months)">
                                 <button type="submit" class="btnLoanSearch btn btn-orange mt-5">SEARCH</button>
                             </form>
                         </div>
