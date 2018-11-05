@@ -19,7 +19,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/offers','OfferController');//->middleware('verified');
 
+<<<<<<< HEAD
 Route::get('/search', 'OfferController@search');
+=======
+Route::get('/search/offers', 'OfferController@search');
+>>>>>>> dca261d83ba042e3076f547898d11d6d86174678
 
 Route::prefix('admin')->group(function() {
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
@@ -36,8 +40,8 @@ Route::prefix('admin')->group(function() {
     //routes for purposes
     Route::resource('/purposes', 'Admin\PurposeController');
 
-    //routes for specification
-    Route::resource('/specifications', 'Admin\SpecificationController');
+    //routes for classification
+    Route::resource('/classifications', 'Admin\ClassificationController');
 
 
     //routes for banks and bank employees
@@ -51,7 +55,7 @@ Route::prefix('admin')->group(function() {
     Route::get('/all_banks', 'Admin\DataTableController@fetchBanks')->name('datatable.banks');
     Route::get('/all_loans', 'Admin\DataTableController@fetchLoans')->name('datatable.loans');
     Route::get('/all_loan_purposes', 'Admin\DataTableController@fetchPurposes')->name('datatable.purposes');
-    Route::get('/all_loan_specifications', 'Admin\DataTableController@fetchSpecifications')->name('datatable.specifications');
+    Route::get('/all_loan_classifications', 'Admin\DataTableController@fetchClassifications')->name('datatable.classifications');
     Route::get('/all_offers', 'Admin\DataTableController@fetchOffers')->name('datatable.offers');
     
 });

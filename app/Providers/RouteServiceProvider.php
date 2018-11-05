@@ -5,6 +5,8 @@ namespace App\Providers;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use App\Loan;
+use App\Bank;
+use App\Offer;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -33,7 +35,15 @@ class RouteServiceProvider extends ServiceProvider
         });
 
         Route::bind('bank', function($value){
-            return Loan::where('slug', $value)->orWhere(function($query) use ($value){
+            return Bank::where('slug', $value)->orWhere(function($query) use ($value){
+                if(is_numeric($value)){
+                    $query->where('id',$value);
+                }
+            })->firstOrFail();
+        });
+
+        Route::bind('offer', function($value){
+            return Offer::where('slug', $value)->orWhere(function($query) use ($value){
                 if(is_numeric($value)){
                     $query->where('id',$value);
                 }

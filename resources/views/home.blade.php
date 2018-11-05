@@ -12,10 +12,17 @@
                         <div class="col-md-12">
                             <form method="GET" action="/offers/search">
                                 @csrf
+<<<<<<< HEAD
                                 <input type="text" class="form-control" name="txtLoanType" placeholder="Loan Type">
                                 <input type="text" class="form-control" name="classification" placeholder="Loan Classification">
                                 <input type="text" class="form-control" name="amount" placeholder="Loan Amount">
                                 <input type="number" class="form-control" name="terms" placeholder="Terms (months)">
+=======
+                                <input type="text" class="form-control" name="loan_id" placeholder="Loan Type">
+                                <input type="text" class="form-control" name="classification_id" placeholder="Loan Classification">
+                                <input type="text" class="form-control" name="amount" placeholder="Loan Amount">
+                                <input type="number" class="form-control" name="term" placeholder="Terms (months)">
+>>>>>>> dca261d83ba042e3076f547898d11d6d86174678
                                 <button type="submit" class="btnLoanSearch btn btn-orange mt-5">SEARCH</button>
                             </form>
                         </div>

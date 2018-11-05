@@ -13,8 +13,8 @@ class Loan extends Model
 	protected $fillable = ['type'];
 	protected $dates = ['deleted_at'];
 
-    public function specifications(){
-    	return $this->hasMany('App\Specification');
+    public function classifications(){
+    	return $this->hasMany('App\Classification');
     }
 
     public function purposes(){

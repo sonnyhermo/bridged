@@ -5,12 +5,12 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreNewSpec;
-use App\Specification;
+use App\Classification;
 
 use Yajra\Datatables\Datatables;;
 
 
-class SpecificationController extends Controller
+class ClassificationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -38,7 +38,7 @@ class SpecificationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreNewSpec $request, Specification $spec)
+    public function store(StoreNewSpec $request, Classification $spec)
     {
         $data = $request->validated();
         $data = array_merge($data, ['slug' => str_slug($request->description, '-')]);
@@ -46,7 +46,7 @@ class SpecificationController extends Controller
         $newSpec = $spec->create($data);
 
         if( $newSpec ){
-            return redirect()->route('loans.index')->with('success','New loan specification has been added!');
+            return redirect()->route('loans.index')->with('success','New loan classification has been added!');
         }
     }
 
@@ -56,9 +56,9 @@ class SpecificationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Specification $specification)
+    public function show(Classification $classification)
     {
-        return $specification->toJson();
+        return $classification->toJson();
     }
 
     /**
@@ -79,15 +79,15 @@ class SpecificationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreNewSpec $request, Specification $specification)
+    public function update(StoreNewSpec $request, Classification $classification)
     {
         $data = $request->validated();
-        $is_updated = $specification->update($data);
+        $is_updated = $classification->update($data);
         if(!$is_updated){
-            return redirect()->route('loans.index')->with('error','Specification failed to update');
+            return redirect()->route('loans.index')->with('error','Classification failed to update');
         }
         
-        return redirect()->route('loans.index')->with('success','Specification Updated');
+        return redirect()->route('loans.index')->with('success','Classification Updated');
     }
 
     /**
@@ -96,9 +96,9 @@ class SpecificationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Specification $specification)
+    public function destroy(Classification $classification)
     {
-        $specification->delete();
+        $classification->delete();
         return json_encode(['a'=>'b']);
     }
 }

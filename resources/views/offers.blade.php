@@ -33,6 +33,7 @@
 			@foreach($offers as $offer)
 			<div class="col-md-12 result-box p-3 mb-2">
 				<div class="row">
+<<<<<<< HEAD
 					<div class="col-md-4">
 						<img src="/storage/{{ $offer->bank->logo }}">
 					</div>
@@ -43,6 +44,20 @@
 					</div>
 					<div class="col-md-3">
 						<a href="/offers/{{ $offer->id }}" target="_blank"><button class="btn btn-orange mt-3 font-weight-bold">APPLY</button></a>
+=======
+					<div class="col-md-5">
+						<img src="/storage/{{ $offer->bank->logo }}">
+					</div>
+					<div class="col-md-3">
+						<p><i class="fas fa-percent"></i>&nbsp {{ $offer->terms[0]->interest_rate }}%</p>
+						<p><i class="fas fa-hand-holding-usd"></i>&nbsp {{ $offer->classification->collateral }}</p>
+						<p><i class="fas fa-calculator"></i>&nbspPhp {{ number_format(((($offer->terms[0]->interest_rate * $offer->terms[0]->term) * $amount) + $amount) / $offer->terms[0]->term,2,'.',',') }}</p>
+					</div>
+					<div class="col-md-4">
+						<a href="/offers/{{ $offer->slug }}" target="_blank">
+							<button class="btn btn-orange mt-3 font-weight-bold">APPLY</button>
+						</a>
+>>>>>>> dca261d83ba042e3076f547898d11d6d86174678
 					</div>
 				</div>
 			</div>

@@ -25,7 +25,7 @@ class StoreNewOfferRequest extends FormRequest
     {
         return [
             'bank_id' => 'required|integer',
-            'specification_id' => 'required|integer',
+            'classification_id' => 'required|integer',
             'product' => 'required',
             'min' => 'required|numeric',
             'max' => 'required|numeric',
