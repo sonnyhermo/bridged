@@ -21,6 +21,7 @@ Route::resource('/offers','OfferController');//->middleware('verified');
 
 Route::get('/search/offers', 'OfferController@search');
 
+
 Route::prefix('admin')->group(function() {
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
@@ -54,4 +55,9 @@ Route::prefix('admin')->group(function() {
     Route::get('/all_loan_classifications', 'Admin\DataTableController@fetchClassifications')->name('datatable.classifications');
     Route::get('/all_offers', 'Admin\DataTableController@fetchOffers')->name('datatable.offers');
     
+});
+
+Route::prefix('/creditor')->group(function(){
+    Route::get('/login', 'Auth\CreditorLoginController@showLoginForm')->name('creditor.login');
+    Route::post('/login', 'Auth\CreditorLoginController@login')->name('creditor.login.submit');
 });

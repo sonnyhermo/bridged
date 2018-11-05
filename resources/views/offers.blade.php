@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+{{request()->query('txtLoanAmount')}}
 	<section class="container my-5" id="loan-search-section">
 		<div class="col-md-12 text-center">
 			<p class="font-weight-bold">Your journey to easy-access to financial products starts here!</p>

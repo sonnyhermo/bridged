@@ -23,6 +23,11 @@ class RedirectIfAuthenticated
                     return redirect()->route('admin.dashboard');
                 }
                 break;
+            case 'creditor' :
+                if (Auth::guard($guard)->check()) {
+                    return redirect()->route('creditor.dashboard');
+                }
+                break;
             default:
                 if (Auth::guard($guard)->check()) {
                     return redirect()->route('home');
