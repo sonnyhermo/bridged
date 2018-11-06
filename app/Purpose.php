@@ -10,7 +10,7 @@ class Purpose extends Model
 	use SoftDeletes;
 
 	protected $fillable = [
-        'loan_id', 'purpose'
+        'loan_id', 'purpose', 'slug'
     ];
     protected $dates = ['deleted_at'];
 

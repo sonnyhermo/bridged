@@ -7,6 +7,8 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 use App\Loan;
 use App\Bank;
 use App\Offer;
+use App\Classification;
+use App\Purpose;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -44,6 +46,22 @@ class RouteServiceProvider extends ServiceProvider
 
         Route::bind('offer', function($value){
             return Offer::where('slug', $value)->orWhere(function($query) use ($value){
+                if(is_numeric($value)){
+                    $query->where('id',$value);
+                }
+            })->firstOrFail();
+        });
+
+        Route::bind('classification', function($value){
+            return Classification::where('slug', $value)->orWhere(function($query) use ($value){
+                if(is_numeric($value)){
+                    $query->where('id',$value);
+                }
+            })->firstOrFail();
+        });
+
+        Route::bind('purpose', function($value){
+            return Purpose::where('slug', $value)->orWhere(function($query) use ($value){
                 if(is_numeric($value)){
                     $query->where('id',$value);
                 }

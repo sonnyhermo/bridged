@@ -65,7 +65,7 @@
 	           					<th>Action</th>
 	           				</tr>
 	           			</thead>
-	           			<tbody>	
+	           			<tbody>
 
 	           			</tbody>
 	           		</table>
@@ -125,7 +125,10 @@
 	           				@foreach($loans as $loan)
 	           				<tr>
 	           					<td>{{ $loan->type }}</td>
-	           					<td><button type="button" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></i></button></td>
+	           					<td>
+	           						<button type="button" class="btn btn-danger btn-sm btn-fill loan-del" data-type="{{ $loan->slug }}"><i class="fa fa-trash"></i></button>
+	           						<button type="button" class="btn btn-info btn-sm btn-fill loan-edit" data-type="{{ $loan->slug }}"><i class="fa fa-edit"></i></button>
+	           					</td>
 	           				</tr>
 	           				@endforeach
 	           			</tbody>
@@ -160,7 +163,7 @@
 							</select>
 						</div>
 						<div class="form-group">
-							<label>Description</label>
+							<label>Classification</label>
 							<input class="form-control" name="classification" id="txtLoanClassification" placeholder="Enter New Loan Type">
 						</div>
 						<div class="form-group">
@@ -173,7 +176,7 @@
 							<textarea class="form-control" name="description" id="txtDescription" placeholder="Enter Offer Description"></textarea>
 						</div>
 
-						<button type="submit" class="btn btn-primary">Submit</button>
+						<button type="submit" class="btn btn-primary btn-fill">Submit</button>
 					</form>
 				</div>
 			</div>
@@ -208,7 +211,7 @@
 							<input class="form-control" name="purpose" id="txtLoanPurpose" placeholder="Enter New Purpose">
 						</div>
 
-						<button type="submit" class="btn btn-primary">Submit</button>
+						<button type="submit" class="btn btn-primary btn-fill">Submit</button>
 					</form>
 				</div>
 			</div>
