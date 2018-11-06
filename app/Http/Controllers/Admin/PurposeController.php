@@ -37,13 +37,14 @@ class PurposeController extends Controller
      */
     public function store(StoreNewPurpose $request, Purpose $purpose)
     {
-        /*$data = $request->validated();
+        $data = $request->validated();
+        $data['slug'] = str_slug($data['purpose'].' '.$data['loan_id'], '-');
 
         $newPurpose = $purpose->create($data);
 
         if( $newPurpose ){
             return redirect()->route('loans.index')->with('success','New loan purpose has been added!');
-        }*/
+        }
     }
 
     /**
@@ -63,9 +64,9 @@ class PurposeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Purpose $purpose)
     {
-        //
+        return $purpose;
     }
 
     /**

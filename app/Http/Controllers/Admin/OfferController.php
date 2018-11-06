@@ -50,7 +50,7 @@ class OfferController extends Controller
     {
 
         $data = $request->validated();
-        $data['slug'] = str_slug($data['product']);
+        $data['slug'] = str_slug($data['product']).$data['bank_id'];
 
         $newOffer = $offer->create($data);
 

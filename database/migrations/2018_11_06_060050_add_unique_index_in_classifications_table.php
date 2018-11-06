@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTermsTable extends Migration
+class AddUniqueIndexInClassificationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class CreateTermsTable extends Migration
      */
     public function up()
     {
-        Schema::create('terms', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('offer_id');
-            $table->integer('term');
-            $table->float('interest_rate');
-            $table->timestamps();
+        Schema::table('classifications', function (Blueprint $table) {
+            $table->unique('classification');
         });
     }
 
@@ -29,6 +25,8 @@ class CreateTermsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('terms');
+        Schema::table('classifications', function (Blueprint $table) {
+            $table->dropUnique(['classification']);
+        });
     }
 }

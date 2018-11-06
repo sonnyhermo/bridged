@@ -13,17 +13,17 @@ use App\Offer;
 
 class DataTableController extends Controller
 {
-    public function fetchLoans(){
+   /* public function fetchLoans(){
     	return Datatables::of(Loan::all())->make();
-    }
+    }*/
 
  	public function fetchPurposes(){
 
-        return Datatables::of(Purpose::with('loan'))->make();
+        return Datatables::of(Purpose::all())->make();
     }
 
     public function fetchClassifications(){
-        return Datatables::of(Classification::with('loan'))->make();
+        return Datatables::of(Classification::with('loan:id,type'))->make();
     }
 
     public function fetchBanks(){

@@ -94,9 +94,6 @@ $(document).ready(function(){
 
 	$('.bank-delete').click(function(e){
 		e.preventDefault();
-		$.ajax({
-			type: url
-		});
 	});
 
 
