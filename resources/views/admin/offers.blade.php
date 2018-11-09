@@ -37,7 +37,7 @@
 	</div>
 
 
-	<!-- Modal For New Bank-->
+	<!-- Modal For New Bank Offer-->
 	<div class="modal fade" id="newOfferModal" tabindex="-1" role="dialog" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
@@ -106,8 +106,8 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label>Description</label>
-							<textarea class="form-control" name="requirements" id="txtRequirements" placeholder="Enter Offer Description"></textarea>
+							<label>Requirements</label>
+							<textarea class="form-control" name="requirements" id="txtRequirements" placeholder="Enter Offer Requirements"></textarea>
 						</div>
 
 						<div class="form-group">

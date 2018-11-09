@@ -99,7 +99,12 @@ class LoanController extends Controller
     public function update(StoreNewLoan $request, Loan $loan)
     {
         $data = $request->validated();
-        $is_updated = $loan->update(['type' => $data['loan'], 'slug' => str_slug($data['loan'], '-')]);
+
+        $loan->type = $data['loan'];
+        $loan->slug = str_slug($data['loan'], '-');
+
+        $is_updated = $loan->save();
+        
         if(!$is_updated){
             return redirect()->route('loans.index')->with('error','Loan Type failed to update');
         }

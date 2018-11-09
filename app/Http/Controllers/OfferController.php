@@ -46,8 +46,15 @@ class OfferController extends Controller
      */
     public function show(Offer $offer)
     {
-        //return $offer->with(['terms, classification, bank']);
-        return view('chosen_offer', ['offer' => $offer]);
+        $offer_details = $offer->with([
+            'classification:id,loan_id,description,classification,collateral',
+            'terms:offer_id,term,interest_rate',
+            'classification.loan:id,type',
+            'classification.loan.purposes:loan_id,purpose'
+        ])->get();
+
+        //return $offer_details;
+        return view('chosen_offer', ['offer' => $offer_details]);
     }
 
     /**

@@ -5,7 +5,6 @@ $(document).ready(function(){
 		e.preventDefault();
 		
 		let formData = new FormData($('#bankForm')[0]);
-		console.log(formData.get('_token'));
 		$.ajax({
 			url:'/admin/banks',
 			type:'post',
@@ -14,7 +13,6 @@ $(document).ready(function(){
 			processData: false,
 			contentType: false,
 			success:function(res){
-				console.log(res);
 				if(res.hasOwnProperty('status')){
 					if(res.status == 1){
 						swalTitle = 'Success';
@@ -34,9 +32,11 @@ $(document).ready(function(){
 				}).then(function(value){
 					$(this)[0].reset();
 					$('#newBankModal').hide();
+					location.reload();
 				});
 			},
 			error:function(xhr){
+				console.log(xhr.responseText);
 				let xhrResponse = JSON.parse(xhr.responseText);
 				console.log(xhrResponse);
 				if(xhrResponse.hasOwnProperty('errors')){
@@ -74,7 +74,9 @@ $(document).ready(function(){
         columns: [
             {
             	data: 'logo',
+            	name: 'logo',
             	render: function ( data, type, row ) {
+            		console.log(row);
 			        return '<img src="/storage/'+data+'" class="logo"/>';
 		    	}
             },

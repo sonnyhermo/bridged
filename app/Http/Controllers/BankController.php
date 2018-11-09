@@ -48,8 +48,21 @@ class BankController extends Controller
         $data['coverage'] = implode(', ',$data['coverage']);
         $data['slug'] = str_slug($data['name']);
 
-        $path = $request->file('logo')->store('banks_logo');
+        return $request->file('branches');
+
+        /*$path = $request->file('logo')->store('banks_logo');
         $data['logo'] = $path;
+
+        $countUndelete = count($bank->where('slug','=',$data['slug'])->get());
+        if($countUndelete != 0){
+            return ['status' => 0, 'title' => 'Error', 'message' =>'Bank already exist'); 
+        }
+
+        $countDeleted = count($bank->onlyTrashed()->where('slug','=',$data['slug'])->get());
+
+        if($countDeleted != 0){
+            return ['status' => 0, 'title' => 'Error', 'message' => 'Bank already exist in archived');
+        }
 
         $newBank = $bank->create($data);
 
@@ -67,7 +80,7 @@ class BankController extends Controller
             return ['status' => 1, 'title' => 'Success','message' => 'New Bank Partners has been added!'];
         }else{
             return ['status' => 0, 'title' => 'Error', 'message' => 'Failed to add Bank!'];
-        }
+        }*/
 
     }
 
