@@ -11,7 +11,7 @@ class Classification extends Model
 	use SoftDeletes;
 
 	protected $fillable = [
-        'loan_id', 'classification', 'collateral', 'description', 'slug'
+        'loan_id', 'classification', 'collateral', 'slug'
     ];
 
     protected $dates = ['deleted_at'];

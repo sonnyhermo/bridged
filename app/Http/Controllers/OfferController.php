@@ -46,6 +46,7 @@ class OfferController extends Controller
      */
     public function show(Offer $offer)
     {
+
         $offer_details = $offer->with([
             'classification:id,loan_id,description,classification,collateral',
             'terms:offer_id,term,interest_rate',
@@ -55,6 +56,7 @@ class OfferController extends Controller
 
         //return $offer_details;
         return view('chosen_offer', ['offer' => $offer_details]);
+
     }
 
     /**
@@ -95,7 +97,7 @@ class OfferController extends Controller
 
         $offers = Offer::with([
             'bank:id,name,logo',
-            'classification:id,loan_id,collateral', 
+            'classification:id,loan_id,description,collateral', 
             'classification.loan:id,type',
             'terms'=>function($query){
                 $query->where('term', '=', '3');
@@ -109,7 +111,6 @@ class OfferController extends Controller
         })
         ->where('classification_id', '=', '1')
         ->paginate(2);
-
 
         return view('offers',['offers' => $offers, 'amount' => '500000']);
     }
