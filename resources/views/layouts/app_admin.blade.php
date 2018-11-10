@@ -9,22 +9,20 @@
 
     <title>{{ config('app.name', 'Bridged') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="{{ asset('css/light-bootstrap-dashboard.css?v=2.0.1') }}" rel="stylesheet" />
 
 </head>
 <body>
     <div class="wrapper">
-        <div class="sidebar" data-image="../assets/img/sidebar-5.jpg">
+        <div class="sidebar" data-image="{{ asset('images/building.jpeg')}}">
             <!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
 
@@ -38,21 +36,33 @@
                 </div>
                 <ul class="nav">
                     <li>
-                        <a class="nav-link" href="#">
-                            <i class="fas fa-tachometer-alt"></i>
+                        <a class="nav-link" href="/admin/dashboard">
+                            <i class="fa fa-tachometer" aria-hidden="true"></i>
                             <p>Dashboard</p>
                         </a>
                     </li>
                     <li>
-                        <a class="nav-link" href="#">
-                            <i class="fas fa-users"></i>
+                        <a class="nav-link" href="/admin/users">
+                            <i class="fa fa-users" aria-hidden="true"></i>
                             <p>Users</p>
                         </a>
                     </li>
                     <li>
-                        <a class="nav-link" href="#">
-                            <i class="fas fa-building"></i>
+                        <a class="nav-link" href="/admin/loans">
+                            <i class="fa fa-file-archive-o" aria-hidden="true"></i>
+                            <p>Loans</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="/admin/banks">
+                            <i class="fa fa-building" aria-hidden="true"></i>
                             <p>Banks</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="/admin/offers">
+                            <i class="fa fa-tags" aria-hidden="true"></i>
+                            <p>Offers</p>
                         </a>
                     </li>
                 </ul>
@@ -88,16 +98,27 @@
             </div>
         </div>
     </div>
-</body>
-<!--   Core JS Files   -->
-<script src="{{ asset('js/jquery.3.2.1.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('js/popper.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('js/bootstrap.min.js') }}" type="text/javascript"></script>
-<!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
-<script src="{{ asset('js/light-bootstrap-dashboard.js?v=2.0.1') }}" type="text/javascript"></script>
-<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
-@stack('script')
+    <!--   Core JS Files   -->
+    <script src="{{ asset('js/jquery.3.2.1.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/popper.min.js') }}" type="text/javascript"></script>
+    
+    <!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
+    <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/light-bootstrap-dashboard.js?v=2.0.1') }}" type="text/javascript"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="text/javascript">
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+    </script>
+    @stack('script')
+    
+</body>
 
 
 </body>

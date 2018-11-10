@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSpecificationsTable extends Migration
+class AddSoftDeleteInBanksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class CreateSpecificationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('specifications', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('loan_id');
-            $table->string('description');
-            $table->string('collateral');
-            $table->timestamps();
+        Schema::table('banks', function (Blueprint $table) {
+            $table->softDeletes();
         });
     }
 
@@ -29,6 +25,8 @@ class CreateSpecificationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('specifications');
+        Schema::table('banks', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
     }
 }

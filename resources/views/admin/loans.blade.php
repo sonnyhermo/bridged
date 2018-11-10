@@ -6,11 +6,11 @@
 	
 	<div class="row">
 		<div class="col-md-12 mb-3">
-			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newLoanModal">
-				Add Loans <span class="fas fa-plus fa-sm">
+			<button type="button" class="btn btn-primary btn-fill" data-toggle="modal" data-target="#newLoanModal">
+				Add Loans <span class="fa fa-plus" aria-hidden="true"></span>
 			</button>
-			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loanListModal">
-				Loan List <span class="fas fa-list fa-sm"></span>
+			<button type="button" class="btn btn-primary btn-fill" data-toggle="modal" data-target="#loanListModal">
+				Loan List <span class="fa fa-list-alt" aria-hidden="true"></span>
 			</button>
 		</div>
 
@@ -19,32 +19,26 @@
 		        <div class="card-header">
 		        	<div class="clearfix">
 						<button type="button" class="btn btn-primary btn-sm float-right" data-toggle="modal" data-target="#newSpecModal">
-							<i class="fas fa-plus fa-sm"></i>
+							<i class="fa fa-plus" aria-hidden="true"></i>
 						</button>
-			            <h4 class="card-title">Specification</h4>
+			            <h4 class="card-title">Classification</h4>
 					</div>
-		            <p class="card-category">List of Specification</p>
+		            <p class="card-category">List of Classification</p>
 		        </div>
 	            <div class="card-body">
 	           		<table class="table table-striped" id="loanSpecTable">
 	           			<thead>
 	           				<tr>
+	           					<th></th>
 	           					<th>Loan Type</th>
-	           					<th>Specfication</th>
+	           					<th>Classifications</th>
 	           					<th>Collateral</th>
+	           					<th>Action</th>
 	           				</tr>
 	           			</thead>
 
 	           			<tbody>
-           				@foreach($loans as $loan)
-           					@foreach($loan->specifications as $spec)
-           					<tr>
-           						<td>{{ $loan->type}}</td>
-           						<td>{{ $spec->description }}</td>
-           						<td>{{ $spec->collateral }}</td>
-           					</tr>
-           					@endforeach
-           				@endforeach
+
 	           			</tbody>
 	           		</table>
 		        </div>
@@ -56,7 +50,7 @@
 		        <div class="card-header">
 		            <div class="clearfix">
 						<button type="button" class="btn btn-primary btn-sm float-right" data-toggle="modal" data-target="#newPurposeModal">
-							<i class="fas fa-plus fa-sm"></i>
+							<i class="fa fa-list-alt" aria-hidden="true"></i>
 						</button>
 			            <h4 class="card-title">Purpose</h4>
 					</div>
@@ -68,17 +62,11 @@
 	           				<tr>
 	           					<th>Loan Type</th>
 	           					<th>Purpose</th>
+	           					<th>Action</th>
 	           				</tr>
 	           			</thead>
 	           			<tbody>	
-	           				@foreach($loans as $loan)
-           					@foreach($loan->purposes as $purpose)
-           					<tr>
-           						<td>{{ $loan->type}}</td>
-           						<td>{{ $purpose->purpose }}</td>
-           					</tr>
-           					@endforeach
-           				@endforeach
+
 	           			</tbody>
 	           		</table>
 		        </div>
@@ -153,13 +141,13 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title">Modal title</h5>
+					<h5 class="modal-title">New classification</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<div class="modal-body">
-					<form action="/admin/specifications" method="POST">
+					<form action="/admin/classifications" method="POST">
 						@csrf
 
 						<div class="form-group">
@@ -173,11 +161,16 @@
 						</div>
 						<div class="form-group">
 							<label>Description</label>
-							<input class="form-control" name="description" id="txtLoanDescription" placeholder="Enter New Loan Type">
+							<input class="form-control" name="classification" id="txtLoanClassification" placeholder="Enter New Loan Type">
 						</div>
 						<div class="form-group">
 							<label>Collateral</label>
 							<input class="form-control" name="collateral" id="txtCollateral" placeholder="Enter Loan Description">
+						</div>
+
+						<div class="form-group">
+							<label>Description</label>
+							<textarea class="form-control" name="description" id="txtDescription" placeholder="Enter Offer Description"></textarea>
 						</div>
 
 						<button type="submit" class="btn btn-primary">Submit</button>
@@ -192,13 +185,13 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title">Modal title</h5>
+					<h5 class="modal-title">New Purpose</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<div class="modal-body">
-					<form action="/admin/purposes" method="POST">
+					<form action="/admin/purposes" method="POST" id="purposeForm">
 						@csrf
 
 						<div class="form-group">
@@ -225,12 +218,5 @@
 
 
 @push('script')
-<script>
-	$('#loanSpecTable').DataTable({
-		searching: false,
-		lengthChange: false,
-		pageLength: 5,
-		pagingType: 'simple'
-	});
-</script>
+<script src="{{ asset('js/loans.js') }}"></script>
 @endpush

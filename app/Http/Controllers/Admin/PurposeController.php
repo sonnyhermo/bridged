@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreNewSpec;
-use App\Specification;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreNewPurpose;
+use App\Purpose;
 
-
-class SpecificationController extends Controller
+class PurposeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,15 +35,15 @@ class SpecificationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreNewSpec $request, Specification $spec)
+    public function store(StoreNewPurpose $request, Purpose $purpose)
     {
-        $data = $request->validated();
+        /*$data = $request->validated();
 
-        $newSpec = $spec->create($data);
+        $newPurpose = $purpose->create($data);
 
-        if( $newSpec ){
-            return redirect()->route('loans.index')->with('success','New loan specification has been added!');
-        }
+        if( $newPurpose ){
+            return redirect()->route('loans.index')->with('success','New loan purpose has been added!');
+        }*/
     }
 
     /**
@@ -54,7 +54,7 @@ class SpecificationController extends Controller
      */
     public function show($id)
     {
-        //
+        return $id;
     }
 
     /**

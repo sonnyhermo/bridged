@@ -3,24 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreNewLoan;
-use App\Loan;
-use App\Specification;
-use App\Purpose;
 
-
-class LoanController extends Controller
+class CreditorController extends Controller
 {
-
-    protected $loan;
-
-    public function __construct(Loan $loan)
-    {
-        $this->middleware('auth:admin');
-        $this->loan = $loan;
-    }
-
-
     /**
      * Display a listing of the resource.
      *
@@ -28,10 +13,7 @@ class LoanController extends Controller
      */
     public function index()
     {
-        $loans = $this->loan->all();
-        $specs = Specification::all();
-        $purposes = Purpose::all();
-        return view('admin.loans', ['loans' => $loans, 'module' => 'Loans', 'specs' => $specs, 'purposes' => $purposes]);
+        //
     }
 
     /**
@@ -50,16 +32,9 @@ class LoanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreNewLoan $request)
+    public function store(Request $request)
     {
-
-        $data = $request->validated();
-
-        $this->loan->type = $request->loan;
-
-        if($this->loan->save()){
-            return redirect()->route('loans.index')->with('success','New Loan type has been added!');
-        }
+        //
     }
 
     /**
@@ -68,9 +43,9 @@ class LoanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Loan $loan)
+    public function show($id)
     {
-        return $loan;
+        //
     }
 
     /**
@@ -102,10 +77,8 @@ class LoanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Loan $loan)
+    public function destroy($id)
     {
-        return $loan;
-
+        //
     }
-
 }

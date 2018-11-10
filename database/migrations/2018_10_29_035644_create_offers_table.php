@@ -16,10 +16,13 @@ class CreateOffersTable extends Migration
         Schema::create('offers', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('bank_id');
-            $table->integer('loan_id');
-            $table->string('specification');
-            $table->integer('term');
-            $table->float('interest_rate');
+            $table->integer('classification_id');
+            $table->string('product');
+            $table->integer('min');
+            $table->integer('max');
+            $table->text('terms');
+            $table->text('interest');
+            $table->integer('min_income');
             $table->timestamps();
         });
     }

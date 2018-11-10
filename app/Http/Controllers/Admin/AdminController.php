@@ -1,21 +1,29 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreNewPurpose;
-use App\Purpose;
+use App\Http\Controllers\Controller;
 
-class PurposeController extends Controller
+class AdminController extends Controller
 {
+      /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {   
+        $this->middleware('auth:admin');
+    }
     /**
-     * Display a listing of the resource.
+     * Show the application dashboard.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        return view('admin.users', ['module' => 'Users']);
     }
 
     /**
@@ -34,15 +42,9 @@ class PurposeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreNewPurpose $request, Purpose $purpose)
+    public function store(Request $request)
     {
-        $data = $request->validated();
-
-        $newPurpose = $purpose->create($data);
-
-        if( $newPurpose ){
-            return redirect()->route('loans.index')->with('success','New loan purpose has been added!');
-        }
+        //
     }
 
     /**
@@ -89,4 +91,5 @@ class PurposeController extends Controller
     {
         //
     }
+
 }
