@@ -19,6 +19,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/offers','OfferController');//->middleware('verified');
 
+Route::resource('/users','BorrowerController');//->middleware('verified');
+
 Route::get('/search/offers', 'OfferController@search');
 
 Route::prefix('admin')->group(function() {
