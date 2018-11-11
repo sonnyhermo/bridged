@@ -76,14 +76,14 @@ $(document).ready(function(){
         pageLength: 1,
         searching: false,
         lengthChange: false,
-        ajax: '/admin/all_loan_purposes',
+        ajax: '/admin/all_loan_purposes/',
         columns: [
             {data: 'loan.type', name: 'loan.type'},
             {data: 'purpose', name: 'purpose'},
             {
-                //data: 'slug',
+                data: null,
                 render: function ( data, type, row ) {
-                    console.log(row.created_at);
+                    console.log(row);
                     return '<button class="btn btn-sm btn-danger purpose-delete" data-id="'+row['slug']+'"><span class="fa fa-trash"></span></button>'+
                     '<button class="btn btn-sm btn-info purpose-edit" data-id="'+row['slug']+'"><span class="fa fa-edit"></span></button>';
                 }
@@ -116,6 +116,7 @@ $(document).ready(function(){
 
     $('.loan-del').click(function(e){
         e.preventDefault();
+        let type = $(this).data('type');
         swal({
           title: "Are you sure?",
           text: "Once deleted, all data related to this will be deleted",
@@ -125,7 +126,7 @@ $(document).ready(function(){
         }).then(function(proceed){
             if(proceed){
                 $.ajax({
-                    url:'/admin/loans/'+$(this).data('type'),
+                    url:'/admin/loans/'+type,
                     type:'delete',
                     dataType:'json',
                     success:function(res){

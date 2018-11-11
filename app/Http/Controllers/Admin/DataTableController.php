@@ -19,7 +19,7 @@ class DataTableController extends Controller
 
  	public function fetchPurposes(){
 
-        return Datatables::of(Purpose::all())->make();
+        return Datatables::of(Purpose::with('loan'))->make();
     }
 
     public function fetchClassifications(){

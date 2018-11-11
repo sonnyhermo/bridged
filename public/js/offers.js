@@ -9,7 +9,7 @@ $(document).ready(function(){
 				let options = "<option value=''>Select Loan Type</option>";
 				$.each(res, function(key, val){
 					$.each(val.classifications, function(skey, sval){
-						options += "<option value='"+sval.id+"'>"+sval.description+"</option>"
+						options += "<option value='"+sval.id+"'>"+sval.classification+"</option>"
 					})
 				});
 

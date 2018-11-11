@@ -21,8 +21,4 @@ class Offer extends Model
     public function terms(){
     	return $this->hasMany('App\Term');
     }
-
-    public function terms(){
-    	return $this->hasMany('App\Term');
-    }
 }
