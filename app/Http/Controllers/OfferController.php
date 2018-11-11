@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Offer;
+use App\Term;
 
 class OfferController extends Controller
 {
@@ -47,7 +48,16 @@ class OfferController extends Controller
     public function show(Offer $offer)
     {
 
-        return view('chosen_offer');
+        $offer_details = $offer->with([
+            'classification:id,loan_id,description,classification,collateral',
+            'terms:offer_id,term,interest_rate',
+            'classification.loan:id,type',
+            'classification.loan.purposes:loan_id,purpose'
+        ])->get();
+
+        //return $offer_details;
+        return view('chosen_offer', ['offer' => $offer_details]);
+
     }
 
     /**

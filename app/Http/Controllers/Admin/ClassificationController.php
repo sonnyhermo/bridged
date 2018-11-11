@@ -95,8 +95,14 @@ class ClassificationController extends Controller
     public function update(StoreNewSpec $request, Classification $classification)
     {
         $data = $request->validated();
-        $data = array_merge($data, ['slug' => str_slug($request->classification, '-')]);
-        $is_updated = $classification->update($data);
+
+        $classification->loan_id = $data['loan_id'];
+        $classification->classification = $data['classification'];
+        $classification->collateral = $data['collateral'];
+        $classification->description = $data['description'];
+        $classification->slug = str_slug($data['classification'], '-');
+
+        $is_updated = $classification->save();
         if(!$is_updated){
             return redirect()->route('loans.index')->with('error','Classification failed to update');
         }

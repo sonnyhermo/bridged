@@ -5,7 +5,6 @@ $(document).ready(function(){
 			type: 'get',
 			dataType: 'json',
 			success: function(res){
-				console.log(res);
 				let options = "<option value=''>Select Loan Type</option>";
 				$.each(res, function(key, val){
 					$.each(val.classifications, function(skey, sval){
@@ -84,7 +83,68 @@ $(document).ready(function(){
         $.each( detailRows, function ( i, id ) {
             $('#'+id+' td.details-control').trigger( 'click' );
         } );
-    } );
+    });
+
+    $('#offerForm').submit(function(e){
+        e.preventDefault();
+        let formData = new FormData($(this)[0]);
+        console.log(formData);
+            $.ajax({
+            url:'/admin/offers',
+            type:'post',
+            dataType:'json',
+            data:formData,
+            processData: false,
+            contentType: false,
+            success:function(res){
+                if(res.hasOwnProperty('status')){
+                    if(res.status == 1){
+                        swalTitle = 'Success';
+                        swalType = 'success'; 
+                    }else{
+                        swalTitle = 'Error';
+                        swalType = 'error';
+                    }
+
+                    swalText = res.message
+                }
+
+                swal({
+                  title: swalTitle,
+                  text: swalText,
+                  icon: swalType,
+                }).then(function(value){
+                    $(this)[0].reset();
+                    $('#newBankModal').hide();
+                    location.reload();
+                });
+            },
+            error:function(xhr){
+                let xhrResponse = JSON.parse(xhr.responseText);
+                if(xhrResponse.hasOwnProperty('errors')){
+                    swalTitle = 'Follow This';
+                    swalType = 'info';
+                    swalText = "";
+                    $.each(xhrResponse.errors, function(keys, values){
+                        $.each(values, function(key, value){
+                            swalText += value + '\n';
+                        });
+                    });
+                }else{
+                    swalTitle = 'Error';
+                    swalType = 'error';
+                    swalText = "An Error Occured, Please contact admin.";
+                }
+
+                swal({
+                  title: swalTitle,
+                  text: swalText,
+                  icon: swalType,
+                })
+            }
+
+        })
+    })
 
 });
 

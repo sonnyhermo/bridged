@@ -20,8 +20,6 @@ class CreateOffersTable extends Migration
             $table->string('product');
             $table->integer('min');
             $table->integer('max');
-            $table->text('terms');
-            $table->text('interest');
             $table->integer('min_income');
             $table->timestamps();
         });

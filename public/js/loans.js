@@ -1,6 +1,15 @@
 $(document).ready(function(){
     var loanModalClone = $("#newLoanModal").clone();
     var specModalClone = $("#newSpecModal").clone();
+    var purposeModalClone = $("#newPurposeModal").clone();
+
+    $.ajax({
+        url:'/admin/all_loan_purposes',
+        dataType:'json',
+        success:function(res){
+            console.log(res);
+        }
+    })
 
     /*** classification ***/
 	let loan_dt = $('#loanSpecTable').DataTable({
@@ -25,8 +34,8 @@ $(document).ready(function(){
             	data: null,
 			    render: function ( data, type, row ) {
                     console.log(row);
-                    return '<button class="btn btn-sm btn-danger spec-delete" onclick="removeSpec('+row['slug']+')"><span class="fa fa-trash"></span></button>'+
-			        '<button class="btn btn-sm btn-info spec-edit" onclick="retrieveSpec('+row['slug']+')"><span class="fa fa-edit"></span></button>';;
+                    return '<button class="btn btn-sm btn-danger spec-delete" onclick="removeSpec(\''+row['slug']+'\')"><span class="fa fa-trash"></span></button>'+
+			        '<button class="btn btn-sm btn-info spec-edit" onclick="retrieveSpec(\''+row['slug']+'\')"><span class="fa fa-edit"></span></button>';;
 		    	}
 		    }
         ],
@@ -64,6 +73,11 @@ $(document).ready(function(){
         } );
     } );
 
+
+    $('#newSpecModal').on('hidden.bs.modal', function () {
+        $("#newSpecModal").replaceWith(specModalClone);
+    });
+
     /*** end classification  ***/
 
 
@@ -71,7 +85,6 @@ $(document).ready(function(){
     /*** purpose ***/ 
     $('#loanPurposeTable').DataTable({
         processing: true,
-        serverSide: true,
         pagingType: 'simple',
         pageLength: 1,
         searching: false,
@@ -83,7 +96,7 @@ $(document).ready(function(){
             {
                 data: null,
                 render: function ( data, type, row ) {
-                    console.log(row);
+
                     return '<button class="btn btn-sm btn-danger purpose-delete" data-id="'+row['slug']+'"><span class="fa fa-trash"></span></button>'+
                     '<button class="btn btn-sm btn-info purpose-edit" data-id="'+row['slug']+'"><span class="fa fa-edit"></span></button>';
                 }
@@ -92,7 +105,33 @@ $(document).ready(function(){
     });
 
     $('#loanPurposeTable tbody').on( 'click', '.purpose-delete', function () {
-        
+        let data = $(this).data('id');
+        swal({
+          title: "Are you sure?",
+          text: "Once deleted, it may affect other datas",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        }).then(function(proceed){
+            if(proceed){
+                $.ajax({
+                    url:'/admin/purposes/'+data,
+                    type:'delete',
+                    dataType:'json',
+                    success:function(res){
+                        if(res.code == 1){
+                            swal('Success', res.message, 'success')
+                            .then(function(val){ location.reload() });
+                        }else{
+                            swal('Failed', res.message, 'Error');
+                        }
+                    },
+                    error:function(xhr){
+                        console.log(xhr.responseText);
+                    }
+                });
+            }
+        });
     });
 
     $('#loanPurposeTable tbody').on( 'click', '.purpose-edit', function () {
@@ -101,12 +140,21 @@ $(document).ready(function(){
             type:'get',
             dataType:'json',
             success:function(res){
-                console.log(res);
+                $('#newPurposeModal .modal-title').html('Edit Loan');
+                $('#newPurposeModal #selectLoan').val(res.loan_id);
+                $('#newPurposeModal #txtLoanPurpose').val(res.purpose);
+                $('#newPurposeModal').find('form').prepend('<input type="hidden" name="_method" value="PUT">');
+                $('#newPurposeModal').find('form').attr('action','/admin/purposes/'+res.slug);
+                $('#newPurposeModal').modal('show');
             },
             error:function(xhr){
                 console.log(xhr.responseText);
             }
         });
+    });
+
+    $('#newPurposeModal').on('hidden.bs.modal', function () {
+        $("#newPurposeModal").replaceWith(purposeModalClone);
     });
 
     /*** end purpose ***/
@@ -169,12 +217,6 @@ $(document).ready(function(){
     $('#newLoanModal').on('hidden.bs.modal', function () {
         $("#newLoanModal").replaceWith(loanModalClone);
     });
-
-    $('#newSpecModal').on('hidden.bs.modal', function () {
-        $("#newSpecModal").replaceWith(specModalClone);
-    });
-
-    
 
 });
 

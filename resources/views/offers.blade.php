@@ -19,6 +19,7 @@
 	</section>
 
 	<section class="container my-5" id="search-result-section">
+		@if(!empty($offers))
 		<div class="col-md-12">
 			<p id="client-searching">Busines Loan  >  Term Loan  >  Php 1,500,00.00  >  12 months</p>
 		</div>
@@ -66,5 +67,6 @@
 		<div class="col-md-12 text-center">
 			<p id="loan-note">Note:  You can select only up to  10 Banks at a time per Loan Classification</p>
 		</div>
+		@endif
 	</section>
 @endsection

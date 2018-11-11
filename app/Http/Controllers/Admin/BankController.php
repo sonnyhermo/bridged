@@ -49,22 +49,37 @@ class BankController extends Controller
         $data['coverage'] = implode(', ',$data['coverage']);
         $data['slug'] = str_slug($data['name']);
 
-        $path = $request->file('logo')->store('banks_logo','public');
+        $tempfile = $request->file('branches')->store('tmp');
+        $path = $request->file('logo')->store('banks_logo');
+
         $data['logo'] = $path;
+
+        $countUndelete = count($bank->where('slug','=',$data['slug'])->get());
+        if($countUndelete != 0){
+            return ['status' => 0, 'title' => 'Error', 'message' =>'Bank already exist']; 
+        }
+
+        $countDeleted = count($bank->onlyTrashed()->where('slug','=',$data['slug'])->get());
+
+        if($countDeleted != 0){
+            return ['status' => 0, 'title' => 'Error', 'message' => 'Bank already exist in archived'];
+        }
 
         $newBank = $bank->create($data);
 
         if($newBank){
-            (new FastExcel)->import($request->file('branches'), function ($line) use ($newBank) {
+            (new FastExcel)->import(storage_path('app/'.$tempfile), function ($line) use ($newBank) {
                 Branch::create([
                     'bank_id' => $newBank->id,
-                    'branch' => $line['branch'],
-                    'address' => $line['address'],
-                    'telephone' => $line['telephone'],
-                    'region' => $line['region'],
-                    'slug' => str_slug($newBank->name.' '.$line['branch'])
+                    'branch' => $line['Branch'],
+                    'address' => $line['Address'],
+                    'telephone' => $line['Telephone'],
+                    'region' => $line['Region'],
+                    'slug' => str_slug($newBank->name.' '.$line['Branch'],'-')
                 ]);
             });
+
+            Storage::delete('app/'.$tempfile);
 
             return ['status' => 1, 'title' => 'Success','message' => 'New Bank Partners has been added!'];
         }else{

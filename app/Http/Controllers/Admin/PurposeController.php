@@ -76,9 +76,22 @@ class PurposeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreNewPurpose $request, Purpose $purpose)
     {
-        //
+        $data = $request->validated();
+        $data['slug'] = str_slug($data['purpose'].' '.$data['loan_id'], '-');
+
+        $purpose->loan_id = $data['loan_id'];
+        $purpose->purpose = $data['purpose'];
+        $purpose->slug = str_slug($data['purpose'].' '.$data['loan_id'], '-');
+
+        $is_updated = $purpose->save();
+        
+        if(!$is_updated){
+            return redirect()->route('loans.index')->with('error','Purpose failed to update');
+        }
+        
+        return redirect()->route('loans.index')->with('success','Purpose Updated');
     }
 
     /**
@@ -87,8 +100,14 @@ class PurposeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Purpose $purpose)
     {
-        //
+        $is_deleted = $purpose->delete();
+        
+        if(!$is_deleted){
+            return json_encode(['code' => 0, 'message' => 'Deleting purpose Failed']);
+        }
+
+        return json_encode(['code' => 1, 'message' => 'Purpose Deleted']);
     }
 }

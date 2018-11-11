@@ -29,8 +29,9 @@ class StoreNewOfferRequest extends FormRequest
             'product' => 'required',
             'min' => 'required|numeric',
             'max' => 'required|numeric',
-            'min_income' => 'required|numeric'
-            //'terms_rate' => 'required|mimes:xlsx,xls'
+            'min_income' => 'required|numeric',
+            'requirements' => 'required|string',
+            'terms_rates' => 'required|mimes:xlsx,xls'
         ];
     }
 }

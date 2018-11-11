@@ -102,7 +102,7 @@ class LoanController extends Controller
 
         $loan->type = $data['loan'];
         $loan->slug = str_slug($data['loan'], '-');
-        
+
         $is_updated = $loan->save();
 
         if(!$is_updated){
