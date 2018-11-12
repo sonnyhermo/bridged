@@ -56,6 +56,8 @@
 							<option value="">Select Civil Status</option>
 							<option value="married">Married</option>
 							<option value="single">Single</option>
+							<option value="widow">Widow</option>
+							<option value="separated">Separated</option>
 						</select>
 					</div>
 					<div class="form-group">
@@ -88,7 +90,14 @@
 					</div>
 					<div class="form-group">
 						<label>Residence Ownership</label>
-						<input type="text" class="form-control" id="txtStreet" name="street">
+						<select class="form-control" name="ownership">
+							<option value="">Select Ownership Type</option>
+							<option value="owned">Owned</option>
+							<option value="mortgaged">Mortgaged</option>
+							<option value="rented">Rented</option>
+							<option value="living with parents">Living with Parents</option>
+							<option value="others">Others</option>
+						</select>
 					</div>
 					<div class="form-group">
 						<label>Permanent address<span class="text-danger">*</span></label>

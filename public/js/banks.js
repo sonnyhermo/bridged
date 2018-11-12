@@ -38,7 +38,6 @@ $(document).ready(function(){
 			error:function(xhr){
 				console.log(xhr.responseText);
 				let xhrResponse = JSON.parse(xhr.responseText);
-				console.log(xhrResponse);
 				if(xhrResponse.hasOwnProperty('errors')){
 					swalTitle = 'Follow This';
 					swalType = 'info';
