@@ -105,21 +105,15 @@
 								</div>
 							</div>
 						</div>
-<<<<<<< HEAD
+
 						<div class="form-group">
 							<label>Requirements</label>
 							<textarea class="form-control" name="requirements" id="txtRequirements" placeholder="Enter Offer Requirements"></textarea>
 						</div>
-=======
-
->>>>>>> 69da8bcd11cdfc0def01fa96fc45c120817b4b9f
-
 						<div class="form-group">
 							<label>Terms and Interest</label>
 							<input type="file" name="terms_rates" class="form-control-file" id="fileIntTerm">
 						</div>
-
-
 						<button type="submit" class="btn btn-primary">Submit</button>
 					</form>
 				</div>

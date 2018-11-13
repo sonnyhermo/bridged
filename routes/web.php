@@ -57,3 +57,8 @@ Route::prefix('admin')->group(function() {
     Route::get('/all_offers', 'Admin\DataTableController@fetchOffers')->name('datatable.offers');
     
 });
+
+Route::prefix('/creditor')->group(function(){
+    Route::get('/login', 'Auth\CreditorLoginController@showLoginForm')->name('creditor.login');
+    Route::post('/login', 'Auth\CreditorLoginController@login')->name('creditor.login.submit');
+});
