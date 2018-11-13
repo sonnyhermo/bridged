@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Term extends Model
 {
 
+	protected $fillable = [
+		'offer_id','term','interest_rate'
+	];
+
 	protected $hidden = [
         'id','offer_id', 'created_at', 'updated_at',
     ];

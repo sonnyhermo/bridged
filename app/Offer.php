@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Offer extends Model
 {
 
-    protected $fillable = ['bank_id', 'classification_id','product','min','max','terms', 'interest', 'min_income', 'requirements', 'slug'];
+    protected $fillable = ['bank_id', 'classification_id','product','min','max','terms', 'interest', 'min_income', 'slug'];
 
 
     public function bank(){
@@ -21,5 +21,4 @@ class Offer extends Model
     public function terms(){
     	return $this->hasMany('App\Term');
     }
-
 }

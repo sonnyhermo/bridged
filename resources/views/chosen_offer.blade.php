@@ -15,7 +15,7 @@
 					<p class="float-right">:</p>
 				</div>
 				<div class="col-md-6">
-					<p>{{ $offer->classification->loan->type }}</p>
+					<p>{{ $offer[0]->classification->loan->type }}</p>
 				</div>
 			</div>
 			<div class="row">
@@ -24,7 +24,7 @@
 					<p class="float-right">:</p>
 				</div>
 				<div class="col-md-6">
-					<p>{{ $offer->classification->description }}</p>
+					<p>{{ $offer[0]->classification->classification }}</p>
 				</div>
 			</div>
 			<div class="row">
@@ -33,7 +33,7 @@
 					<p class="float-right">:</p>
 				</div>
 				<div class="col-md-6">
-					<p>{{ $offer->product }}</p>
+					<p>{{ $offer[0]->product }}</p>
 				</div>
 			</div>
 			<div class="row">
@@ -42,7 +42,7 @@
 					<p class="float-right">:</p>
 				</div>
 				<div class="col-md-6">
-					<p>Php {{ number_format($offer->min,2,'.',',') }} to Php {{ number_format($offer->max,2,'.',',') }}</p>
+					<p>Php {{ number_format($offer[0]->min,2,'.',',') }} to Php {{ number_format($offer[0]->max,2,'.',',') }}</p>
 				</div>
 			</div>
 			<div class="row">
@@ -60,7 +60,7 @@
 					<p class="float-right">:</p>
 				</div>
 				<div class="col-md-6">
-					<p>6 months to 36 months</p>
+					<p>{{ $offer[0]->terms->min('term') }} months to {{ $offer[0]->terms->max('term') }} months</p>
 				</div>
 			</div>
 			<div class="row">
@@ -69,7 +69,7 @@
 					<p class="float-right">:</p>
 				</div>
 				<div class="col-md-6">
-					<p>{{ $offer->classification->collateral }}</p>
+					<p>{{ $offer[0]->classification->collateral }}</p>
 				</div>
 			</div>
 			<div class="row">
@@ -96,8 +96,31 @@
 					<p class="float-right">:</p>
 				</div>
 				<div class="col-md-6">
-					<p>Php {{ number_format($offer->min_income,'2','.',',') }} annual income</p>
+					<p>Php {{ number_format($offer[0]->min_income,'2','.',',') }} annual income</p>
 				</div>
+			</div>
+		</div>
+		<div class="col-md-12 mt-5" id="offer-product-description">
+			<h5>PRODUCT DESCRIPTION</h5>
+			<div class="col-md-12">
+				{{ $offer[0]->classification->description }}
+			</div>
+			<div class="col-md-12">
+				<ul>
+				@foreach($offer[0]->classification->loan->purposes as $purpose)
+					<li>{{ $purpose->purpose }}</li>
+				@endforeach
+				</ul>
+			</div>
+		</div>
+		<div class="col-md-12 mt-5" id="offer-product-requirements">
+			<h5>LIST OF REQUIREMENTS</h5>
+			<div class="col-md-12">
+				<ul>
+				@foreach(explode(',',$offer[0]->requirements) as $requirements)
+					<li>{{ $requirements }}</li>
+				@endforeach
+				</ul>
 			</div>
 		</div>
 	</div>

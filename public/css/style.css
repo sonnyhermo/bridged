@@ -4,7 +4,7 @@
 	padding: 0;
 }
 
-body, html {
+body, html, creditor-admin-login {
     height: 100%;
     font-family: Nunito;
 }

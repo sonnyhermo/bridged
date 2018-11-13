@@ -132,6 +132,12 @@ return [
             'table' => 'password_resets',
             'expire' => 15,
         ],
+
+        'admins' => [
+            'provider' => 'creditors',
+            'table' => 'password_resets',
+            'expire' => 15,
+        ],
     ],
 
 ];

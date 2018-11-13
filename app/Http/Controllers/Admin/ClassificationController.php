@@ -38,16 +38,29 @@ class ClassificationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreNewSpec $request, Classification $spec)
+    public function store(StoreNewSpec $request, Classification $classification)
     {
+    
         $data = $request->validated();
-        $data = array_merge($data, ['slug' => str_slug($request->description, '-')]);
+        $data = array_merge($data, ['slug' => str_slug($data['classification'], '-')]);
 
-        $newSpec = $spec->create($data);
+        $countUndelete = count($classification->where('slug','=',$data['slug'])->get());
+        if($countUndelete != 0){
+            return redirect()->route('loans.index')->with('error','Classification already exist'); 
+        }
+
+        $countDeleted = count($classification->onlyTrashed()->where('slug','=',$data['slug'])->get());
+
+        if($countDeleted != 0){
+            return redirect()->route('loans.index')->with('error','Classification already exist in archived');
+        }
+
+        $newSpec = $classification->create($data);
 
         if( $newSpec ){
             return redirect()->route('loans.index')->with('success','New loan classification has been added!');
         }
+        
     }
 
     /**
@@ -67,9 +80,9 @@ class ClassificationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Classification $classification)
     {
-        //
+        return $classification;
     }
 
     /**
@@ -82,7 +95,14 @@ class ClassificationController extends Controller
     public function update(StoreNewSpec $request, Classification $classification)
     {
         $data = $request->validated();
-        $is_updated = $classification->update($data);
+
+        $classification->loan_id = $data['loan_id'];
+        $classification->classification = $data['classification'];
+        $classification->collateral = $data['collateral'];
+        $classification->description = $data['description'];
+        $classification->slug = str_slug($data['classification'], '-');
+
+        $is_updated = $classification->save();
         if(!$is_updated){
             return redirect()->route('loans.index')->with('error','Classification failed to update');
         }
@@ -98,7 +118,12 @@ class ClassificationController extends Controller
      */
     public function destroy(Classification $classification)
     {
-        $classification->delete();
-        return json_encode(['a'=>'b']);
+        $is_deleted = $classification->delete();
+        
+        if(!$is_deleted){
+            return json_encode(['code' => 0, 'message' => 'Deleting Classification Failed']);
+        }
+
+        return json_encode(['code' => 1, 'message' => 'Classification Deleted']);
     }
 }

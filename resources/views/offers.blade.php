@@ -19,6 +19,7 @@
 	</section>
 
 	<section class="container my-5" id="search-result-section">
+		@if(!empty($offers))
 		<div class="col-md-12">
 			<p id="client-searching">Busines Loan  >  Term Loan  >  Php 1,500,00.00  >  12 months</p>
 		</div>
@@ -33,6 +34,7 @@
 			@foreach($offers as $offer)
 			<div class="col-md-12 result-box p-3 mb-2">
 				<div class="row">
+
 					<div class="col-md-5">
 						<img src="/storage/{{ $offer->bank->logo }}">
 					</div>
@@ -45,6 +47,7 @@
 						<a href="/offers/{{ $offer->slug }}" target="_blank">
 							<button class="btn btn-orange mt-3 font-weight-bold">APPLY</button>
 						</a>
+
 					</div>
 				</div>
 			</div>
@@ -53,5 +56,6 @@
 		<div class="col-md-12 text-center">
 			<p id="loan-note">Note:  You can select only up to  10 Banks at a time per Loan Classification</p>
 		</div>
+		@endif
 	</section>
 @endsection

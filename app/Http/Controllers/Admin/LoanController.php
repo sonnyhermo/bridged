@@ -30,8 +30,7 @@ class LoanController extends Controller
     public function index()
     {
         $loans = $this->loan->all();
-        $specs = Classification::all();
-        $purposes = Purpose::all();
+    
         return view('admin.loans', ['loans' => $loans, 'module' => 'Loans']);
     }
 
@@ -57,8 +56,8 @@ class LoanController extends Controller
 
         $data = $request->validated();
 
-        $this->loan->type = $request->loan;
-        $this->loan->slug = str_slug($request->loan, '-');
+        $this->loan->type = $data['loan'];
+        $this->loan->slug = str_slug($data['loan'], '-');
 
         if($this->loan->save()){
             return redirect()->route('loans.index')->with('success','New Loan type has been added!');
@@ -85,9 +84,9 @@ class LoanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Loan $loan)
     {
-        //
+        return $loan;
     }
 
     /**
@@ -97,9 +96,20 @@ class LoanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreNewLoan $request, Loan $loan)
     {
-        //
+        $data = $request->validated();
+
+        $loan->type = $data['loan'];
+        $loan->slug = str_slug($data['loan'], '-');
+
+        $is_updated = $loan->save();
+
+        if(!$is_updated){
+            return redirect()->route('loans.index')->with('error','Loan Type failed to update');
+        }
+        
+        return redirect()->route('loans.index')->with('success','Loan Type Updated');
     }
 
     /**
@@ -110,7 +120,13 @@ class LoanController extends Controller
      */
     public function destroy(Loan $loan)
     {
-        //
+        $is_deleted = $loan->delete();
+        
+        if(!$is_deleted){
+            return json_encode(['code' => 0, 'message' => 'Deleting Loan Failed']);
+        }
+
+        return json_encode(['code' => 1, 'message' => 'Loan Deleted']);
     }
 
 }

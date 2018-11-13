@@ -7,7 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Bank;
 use App\Loan;
 use App\Offer;
+use App\Term;
 use App\Http\Requests\StoreNewOfferRequest;
+use Rap2hpoutre\FastExcel\FastExcel;
 
 class OfferController extends Controller
 {
@@ -50,11 +52,20 @@ class OfferController extends Controller
     {
 
         $data = $request->validated();
-        $data['slug'] = str_slug($data['product']);
+
+        $data['slug'] = str_slug($data['product']).$data['bank_id'];
+        $tempfile = $request->file('terms_rates')->store('tmp');
 
         $newOffer = $offer->create($data);
 
         if($newOffer){
+            (new FastExcel)->import(storage_path('app/'.$tempfile), function ($line) use ($newOffer) {
+                Term::create([
+                    'offer_id' => $newOffer->id,
+                    'term'=> $line['TERM'],
+                    'interest_rate' => $line['INTEREST RATE'] 
+                ]);
+            });
             return ['status' => 1, 'title' => 'Success','message' => 'New Offer has been added!'];
         }else{
             return ['status' => 0, 'title' => 'Error', 'message' => 'Failed to add Offer!'];

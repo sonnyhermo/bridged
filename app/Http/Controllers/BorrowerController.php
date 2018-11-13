@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Borrower;
 use Illuminate\Http\Request;
 
-class CreditorController extends Controller
+class BorrowerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,7 @@ class CreditorController extends Controller
      */
     public function index()
     {
-        //
+        return view('profile.my_profile');
     }
 
     /**
@@ -40,10 +41,10 @@ class CreditorController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Borrower  $borrower
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Borrower $borrower)
     {
         //
     }
@@ -51,10 +52,10 @@ class CreditorController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Borrower  $borrower
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Borrower $borrower)
     {
         //
     }
@@ -63,10 +64,10 @@ class CreditorController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Borrower  $borrower
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Borrower $borrower)
     {
         //
     }
@@ -74,10 +75,10 @@ class CreditorController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Borrower  $borrower
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Borrower $borrower)
     {
         //
     }
