@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Offer extends Model
 {
 
-    protected $fillable = ['bank_id', 'classification_id','product','min','max','terms', 'interest', 'min_income', 'slug'];
+    protected $fillable = ['bank_id', 'classification_id','product','min','max','min_income','requirements', 'slug'];
 
 
     public function bank(){

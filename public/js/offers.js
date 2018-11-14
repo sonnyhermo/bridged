@@ -114,7 +114,7 @@ $(document).ready(function(){
                   text: swalText,
                   icon: swalType,
                 }).then(function(value){
-                    $(this)[0].reset();
+                    $('#offerForm')[0].reset();
                     $('#newBankModal').hide();
                     location.reload();
                 });
