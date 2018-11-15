@@ -50,7 +50,7 @@ class BankController extends Controller
         $data['slug'] = str_slug($data['name']);
 
         $tempfile = $request->file('branches')->store('tmp');
-        $path = $request->file('logo')->store('banks_logo');
+        $path = $request->file('logo')->store('banks_logo','public');
 
         $data['logo'] = $path;
 

@@ -8,13 +8,25 @@
 		</div>
 		<div class="col-md-12 py-3 px-5" id="search-form">
 			<h5>Search Loan</h5>
-			<form class="form-inline">
-				<input type="text" class="form-control mr-2" name="txtLoanType" placeholder="Loan Type">
-				<input type="text" class="form-control mr-2" name="txtLoanClass" placeholder="Loan Classification">
-				<input type="text" class="form-control mr-2" name="txtLoanAmount" placeholder="Loan Amount">
-				<input type="number" class="form-control mr-2" name="txtTerms" placeholder="Terms (months)">
-				<button class="btn btn-navy-blue">SEARCH</button>
-			</form>
+			<form method="GET" action="/search_offers" class="form-inline">
+                @csrf
+                <select class="form-control mr-2" name="loan">
+                    <option value="">Select Loan Type</option>
+                    @foreach($loans as $loan)
+                    <option value="{{ $loan->slug }}">{{ $loan->type }}</option>
+                    @endforeach
+                </select>
+                <select class="form-control mr-2" name="classification">
+                    <option value="">Select Loan Classification</option>
+                    @foreach($classifications as $classification)
+                    <option value="{{ $classification->slug }}">{{ $classification->classification }}</option>
+                    @endforeach
+                </select>
+                <input type="text" class="form-control mr-2" name="amount" placeholder="Loan Amount">
+                <input type="number" class="form-control mr-2" name="term" placeholder="Terms (months)">
+                <button type="submit" class="btn btn-navy-blue">SEARCH</button>
+            </form>
+			
 		</div>
 	</section>
 
@@ -24,7 +36,7 @@
 			<p id="client-searching">Busines Loan  >  Term Loan  >  Php 1,500,00.00  >  12 months</p>
 		</div>
 		<div class="col-md-12">
-			<h5 class="font-weight-bold">Search Results  (3 Loan Offer found)</p>
+			<h5 class="font-weight-bold">Search Results  ({{ $offers->total() }} Loan Offer found)</p>
 		</div>
 		<div class="col-md-12">
 			<button class="btn btn-navy-blue float-right"><i class="fas fa-sort"></i>&nbsp Sort</button>
@@ -56,6 +68,9 @@
 		<div class="col-md-12 text-center">
 			<p id="loan-note">Note:  You can select only up to  10 Banks at a time per Loan Classification</p>
 		</div>
+
+		{{ $offers->appends(request()->query())->links() }}
+
 		@endif
 	</section>
 @endsection

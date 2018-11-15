@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Loan;
+use App\Classification;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $loans = Loan::all();
+        $classifications = Classification::all();
+        return view('home',['loans' => $loans, 'classifications' => $classifications]);
     }
 }
