@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Offer;
 use App\Term;
+use App\Loan;
+use App\Classification;
 
 class OfferController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +18,10 @@ class OfferController extends Controller
      */
     public function index()
     {
-        return view('offers');
+
+        $loans = Loan::all();
+        $classifications = Classification::all();
+        return view('offers',['loans' => $loans, 'classifications' => $classifications]);
     }
 
     /**
@@ -55,9 +61,7 @@ class OfferController extends Controller
             'classification.loan.purposes:loan_id,purpose'
         ])->get();
 
-        //return $offer_details;
         return view('chosen_offer', ['offer' => $offer_details]);
-
     }
 
     /**
@@ -96,23 +100,30 @@ class OfferController extends Controller
 
     public function search(Request $request){
 
+        $loans = Loan::all();
+        $classifications = Classification::all();
+
         $offers = Offer::with([
             'bank:id,name,logo',
-            'classification:id,loan_id,description,collateral', 
-            'classification.loan:id,type',
-            'terms'=>function($query){
-                $query->where('term', '=', '3');
+            'classification:id,loan_id,description,collateral,slug', 
+            'classification.loan:id,type,slug',
+            'terms' => function($query) use ($request){
+                $query->where('term', '=', $request->query('term'));
             }
         ])
-        ->whereHas('terms', function($query){
-            $query->where('term', '=', '3');
+        ->whereHas('terms', function($query) use ($request){
+            $query->where('term', '=', $request->query('term'));
         })
-        ->whereHas('classification', function($query){
-            $query->where('loan_id', '=', '1');
+        ->whereHas('classification', function($query) use ($request){
+            $query->where('slug','=', $request->query('classification'));
         })
-        ->where('classification_id', '=', '1')
-        ->paginate(2);
+        ->whereHas('classification.loan', function($query) use ($request){
+            $query->where('slug','=', $request->query('loan'));
+        })
+        ->paginate(1)
+        ->appends(request()->query());;
 
-        return view('offers',['offers' => $offers, 'amount' => '500000']);
+        //return $offers;
+        return view('offers',['offers' => $offers, 'amount' => '500000', 'loans' => $loans, 'classifications' => $classifications]);
     }
 }

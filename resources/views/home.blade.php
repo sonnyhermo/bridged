@@ -10,10 +10,20 @@
                         <h5 class="card-title">LOAN SEARCH</h5>
                         <h6 class="card-subtitle mb-4">Find the best loan for your needs!</h6>
                         <div class="col-md-12">
-                            <form method="GET" action="/offers/search">
+                            <form method="GET" action="/search_offers">
                                 @csrf
-                                <input type="text" class="form-control" name="loan_id" placeholder="Loan Type">
-                                <input type="text" class="form-control" name="classification_id" placeholder="Loan Classification">
+                                <select class="form-control" name="loan">
+                                    <option value="">Select Loan Type</option>
+                                    @foreach($loans as $loan)
+                                    <option value="{{ $loan->slug }}">{{ $loan->type }}</option>
+                                    @endforeach
+                                </select>
+                                <select class="form-control" name="classification">
+                                    <option value="">Select Loan Classification</option>
+                                    @foreach($classifications as $classification)
+                                    <option value="{{ $classification->slug }}">{{ $classification->classification }}</option>
+                                    @endforeach
+                                </select>
                                 <input type="text" class="form-control" name="amount" placeholder="Loan Amount">
                                 <input type="number" class="form-control" name="term" placeholder="Terms (months)">
                                 <button type="submit" class="btnLoanSearch btn btn-orange mt-5">SEARCH</button>

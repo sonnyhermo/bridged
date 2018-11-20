@@ -5,12 +5,13 @@ $(document).ready(function(){
 			type: 'get',
 			dataType: 'json',
 			success: function(res){
+                console.log(res);
 				let options = "<option value=''>Select Loan Type</option>";
-				$.each(res, function(key, val){
-					$.each(val.classifications, function(skey, sval){
+				//$.each(res, function(key, val){
+					$.each(res, function(skey, sval){
 						options += "<option value='"+sval.id+"'>"+sval.classification+"</option>"
 					})
-				});
+				//});
 
 				$('#selectClassification').html(options);
 			},
@@ -114,7 +115,7 @@ $(document).ready(function(){
                   text: swalText,
                   icon: swalType,
                 }).then(function(value){
-                    $(this)[0].reset();
+                    $('#offerForm')[0].reset();
                     $('#newBankModal').hide();
                     location.reload();
                 });

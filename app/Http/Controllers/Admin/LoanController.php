@@ -74,7 +74,7 @@ class LoanController extends Controller
     {
 
         //route model binding
-        return $loan->with('classifications')->get()->toJson();
+        return $loan->classifications;
 
     }
 

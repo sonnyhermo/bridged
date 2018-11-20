@@ -21,7 +21,7 @@ Route::resource('/offers','OfferController');//->middleware('verified');
 
 Route::resource('/users','BorrowerController');//->middleware('verified');
 
-Route::get('/search/offers', 'OfferController@search');
+Route::get('/search_offers', 'OfferController@search');
 
 Route::prefix('admin')->group(function() {
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');

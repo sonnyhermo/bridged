@@ -7,13 +7,18 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreBankRequest;
 use App\Bank;
 use Storage;
-use Exception;
 use App\Branch;
 use Rap2hpoutre\FastExcel\FastExcel;
-use Carbon\Carbon;
+use App\Repository\DataChecker;
 
 class BankController extends Controller
 {
+    private $dataChecker;
+
+    public function __construct(){
+        $this->dataChecker = new DataChecker();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -50,19 +55,14 @@ class BankController extends Controller
         $data['slug'] = str_slug($data['name']);
 
         $tempfile = $request->file('branches')->store('tmp');
-        $path = $request->file('logo')->store('banks_logo');
+        $path = $request->file('logo')->store('banks_logo','public');
 
         $data['logo'] = $path;
 
-        $countUndelete = count($bank->where('slug','=',$data['slug'])->get());
-        if($countUndelete != 0){
-            return ['status' => 0, 'title' => 'Error', 'message' =>'Bank already exist']; 
-        }
+        $isExist = $this->dataChecker->isExist($bank, $data['slug']);
 
-        $countDeleted = count($bank->onlyTrashed()->where('slug','=',$data['slug'])->get());
-
-        if($countDeleted != 0){
-            return ['status' => 0, 'title' => 'Error', 'message' => 'Bank already exist in archived'];
+        if($isExist){
+            return ['status' => 0, 'title' => 'Error', 'message' => 'Bank already exist or in archieved'];
         }
 
         $newBank = $bank->create($data);

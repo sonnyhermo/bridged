@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
 <section class="container my-5" id="offer-detail-section">
 	<div class="col-md-8">
 		<div class="col-md-12">
@@ -51,7 +50,7 @@
 					<p class="float-right">:</p>
 				</div>
 				<div class="col-md-6">
-					<p>1.75% per month</p>
+					<p>as low as {{ $offer[0]->terms->min('interest_rate') }}% per month</p>
 				</div>
 			</div>
 			<div class="row">

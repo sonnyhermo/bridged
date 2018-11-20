@@ -17,118 +17,77 @@
 
 		<div class="tab-content">
 	  		<div class="tab-pane active container" id="individual">
-	  			<div class="col-md-8">
-			  		<form>
-						<div class="form-group">
-							<label for="txtFname">First Name<span class="text-danger">*</span></label>
-							<input type="text" class="form-control" id="txtFname" name="firstname" placeholder="Enter First Name">
+				<div id="stepper-profile" class="bs-stepper">
+					<div class="bs-stepper-header">
+						<div class="step" data-target="#step-personal-info">
+							<a href="#">
+							<span class="bs-stepper-circle">1</span>
+							<span class="bs-stepper-label">Borrower Info</span>
+							</a>
 						</div>
-						<div class="form-group">
-							<label for="txtMname">Middle Name<span class="text-danger">*</span></label>
-							<input type="text" class="form-control" id="txtMname" name="middlename" placeholder="Enter Middle Name">
+						<div class="line"></div>
+						<div class="step" data-target="#step-income-source">
+							<a href="#">
+							<span class="bs-stepper-circle">2</span>
+							<span class="bs-stepper-label">Source of Income</span>
+							</a>
 						</div>
-						<div class="form-group">
-							<label for="txtSname">Last Name<span class="text-danger">*</span></label>
-							<input type="text" class="form-control" id="txtSname" name="lastname" placeholder="Enter Last Name">
+						<div class="line"></div>
+						<div class="step" data-target="#step-attachment">
+							<a href="#">
+							<span class="bs-stepper-circle">3</span>
+							<span class="bs-stepper-label">Attachments</span>
+							</a>
 						</div>
-					 	<div class="form-group row">
-							<div class="col-md-12">Gender<span class="text-danger">*</span></div>
-							<div class="col-md-12">
-							 		<div class="form-check-inline">
-										<label class="form-check-label">
-										<input type="radio" class="form-check-input" name="gender" value="male">Male
-										</label>
-									</div>
-									<div class="form-check-inline">
-										<label class="form-check-label">
-										<input type="radio" class="form-check-input">Female
-										</label>
-									</div>
-							</div>
+					</div>
+					<div class="bs-stepper-content">
+						<div id="step-personal-info" class="content">
+							@include('profile.personal')
 						</div>
-						<div class="form-group">
-							<label>Nationality<span class="text-danger">*</span></label>
-							<input type="text" class="form-control" id="txtNationality" name="nationality" placeholder="Enter Nationality">
+						<div id="step-income-source" class="content">
+							@include('profile.source_of_income')
 						</div>
-						<div class="form-group">
-							<label>Civil Status<span class="text-danger">*</span></label>
-							<select class="form-control" name="civil_status">
-								<option value="">Select Civil Status</option>
-								<option value="married">Married</option>
-								<option value="single">Single</option>
-								<option value="widow">Widow</option>
-								<option value="separated">Separated</option>
-							</select>
+						<div id="step-attachment" class="content">
+							@include('profile.attachments')
 						</div>
-						<div class="form-group">
-							<label>Birth Date<span class="text-danger">*</span></label>
-							<input type="date" class="form-control" id="txtBDate" name="birth_date">
-						</div>
-						<div class="form-group">
-							<label>Birth Place<span class="text-danger">*</span></label>
-							<input type="text" class="form-control" id="txtBPlace" name="birth_place">
-						</div>
-						<div class="form-group">
-							<label>Mother's Maiden Name</label>
-							<input type="text" class="form-control" id="txtMotherName" name="mother_maiden">
-						</div>
-						<div class="form-group">
-							<label>Present Address: Province<span class="text-danger">*</span></label>
-							<input type="text" class="form-control" id="txtProvince" name="province">
-						</div>
-						<div class="form-group">
-							<label>Present Address: City/Municipality<span class="text-danger">*</span></label>
-							<input type="text" class="form-control" id="txtMunicipal" name="municipal">
-						</div>
-						<div class="form-group">
-							<label>Present Address: Street/Subdivision<span class="text-danger">*</span></label>
-							<input type="text" class="form-control" id="txtStreet" name="street">
-						</div>
-						<div class="form-group">
-							<label>Length of stay</label>
-							<input type="number" class="form-control" id="txtStay" name="stay">
-						</div>
-						<div class="form-group">
-							<label>Residence Ownership</label>
-							<select class="form-control" name="ownership">
-								<option value="">Select Ownership Type</option>
-								<option value="owned">Owned</option>
-								<option value="mortgaged">Mortgaged</option>
-								<option value="rented">Rented</option>
-								<option value="living with parents">Living with Parents</option>
-								<option value="others">Others</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<label>Permanent address<span class="text-danger">*</span></label>
-							<input type="text" class="form-control" id="txtPermanent" name="permanent_address">
-						</div>
-						<div class="form-group">
-							<button class="btn btn-primary form-control" type="button" data-toggle="collapse" data-target="#collapseSpouse">Add Spouse Info(If any)</button>
-							<div class="collapse" id="collapseSpouse">
-								<div class="card card-body">
-								Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-								</div>
-							</div>
-						</div>
-						<div class="form-group">
-							<button class="btn btn-primary form-control" type="button" data-toggle="collapse" data-target="#collapseCoMaker">Add Co-Maker(If any)</button>
-							<div class="collapse" id="collapseCoMaker">
-								<div class="card card-body">
-								Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-								</div>
-							</div>
-						</div>
-						<button type="submit" class="btn btn-primary">Save</button>
-					</form>
+					</div>
 				</div>
-		  	</div>
+			</div>
 
 
 		  	<div class="tab-pane container" id="entity">
 		  		<div class="col-md-8">
 		  			<form>
 		  				<div class="form-group">
+							<label>Business Type</label>
+							<select class="form-control" name="ownership">
+								<option value="">Select Business Type</option>
+								<option value="corporation">Corporation</option>
+								<option value="sole propreitorship">Sole Propreitorship</option>
+								<option value="partnership">Partnership</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label>Business Name</label>
+							<input type="text" class="form-control" id="txtBusiness" name="business">
+						</div>
+						<div class="form-group">
+							<label>Business Name</label>
+							<input type="text" class="form-control" id="txtBusiness" name="business">
+						</div>
+						<div class="form-group">
+							<label>Office Address(Province)</label>
+							<input type="text" class="form-control" id="txtOfficeProvince" name="office_province">
+						</div>
+						<div class="form-group">
+							<label>Office Address(Municipality)</label>
+							<input type="text" class="form-control" id="txtOfficeMunicipal" name="office_municipal">
+						</div>
+						<div class="form-group">
+							<label>Office Address(Street)</label>
+							<input type="text" class="form-control" id="txtOfficeStreet" name="office_street">
+						</div>
+						<div class="form-group">
 							<label>Residence Ownership</label>
 							<select class="form-control" name="ownership">
 								<option value="">Select Ownership Type</option>
@@ -138,6 +97,56 @@
 								<option value="living with parents">Living with Parents</option>
 								<option value="others">Others</option>
 							</select>
+						</div>
+						<div class="form-group">
+							<label>Industry</label>
+							<select class="form-control" name="ownership">
+								<option value="">Select Industry</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label>Date of Establishment</label>
+							<input type="data" class="form-control" id="txtDateEstablished" name="establishment_date">
+						</div>
+						<div class="form-group">
+							<label>Date of Establishment</label>
+							<input type="number" class="form-control" id="txtOperationYears" name="operation_year">
+						</div>
+						<div class="form-group">
+							<label>Company SSS</label>
+							<input type="text" class="form-control" id="txtCompanySSS" name="company_sss">
+						</div>
+						<div class="form-group">
+							<label>Company TIN</label>
+							<input type="text" class="form-control" id="txtCompanyTin" name="company_tin">
+						</div>
+						<div class="form-group">
+							<label>Company Tel No.</label>
+							<input type="text" class="form-control" id="txtCompanyTelNo" name="company_tel">
+						</div>
+						<div class="form-group">
+							<label>Company Fax No.</label>
+							<input type="text" class="form-control" id="txtCompanyFaxNo" name="company_fax">
+						</div>
+						<div class="form-group">
+							<label>Company Website</label>
+							<input type="text" class="form-control" id="txtCompanyWebsite" name="company_web">
+						</div>
+						<div class="form-group">
+							<label>Representative Name</label>
+							<input type="text" class="form-control" id="txtCompanyRepresent" name="company_represent">
+						</div>
+						<div class="form-group">
+							<label>Representative Position</label>
+							<input type="text" class="form-control" id="txtCompanyRepPosition" name="company_rep_position">
+						</div>
+						<div class="form-group">
+							<label>Representative Contact</label>
+							<input type="text" class="form-control" id="txtCompanyRepContact" name="company_rep_contact">
+						</div>
+						<div class="form-group">
+							<label>Representative Years Employed</label>
+							<input type="text" class="form-control" id="txtCompanyRepYear" name="company_rep_year">
 						</div>
 		  			</form>
 		  		</div>
@@ -147,3 +156,12 @@
 	</div>
 </div>
 @endsection
+
+@push('scripts')
+	<script src="https://unpkg.com/bs-stepper/dist/js/bs-stepper.min.js"></script>
+	<script src="{{ asset('js/garlic.js') }}"></script>
+	<script>
+		var myStepper = new Stepper($('#stepper-profile')[0]);
+	</script>
+	<script src="{{ asset('js/profile.js') }}"></script>
+@endpush
