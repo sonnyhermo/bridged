@@ -185,10 +185,8 @@
     </div>
 
 
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" 
-    crossorigin="anonymous"></script>
+    <script src="{{ asset('js/jquery.3.2.1.min.js') }}" type="text/javascript"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="https://unpkg.com/bs-stepper/dist/js/bs-stepper.min.js"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/popper.min.js') }}"></script>
     
@@ -229,7 +227,6 @@
                     }
                 });
             });
-
         });
     </script>
 </body>
