@@ -1,21 +1,22 @@
 <form data-persist="garlic" id="personal-form">
+	@csrf	
 	<div class="row">
 		<div class="col-md-4">
 			<div class="form-group">
 				<label for="txtFname">First Name<span class="text-danger">*</span></label>
-				<input type="text" class="form-control" id="txtFname" name="firstname" placeholder="Enter First Name">
+				<input type="text" class="form-control" id="txtFname" placeholder="Enter First Name" value="{{ $user['firstname'] }}" readonly>
 			</div>
 		</div>
 		<div class="col-md-4">	
 			<div class="form-group">
 				<label for="txtMname">Middle Name<span class="text-danger">*</span></label>
-				<input type="text" class="form-control" id="txtMname" name="middlename" placeholder="Enter Middle Name">
+				<input type="text" class="form-control" id="txtMname" placeholder="Enter Middle Name" value="{{ $user['middlename'] }}" readonly>
 			</div>
 		</div>
 		<div class="col-md-4">	
 			<div class="form-group">
 				<label for="txtSname">Last Name<span class="text-danger">*</span></label>
-				<input type="text" class="form-control" id="txtSname" name="lastname" placeholder="Enter Last Name">
+				<input type="text" class="form-control" id="txtSname" placeholder="Enter Last Name" value="{{ $user['lastname'] }}"readonly>
 			</div>
 		</div>
 	</div>
@@ -26,12 +27,12 @@
 				<div class="col-md-12">
 				 		<div class="form-check-inline">
 							<label class="form-check-label">
-							<input type="radio" class="form-check-input" name="gender" value="male">Male
+							<input type="radio" class="form-check-input" name="gender" value="0" >Male
 							</label>
 						</div>
 						<div class="form-check-inline">
 							<label class="form-check-label">
-							<input type="radio" class="form-check-input">Female
+							<input type="radio" class="form-check-input" name="gender" value="1" >Female
 							</label>
 						</div>
 				</div>
@@ -40,7 +41,7 @@
 		<div class="col-md-4">	
 			<div class="form-group">
 				<label>Nationality<span class="text-danger">*</span></label>
-				<input type="text" class="form-control" id="txtNationality" name="nationality" placeholder="Enter Nationality">
+				<input type="text" class="form-control" id="txtNationality" name="nationality" placeholder="Enter Nationality" required>
 			</div>
 		</div>
 		<div class="col-md-4">	
@@ -60,13 +61,13 @@
 		<div class="col-md-4">
 			<div class="form-group">
 				<label>Birth Date<span class="text-danger">*</span></label>
-				<input type="date" class="form-control" id="txtBDate" name="birth_date">
+				<input type="date" class="form-control" id="txtBDate" name="birth_date" required>
 			</div>
 		</div>
 		<div class="col-md-4">	
 			<div class="form-group">
 				<label>Birth Place<span class="text-danger">*</span></label>
-				<input type="text" class="form-control" id="txtBPlace" name="birth_place">
+				<input type="text" class="form-control" id="txtBPlace" name="birth_place" required>
 			</div>
 		</div>
 		<div class="col-md-4">	
@@ -83,19 +84,19 @@
 
 	<div class="form-group">
 		<label>Street/Subd/Brgy<span class="text-danger">*</span></label>
-		<input type="text" class="form-control" id="txtStreet" name="street">
+		<input type="text" class="form-control" id="txtStreet" name="present_street">
 	</div>
 	<div class="row">
 		<div class="col-md-7">
 			<div class="form-group">
 				<label>City/Municipality<span class="text-danger">*</span></label>
-				<input type="text" class="form-control" id="txtMunicipal" name="municipal">
+				<input type="text" class="form-control" id="txtMunicipal" name="present_city">
 			</div>
 		</div>
 		<div class="col-md-5">	
 			<div class="form-group">
 				<label>Province<span class="text-danger">*</span></label>
-				<input type="text" class="form-control" id="txtProvince" name="province">
+				<input type="text" class="form-control" id="txtProvince" name="present_province">
 			</div>
 		</div>
 	</div>
@@ -103,13 +104,13 @@
 		<div class="col-md-4">
 			<div class="form-group">
 				<label>Length of stay</label>
-				<input type="number" class="form-control" id="txtStay" name="stay">
+				<input type="number" class="form-control" id="txtStay" name="present_stay_length">
 			</div>
 		</div>
 		<div class="col-md-4">	
 			<div class="form-group">
 				<label>Residence Ownership</label>
-				<select class="form-control" id="selOwnership" name="ownership">
+				<select class="form-control" id="selOwnership" name="present_ownership">
 					<option value="">Select Ownership Type</option>
 					<option value="owned">Owned</option>
 					<option value="mortgaged">Mortgaged</option>
@@ -133,13 +134,13 @@
 
 	<div class="form-group">
 		<label>Street/Subd/Brgy<span class="text-danger">*</span></label>
-		<input type="text" class="form-control" id="txtStreetPermanent" name="street">
+		<input type="text" class="form-control" id="txtStreetPermanent" name="permanent_street">
 	</div>
 	<div class="row">
 		<div class="col-md-7">
 			<div class="form-group">
 				<label>City/Municipality<span class="text-danger">*</span></label>
-				<input type="text" class="form-control" id="txtMunicipalPermanent" name="permanent_municipal">
+				<input type="text" class="form-control" id="txtMunicipalPermanent" name="permanent_city">
 			</div>
 		</div>
 		<div class="col-md-5">	
@@ -153,7 +154,7 @@
 		<div class="col-md-4">
 			<div class="form-group">
 				<label>Length of stay</label>
-				<input type="number" class="form-control" id="txtStayPermanent" name="permanent_stay">
+				<input type="number" class="form-control" id="txtStayPermanent" name="permanent_stay_length">
 			</div>
 		</div>
 		<div class="col-md-4">	
