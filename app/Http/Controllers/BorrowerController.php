@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StorePersonalInfoRequest;
 use Auth;
 use App\User;
+use Storage;
 
 class BorrowerController extends Controller
 {
@@ -17,8 +18,10 @@ class BorrowerController extends Controller
      */
     public function index()
     {
+
+        $industries = Storage::get('industries.json');
         $user = User::with(['borrower'])->find(Auth::user()->id);
-        return view('profile.my_profile', ['user' => $user]);
+        return view('profile.my_profile', ['user' => $user, 'industries' => json_decode($industries)]);
     }
 
     /**

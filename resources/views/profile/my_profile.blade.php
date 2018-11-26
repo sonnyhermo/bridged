@@ -1,6 +1,7 @@
 @extends('layouts.profile')
 
 @section('sub-content')
+
 <div class="card border-primary mb-3">
 	<div class="card-header">
 		<h4>Type of Borrower</h4>

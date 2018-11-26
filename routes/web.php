@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-use Illuminate\Http\Request;
+
 Route::get('/', 'HomeController@index')->name('home');
 
 Auth::routes(['verify' => true]);
@@ -21,9 +21,9 @@ Route::resource('/offers','OfferController');//->middleware('verified');
 
 Route::get('/search_offers', 'OfferController@search');
 
-Route::prefix('profile')->group(function(){
-    Route::resource('/user','BorrowerController');//->middleware('verified');
-});
+Route::resource('/my_profile','BorrowerController');//->middleware('verified');
+
+Route::resource('/income', 'IncomeController');
 
 Route::prefix('admin')->group(function() {
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
@@ -62,8 +62,4 @@ Route::prefix('admin')->group(function() {
 Route::prefix('/creditor')->group(function(){
     Route::get('/login', 'Auth\CreditorLoginController@showLoginForm')->name('creditor.login');
     Route::post('/login', 'Auth\CreditorLoginController@login')->name('creditor.login.submit');
-});
-
-Route::post('/sample_req', function(Request $request){
-    return $request;
 });

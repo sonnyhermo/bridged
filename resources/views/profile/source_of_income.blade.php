@@ -1,10 +1,17 @@
+
+
 <form data-persist="garlic" id="income-form">
 	<div id="divSourceFund">
 		<div class="row">
 			<div class="col-md-4">
 				<div class="form-group">
 					<label for="txtFname">Source of Fund <span class="text-danger">*</span></label>
-					<input type="text" class="form-control" id="txtFund" name="fund[]" placeholder="Enter First Name">
+					<select class="form-control" name="fund[]">
+						<option value="">Select Source of fund</option>
+						<option value="ofw">OFW</option>
+						<option value="employed">Employed</option>
+						<option value="self-employed">Self-employed</option>
+					</select>
 				</div>
 			</div>
 		</div>
@@ -12,13 +19,18 @@
 			<div class="col-md-6">
 				<div class="form-group">
 					<label for="txtFname">Employer/Business Name <span class="text-danger">*</span></label>
-					<input type="text" class="form-control" id="txtEmployer" name="employer[]" placeholder="Enter First Name">
+					<input type="text" class="form-control" id="txtEmployer" name="employer[]" placeholder="Enter Employer/Business">
 				</div>
 			</div>
 			<div class="col-md-6">
 				<div class="form-group">
 					<label for="txtFname">Industry <span class="text-danger">*</span></label>
-					<input type="text" class="form-control" id="txtIndustry" name="industry[]" placeholder="Enter First Name">
+					<select class="form-control" name="industry[]">
+						<option value="">Select Industry</option>
+						@foreach($industries->industries as $industry)
+						<option value="{{ $industry }}">{{ $industry }}</option>
+						@endforeach
+					</select>
 				</div>
 			</div>
 		</div>
@@ -26,19 +38,19 @@
 			<div class="col-md-5">
 				<div class="form-group">
 					<label for="txtFname">Job/Position <span class="text-danger">*</span></label>
-					<input type="text" class="form-control" id="txtJob" name="job[]" placeholder="Enter First Name">
+					<input type="text" class="form-control" id="txtJob" name="job[]" placeholder="Enter Job/Position">
 				</div>
 			</div>
 			<div class="col-md-3">
 				<div class="form-group">
 					<label for="txtFname">Length Operation <span class="text-danger">*</span></label>
-					<input type="text" class="form-control" id="txtLengthEmployed" name="length_employed[]" placeholder="Enter First Name">
+					<input type="text" class="form-control" id="txtLengthEmployed" name="length_employed[]" placeholder="Enter Length Employed">
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="form-group">
 					<label for="txtFname">Monthly Income <span class="text-danger">*</span></label>
-					<input type="text" class="form-control" id="txtIncome" name="income[]" placeholder="Enter First Name">
+					<input type="text" class="form-control" id="txtIncome" name="income[]" placeholder="Enter Monthly Income">
 				</div>
 			</div>
 		</div>
@@ -46,13 +58,13 @@
 			<div class="col-md-6">	
 				<div class="form-group">
 					<label for="txtFname">Employer/Business Tel No.</label>
-					<input type="text" class="form-control" id="txtEmployerTel" name="employer_tel[]" placeholder="Enter First Name">
+					<input type="text" class="form-control" id="txtEmployerTel" name="employer_tel[]" placeholder="Enter Employer Tel#">
 				</div>
 			</div>
 			<div class="col-md-6">	
 				<div class="form-group">
 					<label for="txtFname">Employer/Business Email Address</label>
-					<input type="text" class="form-control" id="txtEmployerEmail" name="employer_email[]" placeholder="Enter First Name">
+					<input type="text" class="form-control" id="txtEmployerEmail" name="employer_email[]" placeholder="Enter Employer Email">
 				</div>
 			</div>
 		</div>

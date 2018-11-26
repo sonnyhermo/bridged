@@ -25,40 +25,44 @@ $(document).ready(function(){
 
 	$('#personal-form').validate({
 		submitHandler:function(){
-			/*$.ajax({
-				url: '/profile/user',
-				type: 'post',
-				data: $('#personal-form').serialize(),
-				dataType: 'json',
-				success: function(res){
-					console.log(res);
-					myStepper.next();
-				},
-				error: function(xhr){
-					console.log(xhr.responseText);
-					//ajaxErrorDisplay(xhr.responseText);
-				}
-			});*/
+			// $.ajax({
+			// 	url: '/profile/user',
+			// 	type: 'post',
+			// 	data: $('#personal-form').serialize(),
+			// 	dataType: 'json',
+			// 	success: function(res){
+			// 		console.log(res);
+			// 		myStepper.next();
+			// 	},
+			// 	error: function(xhr){
+			// 		console.log(xhr.responseText);
+			// 		//ajaxErrorDisplay(xhr.responseText);
+			// 	}
+			// });
 
 			myStepper.next();
 		}
 	});
 
-	$('#btn-fund-submit').click(function(e){
-		e.preventDefault();
-		console.log($('#income-form').serialize());
+	$('#income-form').validate({
+		submitHandler:function(){
+			$.ajax({
+				url: '/income',
+				type: 'post',
+				data: $('#income-form').serialize(),
+				dataType: 'json',
+				success: function(res){
+					console.log(res);
+					//myStepper.next();
+				},
+				error: function(xhr){
+					console.log(xhr.responseText);
+					//ajaxErrorDisplay(xhr.responseText);
+				}
+			});
 
-		$.ajax({
-			url:'/sample_req',
-			type: 'post',
-			data: $('#income-form').serialize(),
-			dataType: 'json',
-			success:function(data){
-				console.log(data);
-			}
-		})
-		//myStepper.next();
-	});
+		}
+	})
 
 	$('.previous').click(function(e){
 		e.preventDefault();
