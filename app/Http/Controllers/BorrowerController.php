@@ -6,6 +6,7 @@ use App\Borrower;
 use Illuminate\Http\Request;
 use App\Http\Requests\StorePersonalInfoRequest;
 use Auth;
+use App\User;
 
 class BorrowerController extends Controller
 {
@@ -16,7 +17,8 @@ class BorrowerController extends Controller
      */
     public function index()
     {
-        return view('profile.my_profile', ['user' => Auth::user()]);
+        $user = User::with(['borrower'])->find(Auth::user()->id);
+        return view('profile.my_profile', ['user' => $user]);
     }
 
     /**

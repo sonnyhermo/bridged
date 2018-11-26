@@ -41,7 +41,7 @@
 		<div class="col-md-4">	
 			<div class="form-group">
 				<label>Nationality<span class="text-danger">*</span></label>
-				<input type="text" class="form-control" id="txtNationality" name="nationality" placeholder="Enter Nationality" required>
+				<input type="text" class="form-control" id="txtNationality" name="nationality" placeholder="Enter Nationality" value="{{ ($user['borrower']['nationality']) ? $user['borrower']['nationality'] : '' }}" required>
 			</div>
 		</div>
 		<div class="col-md-4">	
@@ -49,7 +49,7 @@
 				<label>Civil Status<span class="text-danger">*</span></label>
 				<select class="form-control" name="civil_status">
 					<option value="">Select Civil Status</option>
-					<option value="married">Married</option>
+					<option value="married" {{ ($user['borrower']['civil_status'] == 'maried') ? 'selected' : '' }}>Married</option>
 					<option value="single">Single</option>
 					<option value="widow">Widow</option>
 					<option value="separated">Separated</option>

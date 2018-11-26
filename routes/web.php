@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+use Illuminate\Http\Request;
 Route::get('/', 'HomeController@index')->name('home');
 
 Auth::routes(['verify' => true]);
@@ -62,4 +62,8 @@ Route::prefix('admin')->group(function() {
 Route::prefix('/creditor')->group(function(){
     Route::get('/login', 'Auth\CreditorLoginController@showLoginForm')->name('creditor.login');
     Route::post('/login', 'Auth\CreditorLoginController@login')->name('creditor.login.submit');
+});
+
+Route::post('/sample_req', function(Request $request){
+    return $request;
 });

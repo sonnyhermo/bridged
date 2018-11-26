@@ -15,6 +15,14 @@ $(document).ready(function(){
 		}
 	});
 
+	$('#btnAddIncome').click(function(e){
+		e.preventDefault();
+		let incomeLayout = $("#divSourceFund").clone();
+
+		$('#divMoreIncome').append(incomeLayout);
+		$('#divMoreIncome').append('<hr>');
+	});
+
 	$('#personal-form').validate({
 		submitHandler:function(){
 			/*$.ajax({
@@ -38,7 +46,18 @@ $(document).ready(function(){
 
 	$('#btn-fund-submit').click(function(e){
 		e.preventDefault();
-		myStepper.next();
+		console.log($('#income-form').serialize());
+
+		$.ajax({
+			url:'/sample_req',
+			type: 'post',
+			data: $('#income-form').serialize(),
+			dataType: 'json',
+			success:function(data){
+				console.log(data);
+			}
+		})
+		//myStepper.next();
 	});
 
 	$('.previous').click(function(e){

@@ -37,7 +37,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne('App\Borrower');
     }
 
-    public function entity(){
+    public function entities(){
         return $this->hasMany('App\Entity');
     }
 }
