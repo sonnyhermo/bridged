@@ -27,17 +27,17 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'email_verified_at', 'created_at', 'updated_at', 'deleted_at'
     ];
 
     protected $dates = ['deleted_at'];
 
 
-    public function individual(){
-        return $this->hasOne('App\Individual');
+    public function borrower(){
+        return $this->hasOne('App\Borrower');
     }
 
-    public function entity(){
+    public function entities(){
         return $this->hasMany('App\Entity');
     }
 }

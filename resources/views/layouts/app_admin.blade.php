@@ -102,12 +102,11 @@
     <!--   Core JS Files   -->
     <script src="{{ asset('js/jquery.3.2.1.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/popper.min.js') }}" type="text/javascript"></script>
-    
-    <!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
-    <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('js/light-bootstrap-dashboard.js?v=2.0.1') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/light-bootstrap-dashboard.js?v=2.0.1') }}"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="{{ asset('js/utility.js') }}" defer></script>
     <script type="text/javascript">
         $.ajaxSetup({
             headers: {

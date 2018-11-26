@@ -9,6 +9,10 @@ body, html, creditor-admin-login {
     font-family: Nunito;
 }
 
+label.error {
+	color: red;
+}
+
 .btn-orange{
 	background-color: #ffc000;
 	color:#ffffff;
@@ -162,13 +166,12 @@ footer ul li:not(:first-child), footer p{
 	color:#fc4040;
 }
 
-<<<<<<< HEAD
 /**** OFFERs ****/
 #product_summary p{
 	margin-bottom: 0px;
-=======
+}
+
 /** Product Info **/
 #offer-general-info p{
 	margin-bottom: .3rem !important;
->>>>>>> dca261d83ba042e3076f547898d11d6d86174678
 }

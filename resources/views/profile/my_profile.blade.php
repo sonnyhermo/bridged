@@ -1,6 +1,7 @@
 @extends('layouts.profile')
 
 @section('sub-content')
+
 <div class="card border-primary mb-3">
 	<div class="card-header">
 		<h4>Type of Borrower</h4>
@@ -160,8 +161,10 @@
 @push('scripts')
 	<script src="https://unpkg.com/bs-stepper/dist/js/bs-stepper.min.js"></script>
 	<script src="{{ asset('js/garlic.js') }}"></script>
+	<script src="{{ asset('js/jquery.validate.min.js') }}"></script>
 	<script>
-		var myStepper = new Stepper($('#stepper-profile')[0]);
+		var myStepper = new Stepper($('#stepper-profile')[0], {linear:false});
+		var sample;
 	</script>
 	<script src="{{ asset('js/profile.js') }}"></script>
 @endpush

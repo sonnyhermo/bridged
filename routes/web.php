@@ -19,9 +19,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/offers','OfferController');//->middleware('verified');
 
-Route::resource('/users','BorrowerController');//->middleware('verified');
-
 Route::get('/search_offers', 'OfferController@search');
+
+Route::resource('/my_profile','BorrowerController');//->middleware('verified');
+
+Route::resource('/income', 'IncomeController');
 
 Route::prefix('admin')->group(function() {
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
@@ -47,7 +49,6 @@ Route::prefix('admin')->group(function() {
 
     //routes for offers
     Route::resource('/offers','Admin\OfferController');
-
 
     //routes for datatables
     Route::get('/all_banks', 'Admin\DataTableController@fetchBanks')->name('datatable.banks');
