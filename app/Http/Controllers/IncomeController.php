@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Income;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreIncomeRequest;
+use Auth;
 
 class IncomeController extends Controller
 {
@@ -34,9 +35,22 @@ class IncomeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreIncomeRequest $request)
+    public function store(StoreIncomeRequest $request, Income $income)
     {
         $data = $request->validated();
+    
+        for($i = 0 ; $i < count($data); $i++){
+            $data['income'][$i]['user_id'] = Auth::user()->id;
+        }
+        
+        //return $data['income'];
+        $is_inserted = $income->insert($data['income']);
+
+         if(!$is_inserted){
+            return ['status' => 0, 'title' => 'Error', 'message' => 'Failed to add your profile!'];
+        }
+        
+        return ['status' => 1, 'title' => 'Success', 'message' => ''];
     }
 
     /**
