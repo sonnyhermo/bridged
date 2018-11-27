@@ -24,14 +24,7 @@ class StoreIncomeRequest extends FormRequest
     public function rules()
     {
         return [
-            'employer.*' => 'required', 
-            'employer_email.*' => 'required', 
-            'employer_tel.*' => 'required', 
-            'fund.*' => 'required', 
-            'income.*' => 'required', 
-            'industry.*' => 'required', 
-            'job.*' => 'required', 
-            'length_employed.*' => 'required'
+            'income.*.*' => 'required'
         ];
     }
 }

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Income extends Model
 {
     protected $fillable = [
-        'user_id','source','employer_name','industry','employer_address','position','operation_length','monthly_income','employer_tel','employer_email'
+        'user_id','source','employer_name','industry','position','operation_length','monthly_income','employer_tel','employer_email'
     ];
 
     protected $hidden = [

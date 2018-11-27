@@ -44,24 +44,61 @@ $(document).ready(function(){
 		}
 	});
 
-	$('#income-form').validate({
-		submitHandler:function(){
-			$.ajax({
-				url: '/income',
-				type: 'post',
-				data: $('#income-form').serialize(),
-				dataType: 'json',
-				success: function(res){
-					console.log(res);
-					//myStepper.next();
-				},
-				error: function(xhr){
-					console.log(xhr.responseText);
-					//ajaxErrorDisplay(xhr.responseText);
-				}
-			});
+	// $('.income-form').validate({
+	// 	submitHandler:function(){
+			// console.log($('.income-form').serialize());
+			// $.ajax({
+			// 	url: '/income',
+			// 	type: 'post',
+			// 	data: $('#income-form').serialize(),
+			// 	dataType: 'json',
+			// 	success: function(res){
+			// 		console.log(res);
+			// 		//myStepper.next();
+			// 	},
+			// 	error: function(xhr){
+			// 		console.log(xhr.responseText);
+			// 		//ajaxErrorDisplay(xhr.responseText);
+			// 	}
+			// });
 
-		}
+	// 	}
+	// })
+
+	$('#btn-fund-submit').click(function(e){
+		e.preventDefault();
+
+		let data = [];
+		let parse = {};
+		let serialize = [];
+
+		$('.income-form').each(function(){
+			data.push($(this).serializeArray());
+		});
+
+		$.each(data, function(key, value) {
+
+			$.each(value, function(key1, value1) {
+				console.log(key);
+		    	parse[this.name] = this.value;
+		    });
+		    serialize.push(parse);
+		});
+		console.log(serialize);
+		$.ajax({
+			url: '/income',
+			type: 'post',
+			data: {income:serialize},
+			dataType: 'json',
+			success: function(res){
+				console.log(res);
+				//myStepper.next();
+			},
+			error: function(xhr){
+				console.log(xhr.responseText);
+				//ajaxErrorDisplay(xhr.responseText);
+			}
+		});
 	})
 
 	$('.previous').click(function(e){

@@ -19,7 +19,6 @@ class CreateIncomesTable extends Migration
             $table->string('source');
             $table->string('employer_name');
             $table->string('industry');
-            $table->string('employer_address');
             $table->string('position');
             $table->integer('operation_length');
             $table->integer('monthly_income');
