@@ -166,5 +166,5 @@
 		var myStepper = new Stepper($('#stepper-profile')[0], {linear:false});
 		var sample;
 	</script>
-	<script src="{{ asset('js/profile.js') }}"></script>
+	<script src="{{ asset('js/borrower/profile.js') }}"></script>
 @endpush

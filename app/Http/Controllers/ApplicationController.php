@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Application;
+use App\Offer;
+use Auth;
 
 class ApplicationController extends Controller
 {
@@ -32,9 +35,23 @@ class ApplicationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Application $application)
     {
-        dd($request);
+        $offer = Offer::select('id')->where('slug','=',$request->offer)->first();
+        $userId = Auth::user()->id;
+        $borrowerType = $request->borrower_type;
+
+        $is_applied = $application->create([
+                        'offer_id' => $offer->id,
+                        'user_id' => $userId,
+                        'borrower_type' => $borrowerType
+                    ]);
+
+        if(!$is_applied){
+            return ['status' => 0, 'title' => 'Error', 'message' => 'Application Failed!'];
+        }
+        
+        return ['status' => 1, 'title' => 'Success', 'message' => 'Application Sent'];
     }
 
     /**

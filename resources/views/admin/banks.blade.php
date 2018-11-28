@@ -117,5 +117,5 @@
 @endsection
 
 @push('script')
-	<script type="text/javascript" src="{{ asset('js/banks.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/admin/banks.js') }}"></script>
 @endpush

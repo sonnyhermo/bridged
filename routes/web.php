@@ -19,11 +19,13 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/offers','OfferController');//->middleware('verified');
 
-Route::get('/search_offers', 'OfferController@search');
+Route::get('/search_offers', 'OfferController@search')->middleware('auth');
 
 Route::resource('/my_profile','BorrowerController');//->middleware('verified');
 
-Route::resource('/income', 'IncomeController');
+Route::resource('/incomes', 'IncomeController');
+
+Route::resource('/applications', 'ApplicationController');
 
 Route::prefix('admin')->group(function() {
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');

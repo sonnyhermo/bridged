@@ -123,5 +123,5 @@
 @endsection
 
 @push('script')
-<script src="{{ asset('js/offers.js') }}"></script>
+<script src="{{ asset('js/admin/offers.js') }}"></script>
 @endpush
