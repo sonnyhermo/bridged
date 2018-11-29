@@ -27,6 +27,8 @@ Route::resource('/incomes', 'IncomeController');
 
 Route::resource('/applications', 'ApplicationController');
 
+Route::resource('/attachments', 'AttachmentController');
+
 Route::prefix('admin')->group(function() {
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
@@ -35,6 +37,9 @@ Route::prefix('admin')->group(function() {
 
     //routes for users
     Route::resource('/users','Admin\AdminController');
+
+    //routes for creditor
+    Route::resource('/creditor','Admin\CreditorController');
 
     //routes for loans
     Route::resource('/loans', 'Admin\LoanController', ['except' => [ 'create' ] ]);
@@ -64,4 +69,7 @@ Route::prefix('admin')->group(function() {
 Route::prefix('/creditor')->group(function(){
     Route::get('/login', 'Auth\CreditorLoginController@showLoginForm')->name('creditor.login');
     Route::post('/login', 'Auth\CreditorLoginController@login')->name('creditor.login.submit');
+    Route::get('/unassigned', function(){
+        return view('creditor.unassigned',['module' => 'unassigned']);
+    });
 });

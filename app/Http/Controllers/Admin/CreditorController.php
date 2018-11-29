@@ -4,28 +4,20 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Bank;
+use App\Http\Requests\StoreCreditorRequest;
+use App\Creditor;
+use Illuminate\Support\Facades\Hash;
 
-class AdminController extends Controller
+class CreditorController extends Controller
 {
-      /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {   
-        $this->middleware('auth:admin');
-    }
     /**
-     * Show the application dashboard.
+     * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $banks = Bank::select('id','name')->get();
-        return view('admin.users', ['module' => 'Users', 'banks' => $banks]);
+        //
     }
 
     /**
@@ -44,9 +36,17 @@ class AdminController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCreditorRequest $request, Creditor $creditor)
     {
-        //
+        $data = $request->validated();
+        $data['password'] = Hash::make($data['password']);
+
+        $is_inserted = $creditor->create($data);
+
+        if(!$is_inserted){
+            return ['status' => 0, 'title' => 'Error', 'message' => 'Failed to add creditor!'];
+        }
+        return ['status' => 1, 'title' => 'Success','message' => 'New Creditor has been added!'];
     }
 
     /**
@@ -93,5 +93,4 @@ class AdminController extends Controller
     {
         //
     }
-
 }

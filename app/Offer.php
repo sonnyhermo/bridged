@@ -23,6 +23,6 @@ class Offer extends Model
     }
 
     public function applications(){
-        return $this->belongsToMany('App\Application');
+        return $this->hasMany('App\Application');
     }
 }
