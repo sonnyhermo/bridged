@@ -221,5 +221,5 @@
 
 
 @push('script')
-<script src="{{ asset('js/loans.js') }}"></script>
+<script src="{{ asset('js/admin/loans.js') }}"></script>
 @endpush

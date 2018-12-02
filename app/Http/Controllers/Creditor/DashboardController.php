@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Creditor;
 
 use Illuminate\Http\Request;
-use App\Application;
-use App\Offer;
-use Auth;
+use App\Http\Controllers\Controller;
 
-class ApplicationController extends Controller
+class DashboardController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +14,7 @@ class ApplicationController extends Controller
      */
     public function index()
     {
-        //
+        return view('creditor.dashboard',['module' => 'DashBoard']);
     }
 
     /**
@@ -35,23 +33,9 @@ class ApplicationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Application $application)
+    public function store(Request $request)
     {
-        $offer = Offer::select('id')->where('slug','=',$request->offer)->first();
-        $userId = Auth::user()->id;
-        $borrowerType = $request->borrower_type;
-
-        $is_applied = $application->create([
-                        'offer_id' => $offer->id,
-                        'user_id' => $userId,
-                        'borrower_type' => $borrowerType
-                    ]);
-
-        if(!$is_applied){
-            return ['status' => 0, 'title' => 'Error', 'message' => 'Application Failed!'];
-        }
-        
-        return ['status' => 1, 'title' => 'Success', 'message' => 'Application Sent'];
+        //
     }
 
     /**

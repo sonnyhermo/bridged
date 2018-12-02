@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateApplicationsTable extends Migration
+class CreateAttachmentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateApplicationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('applications', function (Blueprint $table) {
+        Schema::create('attachments', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
             $table->boolean('borrower_type');
-            $table->integer('offer_id');
-            $table->string('status')->nullable();
+            $table->string('filename');
+            $table->string('path');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateApplicationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('applications');
+        Schema::dropIfExists('attachments');
     }
 }

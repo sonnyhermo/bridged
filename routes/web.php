@@ -19,11 +19,15 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/offers','OfferController');//->middleware('verified');
 
-Route::get('/search_offers', 'OfferController@search');
+Route::get('/search_offers', 'OfferController@search')->middleware('auth');
 
 Route::resource('/my_profile','BorrowerController');//->middleware('verified');
 
-Route::resource('/income', 'IncomeController');
+Route::resource('/incomes', 'IncomeController');
+
+Route::resource('/applications', 'ApplicationController');
+
+Route::resource('/attachments', 'AttachmentController');
 
 Route::prefix('admin')->group(function() {
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
@@ -33,6 +37,9 @@ Route::prefix('admin')->group(function() {
 
     //routes for users
     Route::resource('/users','Admin\AdminController');
+
+    //routes for creditor
+    Route::resource('/creditor','Admin\CreditorController');
 
     //routes for loans
     Route::resource('/loans', 'Admin\LoanController', ['except' => [ 'create' ] ]);
@@ -62,4 +69,9 @@ Route::prefix('admin')->group(function() {
 Route::prefix('/creditor')->group(function(){
     Route::get('/login', 'Auth\CreditorLoginController@showLoginForm')->name('creditor.login');
     Route::post('/login', 'Auth\CreditorLoginController@login')->name('creditor.login.submit');
+    Route::post('/logout', 'Auth\CreditorLoginController@logout')->name('creditor.logout');
+    Route::get('/unassigned', function(){
+        return view('creditor.unassigned',['module' => 'unassigned']);
+    });
+    Route::get('/dashboard','Creditor\DashboardController@index')->name('creditor.dashboard');
 });

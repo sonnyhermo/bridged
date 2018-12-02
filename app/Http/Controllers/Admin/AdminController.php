@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Bank;
 
 class AdminController extends Controller
 {
@@ -23,7 +24,8 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.users', ['module' => 'Users']);
+        $banks = Bank::select('id','name')->get();
+        return view('admin.users', ['module' => 'Users', 'banks' => $banks]);
     }
 
     /**

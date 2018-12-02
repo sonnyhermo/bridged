@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Application;
-use App\Offer;
-use Auth;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreCreditorRequest;
+use App\Creditor;
+use Illuminate\Support\Facades\Hash;
 
-class ApplicationController extends Controller
+class CreditorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,23 +36,17 @@ class ApplicationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Application $application)
+    public function store(StoreCreditorRequest $request, Creditor $creditor)
     {
-        $offer = Offer::select('id')->where('slug','=',$request->offer)->first();
-        $userId = Auth::user()->id;
-        $borrowerType = $request->borrower_type;
+        $data = $request->validated();
+        $data['password'] = Hash::make($data['password']);
 
-        $is_applied = $application->create([
-                        'offer_id' => $offer->id,
-                        'user_id' => $userId,
-                        'borrower_type' => $borrowerType
-                    ]);
+        $is_inserted = $creditor->create($data);
 
-        if(!$is_applied){
-            return ['status' => 0, 'title' => 'Error', 'message' => 'Application Failed!'];
+        if(!$is_inserted){
+            return ['status' => 0, 'title' => 'Error', 'message' => 'Failed to add creditor!'];
         }
-        
-        return ['status' => 1, 'title' => 'Success', 'message' => 'Application Sent'];
+        return ['status' => 1, 'title' => 'Success','message' => 'New Creditor has been added!'];
     }
 
     /**

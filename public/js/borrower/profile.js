@@ -99,6 +99,32 @@ $(document).ready(function(){
 				//ajaxErrorDisplay(xhr.responseText);
 			}
 		});
+	});
+
+	$('#btn-iattach').click(function(e){
+		e.preventDefault();
+		/*let formData = new FormData();
+		let data = [];
+		$('.i-requirement').each(function(){
+			data.push({'filename':$(this).find('input[name=filename]').val(),'files':$(this).find('input[type=file]').get(0).files});
+		});
+		formData.append('requirements', data);
+
+		$.ajax({
+			url: '/attachments',
+			type: 'post',
+			data: data,
+			contentType: 'false',
+			processData: false,
+			dataType: 'json',
+			success: function(res){
+				console.log(res);
+			},
+			error:function(xhr){
+				console.log(xhr.responseText);
+			}
+		})*/
+
 	})
 
 	$('.previous').click(function(e){
