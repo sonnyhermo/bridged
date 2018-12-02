@@ -13,8 +13,6 @@ $(document).ready(function(){
 			contentType: false,
 			success:function(res){
 				ajaxSuccessResponse(res).then(function(value){
-					$(this)[0].reset();
-					$('#newBankModal').hide();
 					location.reload();
 				});
 			},
@@ -28,7 +26,7 @@ $(document).ready(function(){
 		processing: true,
         serverSide: true,
         pagingType: 'simple',
-        pageLength: 1,
+        pageLength: 10,
         searching: false,
         lengthChange: false,
         ajax: '/admin/all_banks',
@@ -55,8 +53,30 @@ $(document).ready(function(){
         ],
 	});
 
-	$('.bank-delete').click(function(e){
-		e.preventDefault();
+	$('#banksTable tbody').on( 'click', 'tr .bank-delete', function() {
+		let bank = $(this).data('id');
+		swal({
+			title:'Oopps Wait',
+			text:'Remove this partner?',
+			icon:'warning',
+			buttons: ["Cancel", "Okay"],
+		}).then(function(value){
+			if(value){
+				$.ajax({
+					url: '/admin/banks/'+bank,
+					type: 'delete',
+					dataType: 'json',
+					success:function(res){
+						ajaxSuccessResponse(res).then(function(value){
+							location.reload();
+						});
+					},
+					error:function(xhr){
+						ajaxErrorDisplay(xhr.responseText);
+					}
+				})
+			}
+		});
 	});
 
 
