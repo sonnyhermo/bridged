@@ -53,17 +53,23 @@
 		<div class="my-3">
 			@foreach($offers as $offer)
 			<div class="col-md-12 result-box p-3 mb-2">
+				<div class="col-md-12">
+					<h3>{{ $offer->bank->name }}</h3>
+				</div>
 				<div class="row">
-
-					<div class="col-md-5">
+					<div class="col-md-3">
 						<img src="/storage/{{ $offer->bank->logo }}">
 					</div>
 					<div class="col-md-3">
+						<p>&nbsp {{ $offer->classification->classification }}</p>
 						<p><i class="fas fa-percent"></i>&nbsp {{ $offer->terms[0]->interest_rate }}%</p>
 						<p><i class="fas fa-hand-holding-usd"></i>&nbsp {{ $offer->classification->collateral }}</p>
-						<p><i class="fas fa-calculator"></i>&nbspPhp {{ number_format(((($offer->terms[0]->interest_rate * $offer->terms[0]->term) * $amount) + $amount) / $offer->terms[0]->term,2,'.',',') }}</p>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-3">
+						<p><strong>Monthly Amortization</strong></p>
+						<p><i class="fas fa-calculator"></i>&nbspPhp {{ number_format(((($offer->terms[0]->interest_rate * $offer->terms[0]->term) * $amount) + $amount) / $offer->terms[0]->term,2,'.',',') }}</p>
+					</div>	
+					<div class="col-md-3">
 						<button class="btn btn-orange btn-apply mt-3 font-weight-bold" data-offer="{{ $offer->slug }}">APPLY</button>
 					</div>
 				</div>

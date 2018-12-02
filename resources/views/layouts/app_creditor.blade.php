@@ -36,31 +36,37 @@
                 </div>
                 <ul class="nav">
                     <li>
-                        <a class="nav-link" href="/admin/dashboard">
+                        <a class="nav-link" href="/creditor/dashboard">
+                            <i class="fa fa-tachometer" aria-hidden="true"></i>
+                            <p>Dashboard</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="">
                             <i class="fa fa-tachometer" aria-hidden="true"></i>
                             <p>Unassigned</p>
                         </a>
                     </li>
                     <li>
-                        <a class="nav-link" href="/admin/users">
+                        <a class="nav-link" href="">
                             <i class="fa fa-users" aria-hidden="true"></i>
                             <p>Under Review</p>
                         </a>
                     </li>
                     <li>
-                        <a class="nav-link" href="/admin/loans">
+                        <a class="nav-link" href="">
                             <i class="fa fa-file-archive-o" aria-hidden="true"></i>
                             <p>Approved</p>
                         </a>
                     </li>
                     <li>
-                        <a class="nav-link" href="/admin/banks">
+                        <a class="nav-link" href="">
                             <i class="fa fa-building" aria-hidden="true"></i>
                             <p>Booked</p>
                         </a>
                     </li>
                     <li>
-                        <a class="nav-link" href="/admin/offers">
+                        <a class="nav-link" href="">
                             <i class="fa fa-tags" aria-hidden="true"></i>
                             <p>Declined</p>
                         </a>
@@ -76,13 +82,13 @@
                     <div class="collapse navbar-collapse justify-content-end" id="navigation">
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item">
-                                <a class="dropdown-item" href="{{ route('admin.logout') }}"
+                                <a class="dropdown-item" href="{{ route('creditor.logout') }}"
                                    onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
 
-                                <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+                                <form id="logout-form" action="{{ route('creditor.logout') }}" method="POST" style="display: none;">
                                     @csrf
                                 </form>
                             </li>

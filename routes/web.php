@@ -69,7 +69,9 @@ Route::prefix('admin')->group(function() {
 Route::prefix('/creditor')->group(function(){
     Route::get('/login', 'Auth\CreditorLoginController@showLoginForm')->name('creditor.login');
     Route::post('/login', 'Auth\CreditorLoginController@login')->name('creditor.login.submit');
+    Route::post('/logout', 'Auth\CreditorLoginController@logout')->name('creditor.logout');
     Route::get('/unassigned', function(){
         return view('creditor.unassigned',['module' => 'unassigned']);
     });
+    Route::get('/dashboard','Creditor\DashboardController@index')->name('creditor.dashboard');
 });

@@ -133,7 +133,7 @@ return [
             'expire' => 15,
         ],
 
-        'admins' => [
+        'creditors' => [
             'provider' => 'creditors',
             'table' => 'password_resets',
             'expire' => 15,

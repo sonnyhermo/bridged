@@ -105,7 +105,7 @@ class OfferController extends Controller
 
         $offers = Offer::with([
             'bank:id,name,logo',
-            'classification:id,loan_id,description,collateral,slug', 
+            'classification:id,loan_id,classification,collateral,slug', 
             'classification.loan:id,type,slug',
             'terms' => function($query) use ($request){
                 $query->where('term', '=', $request->query('term'));
