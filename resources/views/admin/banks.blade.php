@@ -29,6 +29,7 @@
 	           		<table class="table table-striped" id="banksTable">
 	           			<thead>
 	           				<tr>
+	           					<th></th>
 	           					<th>Logo</th>
 	           					<th>Bank</th>
 	           					<th>Email</th>
@@ -102,7 +103,7 @@
 							<input type="file" name="logo" class="form-control-file" id="fileLogo">
 						</div>
 
-						<div class="form-group">
+						<div class="form-group" id="bank-branches">
 							<label>Bank Branches</label>
 							<input type="file" name="branches" class="form-control-file" id="fileBranches">
 						</div>
