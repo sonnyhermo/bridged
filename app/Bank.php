@@ -12,6 +12,7 @@ class Bank extends Model
 
     protected $fillable = ['name', 'email','description','coverage','slug','logo'];
     protected $dates = ['deleted_at'];
+    protected $hidden = ['created_at', 'deleted_at', 'updated_at'];
 
     public function branches(){
     	return $this->hasMany('App\Branch');

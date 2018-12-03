@@ -126,7 +126,7 @@ class LoanController extends Controller
             return json_encode(['code' => 0, 'message' => 'Deleting Loan Failed']);
         }
 
-        return json_encode(['code' => 1, 'message' => 'Loan Deleted']);
+        return json_encode(['code' => 1, 'message' => 'Loan moved in archieved']);
     }
 
 }

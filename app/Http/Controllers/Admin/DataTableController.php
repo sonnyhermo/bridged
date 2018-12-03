@@ -27,7 +27,7 @@ class DataTableController extends Controller
     }
 
     public function fetchBanks(){
-        $model = Bank::select('name','logo','slug','description', 'email','coverage');
+        $model = Bank::with(['branches'])->get();
         return Datatables::of($model)->make();
     }
 

@@ -61,7 +61,7 @@
 						<img src="/storage/{{ $offer->bank->logo }}">
 					</div>
 					<div class="col-md-3">
-						<p>&nbsp {{ $offer->classification->classification }}</p>
+						<p><a href="/offers/{{ $offer->slug }}">&nbsp {{ $offer->product }}</a></p>
 						<p><i class="fas fa-percent"></i>&nbsp {{ $offer->terms[0]->interest_rate }}%</p>
 						<p><i class="fas fa-hand-holding-usd"></i>&nbsp {{ $offer->classification->collateral }}</p>
 					</div>

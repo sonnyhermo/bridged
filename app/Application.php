@@ -19,6 +19,7 @@ class Application extends Model
     }
 
     public function offer(){
-    	return $this->belongsToMany('App\Offer');
+    	return $this->belongsTo('App\Offer');
     }
+
 }

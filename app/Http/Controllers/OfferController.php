@@ -54,12 +54,12 @@ class OfferController extends Controller
     public function show(Offer $offer)
     {
 
-        $offer_details = $offer->with([
+        $offer_details = $offer->load([
             'classification:id,loan_id,description,classification,collateral',
             'terms:offer_id,term,interest_rate',
             'classification.loan:id,type',
             'classification.loan.purposes:loan_id,purpose'
-        ])->get();
+        ]);
 
         return view('chosen_offer', ['offer' => $offer_details]);
     }
