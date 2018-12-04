@@ -107,7 +107,7 @@ class BankController extends Controller
      */
     public function edit(Bank $bank)
     {
-        return $bank;
+
     }
 
     /**
@@ -117,9 +117,13 @@ class BankController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateBankRequest $request, Bank $bank)
     {
-        //
+        $bank->name = '';
+        $bank->email = '';
+        $bank->description = '';
+        $bank->coverage = '';
+        $bank->slug = '';
     }
 
     /**

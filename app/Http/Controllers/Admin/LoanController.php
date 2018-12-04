@@ -123,10 +123,10 @@ class LoanController extends Controller
         $is_deleted = $loan->delete();
         
         if(!$is_deleted){
-            return json_encode(['code' => 0, 'message' => 'Deleting Loan Failed']);
+            return json_encode(['status' => 0, 'message' => 'Deleting Loan Failed']);
         }
 
-        return json_encode(['code' => 1, 'message' => 'Loan moved in archieved']);
+        return json_encode(['status' => 1, 'message' => 'Loan moved in archieved']);
     }
 
 }

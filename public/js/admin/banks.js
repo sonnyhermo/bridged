@@ -1,26 +1,26 @@
 $(document).ready(function(){
 	var bankModalClone = $("#newBankModal").clone();
 
-	$('#bankForm').submit(function(e){
-		e.preventDefault();
-		
-		let formData = new FormData($('#bankForm')[0]);
-		$.ajax({
-			url:'/admin/banks',
-			type:'post',
-			data: formData,
-			dataType:'json',
-			processData: false,
-			contentType: false,
-			success:function(res){
-				ajaxSuccessResponse(res).then(function(value){
-					location.reload();
-				});
-			},
-			error:function(xhr){
-				ajaxErrorDisplay(xhr.responseText);
-			}
-		});
+	$('#bankForm').validate({
+		submitHandler: function(){
+			let formData = new FormData($('#bankForm')[0]);
+			$.ajax({
+				url:'/admin/banks',
+				type:'post',
+				data: formData,
+				dataType:'json',
+				processData: false,
+				contentType: false,
+				success:function(res){
+					ajaxSuccessResponse(res).then(function(value){
+						location.reload();
+					});
+				},
+				error:function(xhr){
+					ajaxErrorDisplay(xhr.responseText);
+				}
+			});
+		}
 	});
 
 	let bank_dt = $('#banksTable').DataTable({
@@ -82,7 +82,8 @@ $(document).ready(function(){
             if ( idx === -1 ) {
                 bank_detailRows.push( tr.attr('id') );
             }
-        }
+		}
+		
     } );
 
     bank_dt.on( 'draw', function () {
@@ -119,7 +120,7 @@ $(document).ready(function(){
 
 	$('#banksTable tbody').on( 'click', '.bank-edit', function () {
         $.ajax({
-            url:'/admin/banks/'+$(this).data('id')+'/edit',
+            url:'/admin/banks/'+$(this).data('id'),
             type:'get',
             dataType:'json',
             success:function(res){
@@ -137,20 +138,93 @@ $(document).ready(function(){
 
     $('#newBankModal').on('hidden.bs.modal', function () {
         $("#newBankModal").replaceWith(bankModalClone);
-    });
+	});
+	
+	$('input[name=addOption]').on('click',function(){
+		let innerHtml; 
+		if($(this).val() == 'excel'){
+			innerHtml = '<div class="form-group">'+
+							'<label>Bank Branches</label>'+
+							'<input type="file" name="branches" class="form-control-file" id="fileBranches" required>'+
+						'</div>';
+		}else{
+			innerHtml = '<div class="form-group">'+
+							'<label>Branch Name</label>'+
+							'<input type="text" class="form-control" name="branch" placeholder="Enter New Branch" required>'+
+						'</div>'+
+						'<div class="form-group">'+
+							'<label>Branch Address</label>'+
+							'<input type="text" class="form-control" name="address" placeholder="Enter Branch Address" required>'+
+						'</div>'+
+						'<div class="row">'+
+							'<div class="form-group col-md-6">'+
+								'<label>Branch Tel No.</label>'+
+								'<input type="text" class="form-control" name="telephone" placeholder="Enter Branch Telephone" required>'+
+							'</div>'+
+							'<div class="form-group col-md-6">'+
+								'<label>Branch Region</label>'+
+								'<input type="text" class="form-control" name="region" placeholder="Enter Branch Region" required>'+
+							'</div>'+
+						'</div>';
+		}
+
+		$('#branchForm #inner').html(innerHtml);
+		$('#branchForm').removeClass('d-none');
+		console.log(innerHtml);
+	});
+
+	$('#branchForm').validate({
+		submitHandler: function(){
+			let data, contentType, processData;
+			if($('#fileBranches').length){
+				data = new FormData($('#branchForm')[0]);
+				contentType = false;
+				processData = false;
+			}else{
+				data = $('#branchForm').serialize();
+				contentType = "application/x-www-form-urlencoded; charset=UTF-8";
+				processData = true;
+			}
+
+			$.ajax({
+				url: '/admin/branches',
+				type: 'post',
+				data: data,
+				dataType: 'json',
+				contentType: contentType,
+				processData: processData,
+				success:function(res){
+					console.log(res);
+					ajaxSuccessResponse(res).then(function(value){
+						location.reload();
+					});
+				},
+				error:function(xhr){
+					console.log(xhr.responseText);
+					//ajaxErrorDisplay(xhr.responseText);
+				}
+			});
+		}
+	});
+
+	
 });
 
 function format ( d ) {
-	console.log(d.branches);
-
+	$('#txtBank').val(d.slug);
+	console.log($('#txtBank').val());
 	let rows = '';
 	$.each(d.branches, function(key,val){
 		rows += '<tr>'+
 			'<td>Branch:</td>'+
-            '<td>'+val.branch+'</td>'+
+			'<td>'+val.branch+'</td>'+
+			'<td>'+val.address+'</td>'+
+			'<td>'+val.telephone+'</td>'+
+			'<td>'+val.region+'</td>'+
             '<td><button class="btn btn-sm btn-danger bank-delete" data-id="'+val.slug+'"><span class="fa fa-trash"></span></button>'+
 	        '<button class="btn btn-sm btn-info bank-edit" data-id="'+val.slug+'"><span class="fa fa-pencil-square-o"></span></button></td>'
         '</tr>';
 	})
-    return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+rows+'</table>';
+	return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;" id="childTable">'+rows+'</table>'+
+			'<button class="btn btn-warning btn-fill mt-3" data-toggle="modal" data-target="#newBranchModal">Add More Branches</button>';
 }

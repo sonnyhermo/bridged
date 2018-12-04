@@ -57,6 +57,9 @@ Route::prefix('admin')->group(function() {
     //routes for offers
     Route::resource('/offers','Admin\OfferController');
 
+    //routes for branch
+    Route::resource('/branches','Admin\BranchController')->only(['store', 'update', 'destroy']);
+
     //routes for datatables
     Route::get('/all_banks', 'Admin\DataTableController@fetchBanks')->name('datatable.banks');
     Route::get('/all_loans', 'Admin\DataTableController@fetchLoans')->name('datatable.loans');
