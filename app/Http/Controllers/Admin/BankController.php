@@ -117,9 +117,17 @@ class BankController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateBankRequest $request, Bank $bank)
     {
-        //
+        $data = $request->validated();
+
+        return $request->file('logo');
+
+        /*$bank->name = $data['name'];
+        $bank->email = $data['email'];
+        $bank->description = $data['description'];
+        $bank->coverage = $data['name'];
+        $bank->slug = str_slug($data['name']);*/
     }
 
     /**

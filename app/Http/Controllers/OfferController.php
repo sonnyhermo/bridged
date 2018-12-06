@@ -123,7 +123,6 @@ class OfferController extends Controller
         ->paginate(1)
         ->appends(request()->query());;
 
-        //return $offers;
         return view('offers',['offers' => $offers, 'amount' => '500000', 'loans' => $loans, 'classifications' => $classifications]);
     }
 }
