@@ -1,23 +1,29 @@
 <?php
 
 namespace App\Repository;
-use App\Loan;
+use DB;
 
 class Loans{
     public function getApplication($loan_id, $bank_id, $status){
-        $loans = Loan::select('id')
-                        ->with([
-                            'classifications:id,loan_id,classification',
-                            'classifications.offers' => function($q) use($bank_id){
-                                $q->select('id', 'classification_id', 'product')
-                                ->where('bank_id', $bank_id);
-                            },
-                            'classifications.offers.applications' => function($q) use($status){
-                                $q->where('status', $status);
-                            },
-                            'classifications.offers.applications.user'
-                        ])
-                        ->where('id', '=', $loan_id);
+
+        $loans = DB::table('applications')
+                ->join('offers', 'applications.offer_id', '=', 'offers.id')
+                ->join('banks', 'banks.id','=','offers.bank_id')
+                ->join('classifications', 'classifications.id', '=', 'offers.classification_id')
+                ->join('loans', 'classifications.loan_id', '=', 'loans.id')
+                ->join('users', 'users.id', '=', 'applications.user_id')
+                ->whereRaw('banks.id = ?',[$bank_id])
+                ->whereRaw('loans.slug = ?',[$loan_id]);
+                
+                if($status == null){
+                    $loans->where('applications.status');
+                }else{
+                    $loans->whereRaw('applications.status = ?',[$status]);
+                }
+
+                $loans->select('applications.created_at', DB::raw('CONCAT(users.firstname," ",users.middlename," ",users.lastname) as fullname'),'classifications.classification','applications.amount','applications.term', DB::raw('IF (applications.status IS NULL, "Unassigned", applications.status) as status'))
+                ->get();
+
         return $loans;
     }
 }

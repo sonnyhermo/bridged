@@ -28,7 +28,7 @@ class UpdateBankRequest extends FormRequest
             'email' => 'required',
             'description' => 'required',
             'coverage' => 'required',
-            'logo' => 'required|mimes:jpeg,bmp,png'
+            'logo' => 'mimes:jpeg,bmp,png'
         ];
     }
 }

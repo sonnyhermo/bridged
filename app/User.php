@@ -44,4 +44,8 @@ class User extends Authenticatable implements MustVerifyEmail
     public function applications(){
         return $this->hasMany('App\Application');
     }
+
+    public function getFullNameAttribute(){
+        return "{$this->firstname} {$this->middlename} {$this->lastname}";
+    }
 }

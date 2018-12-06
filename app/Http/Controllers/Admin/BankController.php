@@ -107,7 +107,7 @@ class BankController extends Controller
      */
     public function edit(Bank $bank)
     {
-
+        return $bank;
     }
 
     /**
@@ -119,11 +119,15 @@ class BankController extends Controller
      */
     public function update(UpdateBankRequest $request, Bank $bank)
     {
-        $bank->name = '';
-        $bank->email = '';
-        $bank->description = '';
-        $bank->coverage = '';
-        $bank->slug = '';
+        $data = $request->validated();
+
+        return $request->file('logo');
+
+        /*$bank->name = $data['name'];
+        $bank->email = $data['email'];
+        $bank->description = $data['description'];
+        $bank->coverage = $data['name'];
+        $bank->slug = str_slug($data['name']);*/
     }
 
     /**

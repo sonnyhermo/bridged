@@ -4,9 +4,13 @@ $(document).ready(function(){
 	$('#bankForm').validate({
 		submitHandler: function(){
 			let formData = new FormData($('#bankForm')[0]);
+			let method = $('#bankForm input[name=_method]').val();
+			let url = $('#bankForm').attr('action');
+
+
 			$.ajax({
-				url:'/admin/banks',
-				type:'post',
+				url: (typeof method != 'undefined')? '/admin/banks/'+res.slug:'/admin/banks',
+				type: (typeof method != 'undefined')? 'put':'post',
 				data: formData,
 				dataType:'json',
 				processData: false,
@@ -120,7 +124,7 @@ $(document).ready(function(){
 
 	$('#banksTable tbody').on( 'click', '.bank-edit', function () {
         $.ajax({
-            url:'/admin/banks/'+$(this).data('id'),
+            url:'/admin/banks/'+$(this).data('id')+'/edit',
             type:'get',
             dataType:'json',
             success:function(res){
@@ -128,6 +132,16 @@ $(document).ready(function(){
                 $('#newBankModal').find('form').prepend('<input type="hidden" name="_method" value="PUT">');
                 $('#newBankModal').find('form').attr('action','/admin/banks/'+res.slug);
                 $('#bank-branches').remove();
+
+                $('#txtNewBank').val(res.name);
+                $('#txtBankEmail').val(res.email);
+                $('#txtBankDescription').val(res.description);
+                
+                $.each(res.coverage.split(', '), function(key, val){
+                	$("input[type=checkbox][value='"+val+"']").prop("checked",true);
+                })
+
+
                 $('#newBankModal').modal('show');
             },
             error:function(xhr){
@@ -138,6 +152,7 @@ $(document).ready(function(){
 
     $('#newBankModal').on('hidden.bs.modal', function () {
         $("#newBankModal").replaceWith(bankModalClone);
+        $('#bankForm').attr('action','/admin/banks');
 	});
 	
 	$('input[name=addOption]').on('click',function(){

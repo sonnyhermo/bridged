@@ -100,7 +100,7 @@
 
 						<div class="form-group">
 							<label>Bank Logo</label>
-							<input type="file" name="logo" class="form-control-file" id="fileLogo" required>
+							<input type="file" name="logo" class="form-control-file" id="fileLogo">
 						</div>
 
 						<div class="form-group" id="bank-branches">
