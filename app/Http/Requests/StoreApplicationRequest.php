@@ -13,7 +13,7 @@ class StoreApplicationRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class StoreApplicationRequest extends FormRequest
     public function rules()
     {
         return [
-            'borrower_type'
+            'borrower_type' => 'required',
+            'offer' => 'required',
+            'amount' => 'required',
+            'term' => 'required'
         ];
     }
 }

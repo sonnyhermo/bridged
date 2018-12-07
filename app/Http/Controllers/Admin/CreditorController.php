@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Application;
-use App\Offer;
-use Auth;
-use App\Http\Requests\StoreApplicationRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreCreditorRequest;
+use App\Creditor;
 
-class ApplicationController extends Controller
+class CreditorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +16,7 @@ class ApplicationController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -36,26 +35,20 @@ class ApplicationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreApplicationRequest $request, Application $application)
+    public function store(StoreCreditorRequest $request, Creditor $creditor)
     {
+
         $data = $request->validated();
+        $data['password'] = Hash::make($request->password);
 
-        $offer = Offer::select('id')->where('slug','=',$data['offer'])->first();
-        $userId = Auth::user()->id;
+        $newCreditor = $creditor->create($data);
 
-        $is_applied = $application->create([
-                        'offer_id' => $offer->id,
-                        'user_id' => $userId,
-                        'borrower_type' => $data['borrower_type'],
-                        'amount' => $data['amount'],
-                        'term' => $data['term']
-                    ]);
-
-        if(!$is_applied){
-            return ['status' => 0, 'title' => 'Error', 'message' => 'Application Failed!'];
+        if($newCreditor){
+            return json_encode(['status' => 1, 'title' => 'Success','message' => 'New Creditor has been added!']);
+        }else{
+            return json_encode(['status' => 0, 'title' => 'Error', 'message' => 'Failed to add Creditor!']);
         }
-        
-        return ['status' => 1, 'title' => 'Success', 'message' => 'Application Sent'];
+
     }
 
     /**

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Application extends Model
 {
     protected $fillable = [
-    	'offer_id', 'user_id', 'status', 'borrower_type'
+    	'offer_id', 'user_id', 'status', 'borrower_type', 'amount', 'term'
     ];
 
     protected $hidden = [

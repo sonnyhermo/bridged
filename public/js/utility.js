@@ -24,6 +24,7 @@ function ajaxSuccessResponse(res){
 
 function ajaxErrorDisplay(jsonString){
 	let xhrResponse = JSON.parse(jsonString);
+    console.log(jsonString);
     if(xhrResponse.hasOwnProperty('errors')){
         swalTitle = 'Follow This';
         swalType = 'info';
