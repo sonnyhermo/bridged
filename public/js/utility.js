@@ -46,3 +46,13 @@ function ajaxErrorDisplay(jsonString){
       icon: swalType,
     });
 }
+
+function sub_DataTable(table_id) {
+    var subtable = $('#'+table_id).DataTable({
+        
+        pagingType: 'simple',
+        pageLength: 1,
+        lengthChange: false,
+      
+    });
+}

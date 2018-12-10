@@ -86,6 +86,7 @@ $(document).ready(function(){
             if ( idx === -1 ) {
                 bank_detailRows.push( tr.attr('id') );
             }
+            sub_DataTable('childTable');
 		}
 		
     } );
@@ -231,7 +232,6 @@ function format ( d ) {
 	let rows = '';
 	$.each(d.branches, function(key,val){
 		rows += '<tr>'+
-			'<td>Branch:</td>'+
 			'<td>'+val.branch+'</td>'+
 			'<td>'+val.address+'</td>'+
 			'<td>'+val.telephone+'</td>'+
@@ -240,6 +240,21 @@ function format ( d ) {
 	        '<button class="btn btn-sm btn-info bank-edit" data-id="'+val.slug+'"><span class="fa fa-pencil-square-o"></span></button></td>'
         '</tr>';
 	})
-	return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;" id="childTable">'+rows+'</table>'+
-			'<button class="btn btn-warning btn-fill mt-3" data-toggle="modal" data-target="#newBranchModal">Add More Branches</button>';
+	return `<table id="childTable" width="100%">
+		<thead>
+			<tr>
+				<th>Branch</th>
+				<th>Address</th>
+				<th>Telephone</th>
+				<th>Region</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			${rows}
+		</tbody>
+	</table>
+	<div class="col-md-12 mt-5">
+		<button class="btn btn-warning btn-sm btn-fill mt-4" data-toggle="modal" data-target="#newBranchModal">Add More Branches</button>
+	</div>`;
 }

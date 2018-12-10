@@ -9,6 +9,11 @@ body, html, creditor-admin-login {
     font-family: Nunito;
 }
 
+.logo{
+	width: 100px;
+	height: 50px;
+}
+
 label.error {
 	color: red;
 }
