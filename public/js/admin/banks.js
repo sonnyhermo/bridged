@@ -57,8 +57,8 @@ $(document).ready(function(){
             {
             	data: null,
 			    render: function ( data, type, row ) {
-			        return '<button class="btn btn-sm btn-danger bank-delete" data-id="'+row['slug']+'"><span class="fa fa-trash"></span></button>'+
-			        '<button class="btn btn-sm btn-info bank-edit" data-id="'+row['slug']+'"><span class="fa fa-pencil-square-o"></span></button>';
+			        return `<button class="btn btn-sm btn-danger bank-delete" data-id="${row['slug']}"><span class="fa fa-trash"></span></button>
+			        <button class="btn btn-sm btn-info bank-edit" data-id="${row['slug']}"><span class="fa fa-pencil-square-o"></span></button>`;
 		    	}
 		    }
         ],
@@ -86,7 +86,7 @@ $(document).ready(function(){
             if ( idx === -1 ) {
                 bank_detailRows.push( tr.attr('id') );
             }
-            sub_DataTable('childTable');
+            sub_DataTable('childTable', 5);
 		}
 		
     } );
@@ -159,29 +159,29 @@ $(document).ready(function(){
 	$('input[name=addOption]').on('click',function(){
 		let innerHtml; 
 		if($(this).val() == 'excel'){
-			innerHtml = '<div class="form-group">'+
-							'<label>Bank Branches</label>'+
-							'<input type="file" name="branches" class="form-control-file" id="fileBranches" required>'+
-						'</div>';
+			innerHtml = `<div class="form-group">
+							<label>Bank Branches</label>
+							<input type="file" name="branches" class="form-control-file" id="fileBranches" required>
+						</div>`;
 		}else{
-			innerHtml = '<div class="form-group">'+
-							'<label>Branch Name</label>'+
-							'<input type="text" class="form-control" name="branch" placeholder="Enter New Branch" required>'+
-						'</div>'+
-						'<div class="form-group">'+
-							'<label>Branch Address</label>'+
-							'<input type="text" class="form-control" name="address" placeholder="Enter Branch Address" required>'+
-						'</div>'+
-						'<div class="row">'+
-							'<div class="form-group col-md-6">'+
-								'<label>Branch Tel No.</label>'+
-								'<input type="text" class="form-control" name="telephone" placeholder="Enter Branch Telephone" required>'+
-							'</div>'+
-							'<div class="form-group col-md-6">'+
-								'<label>Branch Region</label>'+
-								'<input type="text" class="form-control" name="region" placeholder="Enter Branch Region" required>'+
-							'</div>'+
-						'</div>';
+			innerHtml = `<div class="form-group">
+							<label>Branch Name</label>
+							<input type="text" class="form-control" name="branch" placeholder="Enter New Branch" required>
+						</div>
+						<div class="form-group">
+							<label>Branch Address</label>
+							<input type="text" class="form-control" name="address" placeholder="Enter Branch Address" required>
+						</div>
+						<div class="row">
+							<div class="form-group col-md-6">
+								<label>Branch Tel No.</label>
+								<input type="text" class="form-control" name="telephone" placeholder="Enter Branch Telephone" required>
+							</div>
+							<div class="form-group col-md-6">
+								<label>Branch Region</label>
+								<input type="text" class="form-control" name="region" placeholder="Enter Branch Region" required>
+							</div>
+						</div>`;
 		}
 
 		$('#branchForm #inner').html(innerHtml);
@@ -231,14 +231,14 @@ function format ( d ) {
 	console.log($('#txtBank').val());
 	let rows = '';
 	$.each(d.branches, function(key,val){
-		rows += '<tr>'+
-			'<td>'+val.branch+'</td>'+
-			'<td>'+val.address+'</td>'+
-			'<td>'+val.telephone+'</td>'+
-			'<td>'+val.region+'</td>'+
-            '<td><button class="btn btn-sm btn-danger bank-delete" data-id="'+val.slug+'"><span class="fa fa-trash"></span></button>'+
-	        '<button class="btn btn-sm btn-info bank-edit" data-id="'+val.slug+'"><span class="fa fa-pencil-square-o"></span></button></td>'
-        '</tr>';
+		rows += `<tr>
+			<td>${val.branch}</td>
+			<td>${val.address}</td>
+			<td>${val.telephone}</td>
+			<td>${val.region}</td>
+            <td><button class="btn btn-sm btn-danger bank-delete" data-id="${val.slug}"><span class="fa fa-trash"></span></button>
+	        <button class="btn btn-sm btn-info bank-edit" data-id="${val.slug}"><span class="fa fa-pencil-square-o"></span></button></td>
+        </tr>`;
 	})
 	return `<table id="childTable" width="100%">
 		<thead>
