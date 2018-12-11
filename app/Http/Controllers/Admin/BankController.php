@@ -105,9 +105,9 @@ class BankController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Bank $bank)
     {
-        //
+        return $bank;
     }
 
     /**
@@ -117,9 +117,17 @@ class BankController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateBankRequest $request, Bank $bank)
     {
-        //
+        $data = $request->validated();
+
+        return $request->file('logo');
+
+        /*$bank->name = $data['name'];
+        $bank->email = $data['email'];
+        $bank->description = $data['description'];
+        $bank->coverage = $data['name'];
+        $bank->slug = str_slug($data['name']);*/
     }
 
     /**
@@ -128,8 +136,14 @@ class BankController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Bank $bank)
     {
-        //
+        $is_deleted = $bank->delete();
+
+        if(!$is_deleted){
+            return json_encode(['code' => 0, 'message' => 'Deleting Bank Failed']);
+        }
+
+        return json_encode(['code' => 1, 'message' => 'Bank moved in archived']);
     }
 }

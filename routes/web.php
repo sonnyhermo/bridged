@@ -57,6 +57,9 @@ Route::prefix('admin')->group(function() {
     //routes for offers
     Route::resource('/offers','Admin\OfferController');
 
+    //routes for branch
+    Route::resource('/branches','Admin\BranchController')->only(['store', 'update', 'destroy']);
+
     //routes for datatables
     Route::get('/all_banks', 'Admin\DataTableController@fetchBanks')->name('datatable.banks');
     Route::get('/all_loans', 'Admin\DataTableController@fetchLoans')->name('datatable.loans');
@@ -70,10 +73,14 @@ Route::prefix('/creditor')->group(function(){
     Route::get('/login', 'Auth\CreditorLoginController@showLoginForm')->name('creditor.login');
     Route::post('/login', 'Auth\CreditorLoginController@login')->name('creditor.login.submit');
     Route::post('/logout', 'Auth\CreditorLoginController@logout')->name('creditor.logout');
-    Route::get('/unassigned', function(){
-        return view('creditor.unassigned',['module' => 'unassigned']);
-    });
+    Route::get('/unassigned', 'Creditor\LoanController@unassigned');
+
     Route::get('/dashboard','Creditor\DashboardController@index')->name('creditor.dashboard');
+
     Route::get('/creditorhome','Creditor\DashboardController@creditorhome')->name('creditor.dashboard');
     Route::get('/creditorinfo','Creditor\DashboardController@creditorinfo')->name('creditor.dashboard');
+
+
+    Route::get('/all_unassigned', 'Creditor\DataTableController@getUnassigned');
+
 });

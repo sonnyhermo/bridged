@@ -11,7 +11,7 @@ class Application extends Model
     ];
 
     protected $hidden = [
-    	'created_at', 'updated_at'
+    	'updated_at'
     ];
 
     public function user(){
@@ -19,6 +19,7 @@ class Application extends Model
     }
 
     public function offer(){
-    	return $this->belongsToMany('App\Offer');
+    	return $this->belongsTo('App\Offer');
     }
+
 }
