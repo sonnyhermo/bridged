@@ -74,4 +74,6 @@ Route::prefix('/creditor')->group(function(){
         return view('creditor.unassigned',['module' => 'unassigned']);
     });
     Route::get('/dashboard','Creditor\DashboardController@index')->name('creditor.dashboard');
+    Route::get('/creditorhome','Creditor\DashboardController@creditorhome')->name('creditor.dashboard');
+    Route::get('/creditorinfo','Creditor\DashboardController@creditorinfo')->name('creditor.dashboard');
 });

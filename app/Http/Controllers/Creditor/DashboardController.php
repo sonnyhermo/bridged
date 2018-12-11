@@ -16,6 +16,14 @@ class DashboardController extends Controller
     {
         return view('creditor.dashboard',['module' => 'DashBoard']);
     }
+    public function creditorinfo()
+    {
+        return view('creditor.creditor-info',['module' => 'DashBoard']);
+    }
+    public function creditorhome()
+    {
+        return view('creditor.creditor-home',['module' => 'DashBoard']);
+    }
 
     /**
      * Show the form for creating a new resource.

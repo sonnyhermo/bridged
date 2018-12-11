@@ -32,8 +32,8 @@
 							<input type="text" class="form-control" id="txtEBaddress" name="EBaddress" placeholder="Enter Employer/Business Address">
 						</div>
                         <div class="form-group">
-							<label for="txtindustry">Industry<span class="text-danger">*</span></label>
-							<input type="text" class="form-control" id="txtindustry" name="industry" placeholder="Enter Industry">
+							<label for="txtEindustry">Industry<span class="text-danger">*</span></label>
+							<input type="text" class="form-control" id="txtEindustry" name="industry" placeholder="Enter Industry">
 						</div>
                         <div class="form-group">
 							<label for="txtjobtitle">Job Title<span class="text-danger">*</span></label>
