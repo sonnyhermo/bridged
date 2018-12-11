@@ -79,5 +79,5 @@ Route::prefix('/creditor')->group(function(){
     Route::get('/dashboard','Creditor\DashboardController@index')->name('creditor.dashboard');
 
     Route::get('/all_unassigned', 'Creditor\DataTableController@getUnassigned');
-    Route::get('/user/{id}','Creditor\UserController@getUserInfo');
+
 });
