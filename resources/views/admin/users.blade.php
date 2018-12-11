@@ -9,7 +9,7 @@
 			<button type="button" class="btn btn-primary btn-fill" data-toggle="modal" data-target="#newAdminModal">
 				Add Admin <span class="fa fa-plus" aria-hidden="true"></span>
 			</button>
-			<button type="button" class="btn btn-primary btn-fill" data-toggle="modal" data-target="#newCreditorModal">
+			<button type="button" class="btn btn-primary btn-fill" data-toggle="modal" data-target="#">
 				Admin List <span class="fa fa-list-alt" aria-hidden="true"></span>
 			</button>
 		</div>
@@ -26,7 +26,7 @@
 		            <p class="card-category">List of Banks Creditors</p>
 		        </div>
 	            <div class="card-body">
-	           		<table class="table table-striped" id="loanPurposeTable">
+	           		<table class="table table-striped" id="creditorTable">
 	           			<thead>
 	           				<tr>
 	           					<th>Bank</th>

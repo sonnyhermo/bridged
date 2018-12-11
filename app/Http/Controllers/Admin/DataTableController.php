@@ -10,6 +10,7 @@ use App\Loan;
 use App\Classification;
 use App\Bank;
 use App\Offer;
+use App\Creditor;
 
 class DataTableController extends Controller
 {
@@ -39,5 +40,14 @@ class DataTableController extends Controller
             'terms'
         ]))
         ->make();
+    }
+
+    public function fetchCreditors(){
+        $creditors = Creditor::with([
+            'bank' => function($q){
+                $q->select('id', 'name');
+            }
+        ])->select('creditors.*');
+        return Datatables::of($creditors)->make();
     }
 }

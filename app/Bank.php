@@ -19,6 +19,10 @@ class Bank extends Model
     }
 
     public function offers(){
-    	return $this->hasMany('App\Offers');
+    	return $this->hasMany('App\Offer');
+    }
+
+    public function creditors(){
+        return $this->hasMany('App\Creditor');
     }
 }

@@ -39,7 +39,7 @@ class CreditorController extends Controller
     {
 
         $data = $request->validated();
-        $data['password'] = Hash::make($request->password);
+        $data['password'] = bcrypt($request->password);
 
         $newCreditor = $creditor->create($data);
 
