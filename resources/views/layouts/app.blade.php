@@ -25,7 +25,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
-                <a class="navbar-brand" href="#"><img src="{{ asset('images/logo.png') }}"></a>
+                <a class="navbar-brand" href="#"><img src="{{ asset('images/logo.png') }}" class="logo"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -139,7 +139,7 @@
             <div class="modal-content">
                 <div class="modal-body">
                     <div class="col-md-12 text-center">
-                        <img src="{{asset('images/logo.png')}}" class="pt-5 pb-3">
+                        <img src="{{asset('images/logo.png')}}" class="mt-5 mb-3 logo">
                         <div class="offset-md-1 col-md-10">
                             <form method="POST" action="{{ route('login') }}" id="loginForm" >
                                 @csrf

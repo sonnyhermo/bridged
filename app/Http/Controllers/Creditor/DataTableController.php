@@ -18,10 +18,13 @@ class DataTableController extends Controller
 
     public function getUnassigned(Request $request){
 
+    	return $this->fetchApplications($request->query('loan'),null);
+    
+    }
 
-    	dump($request->query('loan'));
-        $bank = Auth::guard('creditor')->user()->bank_id;
-        $model = $this->loans->getApplication($request->query('loan'),$bank,'assigned');
+    private function fetchApplications($loan, $status){
+    	$bank = Auth::guard('creditor')->user()->bank_id;
+        $model = $this->loans->getApplication($loan,$bank,$status);
         return Datatables::of($model)->make(true);
     }
 }

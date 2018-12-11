@@ -126,7 +126,7 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<div class="form-group">
+					<div class="form-group" id="addthru">
 						<label class="col-md-3">Add Thru</label>
 						<div class="form-check form-check-inline">
 							<input class="form-check-input" type="radio" name="addOption" id="addOption1" value="excel">
@@ -137,7 +137,7 @@
 							<label class="form-check-label" for="addOption2">Manual</label>
 						</div>
 					</div>
-					<form action="/admin/branches" method="POST" id="branchForm" enctype="multipart/form-data class="d-none">
+					<form action="/admin/branches" method="POST" id="branchForm" enctype="multipart/form-data" class="d-none">
 						@csrf
 						<input type="hidden" name="bank" id="txtBank">
 						<div id="inner">

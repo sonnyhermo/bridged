@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreApplicationRequest extends FormRequest
+class UpdateBranchRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,10 @@ class StoreApplicationRequest extends FormRequest
     public function rules()
     {
         return [
-            'borrower_type' => 'required',
-            'offer' => 'required',
-            'amount' => 'required',
-            'term' => 'required'
+            'branch' => 'required',
+            'address' => 'required',
+            'telephone' => 'required',
+            'region' => 'required',
         ];
     }
 }

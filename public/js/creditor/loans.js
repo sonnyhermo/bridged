@@ -18,7 +18,12 @@ $(document).ready(function(){
 		        },
 		        columns: [
 		            {data: 'created_at'},
-		            {data: 'fullname'},
+		            {
+		            	data: 'fullname',
+		            	render: function(data, type, row){
+		            		return `<a href="/creditor/user/${row.id}">${data}</a>`;
+		            	}
+		            },
 		            {data: 'classification'},
 		            {data: 'amount'},
 		            {data: 'term'},

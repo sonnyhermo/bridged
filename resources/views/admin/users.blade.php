@@ -55,14 +55,14 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<form action="/admin/creditor" method="POST" id="creditorForm">
+					<form id="creditorForm">
 						@csrf
 
 						<div class="form-group row">
                             <label class="col-md-4 text-right col-form-label">Bank</label>
 
                             <div class="col-md-8">
-                                <select class="form-control" name="bank_id">
+                                <select class="form-control" name="bank_id" required>
                                 	<option value="">Choose Creditor Bank</option>
                                 	@foreach($banks as $bank)
                                 	<option value="{{ $bank->id }}">{{ $bank->name }}</option>
@@ -75,7 +75,7 @@
                             <label class="col-md-4 text-right col-form-label">Firstname</label>
 
                             <div class="col-md-8">
-                                <input type="text" class="form-control" name="firstname" placeholder="Enter Firstname">
+                                <input type="text" class="form-control" name="firstname" placeholder="Enter Firstname" required>
                             </div>
                         </div>
 
@@ -83,7 +83,7 @@
                             <label class="col-md-4 text-right col-form-label">Middle Name</label>
 
                             <div class="col-md-8">
-                                <input type="text" class="form-control" name="middlename" placeholder="Enter Middle Name">
+                                <input type="text" class="form-control" name="middlename" placeholder="Enter Middle Name" required>
                             </div>
                         </div>
 
@@ -91,7 +91,7 @@
                             <label class="col-md-4 text-right col-form-label">Last Name</label>
 
                             <div class="col-md-8">
-                                <input type="text" class="form-control" name="lastname" placeholder="Enter Last Name">
+                                <input type="text" class="form-control" name="lastname" placeholder="Enter Last Name" required>
                             </div>
                         </div>
 						
@@ -99,7 +99,7 @@
                             <label class="col-md-4 text-right col-form-label">Email Address</label>
 
                             <div class="col-md-8">
-                                <input type="text" class="form-control" name="email" placeholder="Enter Email">
+                                <input type="text" class="form-control" name="email" placeholder="Enter Email" required>
                             </div>
                         </div>
 
@@ -107,7 +107,7 @@
                             <label class="col-md-4 text-right col-form-label">Password</label>
 
                             <div class="col-md-8">
-                                <input type="password" class="form-control" name="password" placeholder="Enter Password">
+                                <input type="password" class="form-control" name="password" placeholder="Enter Password" required>
                             </div>
                         </div>
 
@@ -115,7 +115,7 @@
                             <label class="col-md-4 text-right col-form-label">Confirm Password</label>
 
                             <div class="col-md-8">
-                                <input type="password" class="form-control" name="password_confirmation" placeholder="Re-Enter Password">
+                                <input type="password" class="form-control" name="password_confirmation" placeholder="Re-Enter Password" required>
                             </div>
                         </div>
 
@@ -126,3 +126,8 @@
 		</div>
 	</div>
 @endsection
+
+@push('script')
+	<script src="{{ asset('js/jquery.validate.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/admin/users.js') }}"></script>
+@endpush
