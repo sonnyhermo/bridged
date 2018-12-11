@@ -1,5 +1,25 @@
 $(document).ready(function(){
-	var bankModalClone = $("#newBankModal").clone();
+	let bankModalClone = $("#newBankModal").clone();
+	let branchModalClone = $("#newBranchModal").clone();
+	let childTable;
+	let manualAddBranch = `<div class="form-group">
+							<label>Branch Name</label>
+							<input type="text" class="form-control" name="branch" placeholder="Enter New Branch" required>
+						</div>
+						<div class="form-group">
+							<label>Branch Address</label>
+							<input type="text" class="form-control" name="address" placeholder="Enter Branch Address" required>
+						</div>
+						<div class="row">
+							<div class="form-group col-md-6">
+								<label>Branch Tel No.</label>
+								<input type="text" class="form-control" name="telephone" placeholder="Enter Branch Telephone" required>
+							</div>
+							<div class="form-group col-md-6">
+								<label>Branch Region</label>
+								<input type="text" class="form-control" name="region" placeholder="Enter Branch Region" required>
+							</div>
+						</div>`;
 
 	$('#bankForm').validate({
 		submitHandler: function(){
@@ -37,16 +57,18 @@ $(document).ready(function(){
         ajax: '/admin/all_banks',
         columns: [
     		{
-                "class":          "details-control",
-                "orderable":      false,
-                "data":           null,
-                "defaultContent": "",
+                class:          "details-control ",
+                orderable:      false,
+                data:           "",
+                defaultContent: "",
+                render: function(data, type, row){
+                	return '<p class="d-none">'+row.slug+'</p>';
+                }
             },
             {
             	data: 'logo',
             	name: 'logo',
             	render: function ( data, type, row ) {
-            		console.log(row);
 			        return '<img src="/storage/'+data+'" class="logo"/>';
 		    	}
             },
@@ -67,9 +89,10 @@ $(document).ready(function(){
 	var bank_detailRows = [];
  
     $('#banksTable tbody').on( 'click', 'tr td.details-control', function () {
-        var tr = $(this).closest('tr');
-        var row = bank_dt.row( tr );
-        var idx = $.inArray( tr.attr('id'), bank_detailRows );
+        let tr = $(this).closest('tr');
+        let bank = $(this).find('p').html();
+        let row = bank_dt.row( tr );
+        let idx = $.inArray( tr.attr('id'), bank_detailRows );
  
         if ( row.child.isShown() ) {
             tr.removeClass( 'details' );
@@ -86,7 +109,30 @@ $(document).ready(function(){
             if ( idx === -1 ) {
                 bank_detailRows.push( tr.attr('id') );
             }
-            sub_DataTable('childTable', 5);
+            
+            //instantiate child table
+           childTable = $('#childTable').DataTable({
+		        pagingType: 'simple',
+		        pageLength: 5,
+		        lengthChange: false,
+		        ajax:{
+		        	url:'/admin/bank_branches',
+		        	data: { bank: bank}
+		        },
+		        columns:[
+		        	{data: 'branch', name: 'branch'},
+		        	{data: 'address', name: 'address'},
+		        	{data: 'telephone', name: 'telephone'},
+		        	{data: 'region', name: 'region'},
+		        	{
+		            	data: null,
+					    render: function ( data, type, row ) {
+					        return `<button class="btn btn-sm btn-danger bank-branch-delete" data-id="${row['slug']}"><span class="fa fa-trash"></span></button>
+					        <button class="btn btn-sm btn-info bank-branch-edit" data-id="${row['slug']}"><span class="fa fa-pencil-square-o"></span></button>`;
+				    	}
+				    }
+		        ]
+		    });
 		}
 		
     } );
@@ -151,6 +197,45 @@ $(document).ready(function(){
         });
     });
 
+    $('#banksTable tbody').on( 'click', 'tr .bank-branch-delete', function() {
+		let branch = $(this).data('id');
+		let row = $(this).parent('tr');
+		swal({
+			title:'Oopps Wait',
+			text:'Remove this branch partner?',
+			icon:'warning',
+			buttons: ["Cancel", "Okay"],
+		}).then(function(value){
+			if(value){
+				$.ajax({
+					url: '/admin/branches/'+branch,
+					type: 'delete',
+					dataType: 'json',
+					success:function(res){
+						ajaxSuccessResponse(res).then(function(value){
+							childTable.ajax.reload();s
+						});
+					},
+					error:function(xhr){
+						ajaxErrorDisplay(xhr.responseText);
+					}
+				})
+			}
+		});
+	});
+
+	$('#banksTable tbody').on( 'click', 'tr .bank-branch-edit', function() {
+		$('#newBranchModal .modal-title').html('Edit Branch');
+		$('#addthru').remove();
+		$('#txtBank').remove();
+		$('#bank-branches').remove();
+		$('#branchForm').prepend(manualAddBranch);
+		$('#branchForm').removeClass('d-none');
+		$('#branchForm').attr('data-process','edit');
+		$('#newBranchModal').modal('show');
+
+	});
+
     $('#newBankModal').on('hidden.bs.modal', function () {
         $("#newBankModal").replaceWith(bankModalClone);
         $('#bankForm').attr('action','/admin/banks');
@@ -164,24 +249,7 @@ $(document).ready(function(){
 							<input type="file" name="branches" class="form-control-file" id="fileBranches" required>
 						</div>`;
 		}else{
-			innerHtml = `<div class="form-group">
-							<label>Branch Name</label>
-							<input type="text" class="form-control" name="branch" placeholder="Enter New Branch" required>
-						</div>
-						<div class="form-group">
-							<label>Branch Address</label>
-							<input type="text" class="form-control" name="address" placeholder="Enter Branch Address" required>
-						</div>
-						<div class="row">
-							<div class="form-group col-md-6">
-								<label>Branch Tel No.</label>
-								<input type="text" class="form-control" name="telephone" placeholder="Enter Branch Telephone" required>
-							</div>
-							<div class="form-group col-md-6">
-								<label>Branch Region</label>
-								<input type="text" class="form-control" name="region" placeholder="Enter Branch Region" required>
-							</div>
-						</div>`;
+			innerHtml = manualAddBranch;
 		}
 
 		$('#branchForm #inner').html(innerHtml);
@@ -191,29 +259,33 @@ $(document).ready(function(){
 
 	$('#branchForm').validate({
 		submitHandler: function(){
-			let data, contentType, processData;
+			let data, contentType, processData, type = 'post';
 			if($('#fileBranches').length){
 				data = new FormData($('#branchForm')[0]);
 				contentType = false;
 				processData = false;
+				console.log('hey');
 			}else{
 				data = $('#branchForm').serialize();
 				contentType = "application/x-www-form-urlencoded; charset=UTF-8";
 				processData = true;
+				if($('#branchForm').data('process') == 'edit'){
+					type = 'put';
+				}
 			}
-
+			console.log(type);
 			$.ajax({
 				url: '/admin/branches',
-				type: 'post',
+				type: type,
 				data: data,
 				dataType: 'json',
 				contentType: contentType,
 				processData: processData,
 				success:function(res){
 					console.log(res);
-					ajaxSuccessResponse(res).then(function(value){
+					/*ajaxSuccessResponse(res).then(function(value){
 						location.reload();
-					});
+					});*/
 				},
 				error:function(xhr){
 					console.log(xhr.responseText);
@@ -236,11 +308,11 @@ function format ( d ) {
 			<td>${val.address}</td>
 			<td>${val.telephone}</td>
 			<td>${val.region}</td>
-            <td><button class="btn btn-sm btn-danger bank-delete" data-id="${val.slug}"><span class="fa fa-trash"></span></button>
-	        <button class="btn btn-sm btn-info bank-edit" data-id="${val.slug}"><span class="fa fa-pencil-square-o"></span></button></td>
+            <td><button class="btn btn-sm btn-danger bank-branch-delete" data-id="${val.slug}"><span class="fa fa-trash"></span></button>
+	        <button class="btn btn-sm btn-info bank-branch-edit" data-id="${val.slug}"><span class="fa fa-pencil-square-o"></span></button></td>
         </tr>`;
 	})
-	return `<table id="childTable" width="100%">
+	return `<table id="childTable" class="text-center" width="100%">
 		<thead>
 			<tr>
 				<th>Branch</th>

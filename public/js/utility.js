@@ -47,12 +47,3 @@ function ajaxErrorDisplay(jsonString){
     });
 }
 
-function sub_DataTable(table_id, pageLength) {
-    var subtable = $('#'+table_id).DataTable({
-        
-        pagingType: 'simple',
-        pageLength: pageLength,
-        lengthChange: false,
-      
-    });
-}

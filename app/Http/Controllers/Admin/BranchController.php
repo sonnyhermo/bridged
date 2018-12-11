@@ -60,7 +60,7 @@ class BranchController extends Controller
 
         $bank = Bank::select('id', 'name')->where('slug', $request->bank)->first();
 
-        if(!$request->has('braches')){
+        if(!$request->has('branches')){
             $data = [
                 'bank_id' => $bank->id,
                 'branch' => $request->branch,
@@ -137,8 +137,14 @@ class BranchController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Branch $branch)
     {
-        //
+        $is_deleted = $branch->delete();
+
+        if(!$is_deleted){
+            return json_encode(['status' => 0, 'message' => 'Failed to Remove Branch']);
+        }
+
+        return json_encode(['status' => 1, 'message' => 'Branch moved in archived']);
     }
 }
