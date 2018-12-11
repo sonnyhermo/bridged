@@ -141,9 +141,9 @@ class BankController extends Controller
         $is_deleted = $bank->delete();
 
         if(!$is_deleted){
-            return json_encode(['code' => 0, 'message' => 'Deleting Bank Failed']);
+            return json_encode(['status' => 0, 'message' => 'Deleting Bank Failed']);
         }
 
-        return json_encode(['code' => 1, 'message' => 'Bank moved in archived']);
+        return json_encode(['status' => 1, 'message' => 'Bank moved in archived']);
     }
 }

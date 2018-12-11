@@ -67,6 +67,7 @@ Route::prefix('admin')->group(function() {
     Route::get('/all_loan_classifications', 'Admin\DataTableController@fetchClassifications')->name('datatable.classifications');
     Route::get('/all_offers', 'Admin\DataTableController@fetchOffers')->name('datatable.offers');
     Route::get('/all_creditors', 'Admin\DataTableController@fetchCreditors')->name('datatable.creditors');
+    Route::get('/bank_branches','Admin\DataTableController@fetchBranches')->name('datatable.branches');
     
 });
 
@@ -79,4 +80,5 @@ Route::prefix('/creditor')->group(function(){
     Route::get('/dashboard','Creditor\DashboardController@index')->name('creditor.dashboard');
 
     Route::get('/all_unassigned', 'Creditor\DataTableController@getUnassigned');
+
 });

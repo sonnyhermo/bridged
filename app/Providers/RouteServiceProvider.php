@@ -9,6 +9,7 @@ use App\Bank;
 use App\Offer;
 use App\Classification;
 use App\Purpose;
+use App\Branch;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -62,6 +63,14 @@ class RouteServiceProvider extends ServiceProvider
 
         Route::bind('purpose', function($value){
             return Purpose::where('slug', $value)->orWhere(function($query) use ($value){
+                if(is_numeric($value)){
+                    $query->where('id',$value);
+                }
+            })->firstOrFail();
+        });
+
+        Route::bind('branch', function($value){
+            return Branch::where('slug', $value)->orWhere(function($query) use ($value){
                 if(is_numeric($value)){
                     $query->where('id',$value);
                 }
