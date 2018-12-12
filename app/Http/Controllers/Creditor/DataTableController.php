@@ -18,13 +18,36 @@ class DataTableController extends Controller
 
     public function getUnassigned(Request $request){
 
-    	return $this->fetchApplications($request->query('loan'),null);
+    	return $this->fetchApplications($request->query('loan'),null, $request->query('sort'));
     
     }
 
-    private function fetchApplications($loan, $status){
+    private function fetchApplications($loan, $status, $order){
     	$bank = Auth::guard('creditor')->user()->bank_id;
-        $model = $this->loans->getApplication($loan,$bank,$status);
+
+        switch ($order) {
+            case 'id-asc':
+                $sort = ['key'=>'applications.id', 'value'=>'ASC'];
+                break;
+                
+            case 'id-desc':
+                $sort = ['key'=>'applications.id', 'value'=>'DESC'];
+                break;
+
+            case 'name-desc':
+                $sort = ['key'=>'fullname', 'value'=>'DESC'];
+                break;
+
+            case 'name-desc':
+                $sort = ['key'=>'fullname', 'value'=>'DESC'];
+                break;
+            
+            default:
+                $sort = ['key'=>'status', 'value'=>'ASC'];
+                break;
+        }
+
+        $model = $this->loans->getApplication($loan,$bank,$status, $sort);
         return Datatables::of($model)->make(true);
     }
 }
