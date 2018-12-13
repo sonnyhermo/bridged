@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCreditorRequest;
 use App\Creditor;
+use Hash;
 
 class CreditorController extends Controller
 {
@@ -57,9 +58,9 @@ class CreditorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Creditor $creditor)
     {
-        //
+        return $creditor;
     }
 
     /**
@@ -80,9 +81,18 @@ class CreditorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreCreditorRequest $request, Creditor $creditor)
     {
-        //
+        $data = $request->validated();
+        $data['password'] = Hash::make($data['password']);
+
+        $is_updated = $creditor->update($data);
+
+        if($is_updated){
+            return response()->json(['status' => 1, 'message' => 'Creditor updated successfully']);
+        }
+
+        return response()->json(['status' => 0, 'message' => 'Failed to update creditor']);
     }
 
     /**
@@ -91,8 +101,15 @@ class CreditorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Creditor $creditor)
     {
-        //
+
+        $is_deleted = $creditor->delete();
+
+        if(!$is_deleted){
+            return json_encode(['status' => 0, 'message' => 'Failed to removed creditor']);
+        }
+
+        return json_encode(['status' => 1, 'message' => 'Creditor Successfully removed']);
     }
 }

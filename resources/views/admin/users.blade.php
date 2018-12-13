@@ -9,9 +9,6 @@
 			<button type="button" class="btn btn-primary btn-fill" data-toggle="modal" data-target="#newAdminModal">
 				Add Admin <span class="fa fa-plus" aria-hidden="true"></span>
 			</button>
-			<button type="button" class="btn btn-primary btn-fill" data-toggle="modal" data-target="#">
-				Admin List <span class="fa fa-list-alt" aria-hidden="true"></span>
-			</button>
 		</div>
 
 		<div class="col-md-12">
@@ -62,7 +59,7 @@
                             <label class="col-md-4 text-right col-form-label">Bank</label>
 
                             <div class="col-md-8">
-                                <select class="form-control" name="bank_id" required>
+                                <select class="form-control" name="bank_id" id="selectBank" required>
                                 	<option value="">Choose Creditor Bank</option>
                                 	@foreach($banks as $bank)
                                 	<option value="{{ $bank->id }}">{{ $bank->name }}</option>
@@ -75,7 +72,7 @@
                             <label class="col-md-4 text-right col-form-label">Firstname</label>
 
                             <div class="col-md-8">
-                                <input type="text" class="form-control" name="firstname" placeholder="Enter Firstname" required>
+                                <input type="text" class="form-control" name="firstname" id="txtFirstname" placeholder="Enter Firstname" required>
                             </div>
                         </div>
 
@@ -83,7 +80,7 @@
                             <label class="col-md-4 text-right col-form-label">Middle Name</label>
 
                             <div class="col-md-8">
-                                <input type="text" class="form-control" name="middlename" placeholder="Enter Middle Name" required>
+                                <input type="text" class="form-control" name="middlename" placeholder="Enter Middle Name" id="txtMiddlename" required>
                             </div>
                         </div>
 
@@ -91,7 +88,7 @@
                             <label class="col-md-4 text-right col-form-label">Last Name</label>
 
                             <div class="col-md-8">
-                                <input type="text" class="form-control" name="lastname" placeholder="Enter Last Name" required>
+                                <input type="text" class="form-control" name="lastname" id="txtLastname" placeholder="Enter Last Name" required>
                             </div>
                         </div>
 						
@@ -99,7 +96,7 @@
                             <label class="col-md-4 text-right col-form-label">Email Address</label>
 
                             <div class="col-md-8">
-                                <input type="text" class="form-control" name="email" placeholder="Enter Email" required>
+                                <input type="text" class="form-control" name="email" id="txtEmail" placeholder="Enter Email" required>
                             </div>
                         </div>
 
@@ -107,7 +104,7 @@
                             <label class="col-md-4 text-right col-form-label">Password</label>
 
                             <div class="col-md-8">
-                                <input type="password" class="form-control" name="password" placeholder="Enter Password" required>
+                                <input type="password" class="form-control" name="password" id="txtPassword" placeholder="Enter Password" required>
                             </div>
                         </div>
 
@@ -115,7 +112,7 @@
                             <label class="col-md-4 text-right col-form-label">Confirm Password</label>
 
                             <div class="col-md-8">
-                                <input type="password" class="form-control" name="password_confirmation" placeholder="Re-Enter Password" required>
+                                <input type="password" class="form-control" name="password_confirmation" id="txtCofirmPass" placeholder="Re-Enter Password" required>
                             </div>
                         </div>
 
