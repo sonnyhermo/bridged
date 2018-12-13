@@ -21,7 +21,7 @@ Route::resource('/offers','OfferController');//->middleware('verified');
 
 Route::get('/search_offers', 'OfferController@search')->middleware('auth');
 
-Route::resource('/my_profile','BorrowerController');//->middleware('verified');
+Route::resource('/my-profile','BorrowerController');//->middleware('verified');
 
 Route::resource('/incomes', 'IncomeController');
 
@@ -66,6 +66,7 @@ Route::prefix('admin')->group(function() {
     Route::get('/all_loan_purposes', 'Admin\DataTableController@fetchPurposes')->name('datatable.purposes');
     Route::get('/all_loan_classifications', 'Admin\DataTableController@fetchClassifications')->name('datatable.classifications');
     Route::get('/all_offers', 'Admin\DataTableController@fetchOffers')->name('datatable.offers');
+    Route::get('/all_creditors', 'Admin\DataTableController@fetchCreditors')->name('datatable.creditors');
     Route::get('/bank_branches','Admin\DataTableController@fetchBranches')->name('datatable.branches');
     
 });
@@ -78,6 +79,7 @@ Route::prefix('/creditor')->group(function(){
 
     Route::get('/dashboard','Creditor\DashboardController@index')->name('creditor.dashboard');
 
+
     Route::get('/creditorhome','Creditor\DashboardController@creditorhome')->name('creditor.dashboard');
     Route::get('/creditorinfo','Creditor\DashboardController@creditorinfo')->name('creditor.dashboard');
 
@@ -85,5 +87,11 @@ Route::prefix('/creditor')->group(function(){
     Route::get('/all_unassigned', 'Creditor\DataTableController@getUnassigned');
 
     Route::get('/user/{id}','Creditor\UserController@getUserInfo');
+
+
+    Route::match(['put', 'patch'], '/application/update-status/{application}', 'Creditor\ApplicationController@updateApplication');
+
+    Route::get('/all_unassigned', 'Creditor\DataTableController@getUnassigned');
+
 
 });

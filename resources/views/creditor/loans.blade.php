@@ -5,7 +5,7 @@
 		<div class="col-md-4">
 			<div class="row">
 				<label class="col-md-4">Loan Type</label>
-				<select id="loanType" class="col-md-8">
+				<select id="loanType" class="col-md-8 dropdown-list">
 					<option value="">Select Loan Type</option>
 					@foreach($loans as $loan)
 					<option value="{{ $loan->slug }}">{{ $loan->type }}</option>
@@ -17,12 +17,12 @@
 		<div class="col-md-4 offset-md-4">
 			<div class="row">
 				<label class="col-md-4">Sort By</label>
-				<select class="col-md-8" id="sort">
-					<option value="">Status</option>
-					<option value="">Newest Applications</option>
-					<option value="">Oldest Applications</option>
-					<option value="">Name Ascending</option>
-					<option value="">Name Descending</option>
+				<select class="col-md-8 dropdown-list" id="sortType">
+					<option value="status">Status</option>
+					<option value="id-asc">Newest Applications</option>
+					<option value="id-desc">Oldest Applications</option>
+					<option value="name-asc">Name Ascending</option>
+					<option value="name-desc">Name Descending</option>
 				</select>
 			</div>
 		</div>

@@ -57,23 +57,24 @@
 
 
 		  	<div class="tab-pane container" id="entity">
-			  <div id="stepper-profile" class="bs-stepper">
+
+		  		<div id="stepper-entity" class="bs-stepper">
 					<div class="bs-stepper-header">
-						<div class="step" data-target="#step-personal-info">
+						<div class="step" data-target="#step-entity-info">
 							<a href="#">
 							<span class="bs-stepper-circle">1</span>
-							<span class="bs-stepper-label">Borrower Info</span>
+							<span class="bs-stepper-label">Entity Info</span>
 							</a>
 						</div>
 						<div class="line"></div>
-						<div class="step" data-target="#step-income-source">
+						<div class="step" data-target="#step-entity-income-source">
 							<a href="#">
 							<span class="bs-stepper-circle">2</span>
-							<span class="bs-stepper-label">Source of Income</span>
+							<span class="bs-stepper-label">Rereferences</span>
 							</a>
 						</div>
 						<div class="line"></div>
-						<div class="step" data-target="#step-attachment">
+						<div class="step" data-target="#step-entity-attachment">
 							<a href="#">
 							<span class="bs-stepper-circle">3</span>
 							<span class="bs-stepper-label">Attachments</span>
@@ -81,17 +82,20 @@
 						</div>
 					</div>
 					<div class="bs-stepper-content">
-						<div id="step-personal-info" class="content">
-							@include('profile.entity_profile')
+						<div id="step-entity-info" class="content">
+							@include('profile.entity')
 						</div>
-						<div id="step-income-source" class="content">
-							@include('profile.source_of_income')
+						<div id="step-entity-income-source" class="content">
+							asdad
 						</div>
-						<div id="step-attachment" class="content">
-							@include('profile.attachments')
+						<div id="step-entity-attachment" class="content">
+							asdad
 						</div>
 					</div>
 				</div>
+		  	</div>
+		</div>
+
 
 	</div>
 </div>
@@ -102,8 +106,8 @@
 	<script src="{{ asset('js/garlic.js') }}"></script>
 	<script src="{{ asset('js/jquery.validate.min.js') }}"></script>
 	<script>
-		var myStepper = new Stepper($('#stepper-profile')[0], {linear:false});
-		var sample;
+		var profileStepper = new Stepper($('#stepper-profile')[0], {linear:false});
+		var entityStepper = new Stepper($('#stepper-entity')[0], {linear:false});
 	</script>
 	<script src="{{ asset('js/borrower/profile.js') }}"></script>
 @endpush

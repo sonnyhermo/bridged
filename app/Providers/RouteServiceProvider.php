@@ -10,6 +10,7 @@ use App\Offer;
 use App\Classification;
 use App\Purpose;
 use App\Branch;
+use App\Application;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -76,6 +77,8 @@ class RouteServiceProvider extends ServiceProvider
                 }
             })->firstOrFail();
         });
+
+        Route::model('application', Application::class);
 
         parent::boot();
     }

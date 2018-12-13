@@ -32,7 +32,7 @@ $(document).ready(function(){
 			// 	dataType: 'json',
 			// 	success: function(res){
 			// 		console.log(res);
-			// 		myStepper.next();
+			// 		profileStepper.next();
 			// 	},
 			// 	error: function(xhr){
 			// 		console.log(xhr.responseText);
@@ -40,7 +40,7 @@ $(document).ready(function(){
 			// 	}
 			// });
 
-			myStepper.next();
+			profileStepper.next();
 		}
 	});
 
@@ -54,7 +54,7 @@ $(document).ready(function(){
 			// 	dataType: 'json',
 			// 	success: function(res){
 			// 		console.log(res);
-			// 		//myStepper.next();
+			// 		//profileStepper.next();
 			// 	},
 			// 	error: function(xhr){
 			// 		console.log(xhr.responseText);
@@ -92,7 +92,7 @@ $(document).ready(function(){
 			dataType: 'json',
 			success: function(res){
 				console.log(res);
-				//myStepper.next();
+				//profileStepper.next();
 			},
 			error: function(xhr){
 				console.log(xhr.responseText);
@@ -129,6 +129,6 @@ $(document).ready(function(){
 
 	$('.previous').click(function(e){
 		e.preventDefault();
-		myStepper.previous();
+		profileStepper.previous();
 	});
 });

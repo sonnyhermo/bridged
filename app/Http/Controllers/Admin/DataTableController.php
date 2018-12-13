@@ -10,6 +10,7 @@ use App\Loan;
 use App\Classification;
 use App\Bank;
 use App\Offer;
+use App\Creditor;
 use App\Branch;
 
 class DataTableController extends Controller
@@ -42,9 +43,19 @@ class DataTableController extends Controller
         ->make();
     }
 
+    public function fetchCreditors(){
+        $creditors = Creditor::with([
+            'bank' => function($q){
+                $q->select('id', 'name');
+            }
+        ])->select('creditors.*');
+        return Datatables::of($creditors)->make();
+    }
+
     public function fetchBranches(Request $request){
        $bank = Bank::select('id')->where('slug', $request->query('bank'))->first();
        $model = Branch::where('bank_id',$bank->id);
        return Datatables::of($model)->make();
+
     }
 }

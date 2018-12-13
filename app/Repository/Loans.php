@@ -4,7 +4,7 @@ namespace App\Repository;
 use DB;
 
 class Loans{
-    public function getApplication($loan_id, $bank_id, $status){
+    public function getApplication($loan_id, $bank_id, $status, $sort){
 
         $loans = DB::table('applications')
                 ->join('offers', 'applications.offer_id', '=', 'offers.id')
@@ -22,6 +22,7 @@ class Loans{
                 }
 
                 $loans->select('applications.created_at','users.id', DB::raw('CONCAT(users.firstname," ",users.middlename," ",users.lastname) as fullname'),'classifications.classification','applications.amount','applications.term', DB::raw('IF (applications.status IS NULL, "Unassigned", applications.status) as status'))
+                ->orderBy($sort['key'], $sort['value'])
                 ->get();
 
         return $loans;

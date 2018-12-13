@@ -31,5 +31,7 @@ class Creditor extends Authenticatable
 
     protected $dates = ['deleted_at'];
 
-
+    public function bank(){
+        return $this->belongsTo('App\Bank');
+    }
 }
