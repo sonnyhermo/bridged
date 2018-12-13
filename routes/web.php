@@ -21,7 +21,7 @@ Route::resource('/offers','OfferController');//->middleware('verified');
 
 Route::get('/search_offers', 'OfferController@search')->middleware('auth');
 
-Route::resource('/my_profile','BorrowerController');//->middleware('verified');
+Route::resource('/my-profile','BorrowerController');//->middleware('verified');
 
 Route::resource('/incomes', 'IncomeController');
 
