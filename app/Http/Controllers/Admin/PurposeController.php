@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreNewPurpose;
+use App\Http\Requests\StorePurpose;
 use App\Purpose;
 
 class PurposeController extends Controller
@@ -35,7 +35,7 @@ class PurposeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreNewPurpose $request, Purpose $purpose)
+    public function store(StorePurpose $request, Purpose $purpose)
     {
         $data = $request->validated();
         $data['slug'] = str_slug($data['purpose'].' '.$data['loan_id'], '-');
@@ -76,7 +76,7 @@ class PurposeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreNewPurpose $request, Purpose $purpose)
+    public function update(StorePurpose $request, Purpose $purpose)
     {
         $data = $request->validated();
         $data['slug'] = str_slug($data['purpose'].' '.$data['loan_id'], '-');

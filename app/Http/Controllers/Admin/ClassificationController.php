@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreNewSpec;
+use App\Http\Requests\StoreSpec;
 use App\Classification;
 
 use Yajra\Datatables\Datatables;;
@@ -38,7 +38,7 @@ class ClassificationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreNewSpec $request, Classification $classification)
+    public function store(StoreSpec $request, Classification $classification)
     {
     
         $data = $request->validated();
@@ -92,7 +92,7 @@ class ClassificationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreNewSpec $request, Classification $classification)
+    public function update(StoreSpec $request, Classification $classification)
     {
         $data = $request->validated();
 
@@ -121,9 +121,9 @@ class ClassificationController extends Controller
         $is_deleted = $classification->delete();
         
         if(!$is_deleted){
-            return json_encode(['code' => 0, 'message' => 'Deleting Classification Failed']);
+            return json_encode(['status' => 0, 'message' => 'Deleting Classification Failed']);
         }
 
-        return json_encode(['code' => 1, 'message' => 'Classification Deleted']);
+        return json_encode(['status' => 1, 'message' => 'Classification Deleted']);
     }
 }

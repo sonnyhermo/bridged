@@ -169,10 +169,10 @@ $(document).ready(function(){
           title: "Are you sure?",
           text: "Once deleted, all data related to this will be deleted",
           icon: "warning",
-          buttons: true,
-          dangerMode: true,
-        }).then(function(proceed){
-            if(proceed){
+          buttons: ['No', 'Yes'],
+          closeOnClickOutside: false,
+        }).then(function(value){
+            if(value){
                 $.ajax({
                     url:'/admin/loans/'+type,
                     type:'delete',
@@ -244,22 +244,30 @@ function retrieveSpec(id){
 }
 
 function removeSpec(id){
-    $.ajax({
-        url:'/admin/classifications/'+id,
-        type:'delete',
-        dataType: 'json',
-        success:function(response){
-            if(response.code == 1){
-                swal('Success',response.message,'success')
-                .then(function(value){ location.reload() });
-            }else{
-                swal('Error',response.message,'error');
-            }
-        },
-        error:function(xhr){
-            console.log(xhr.responseText);
+    swal({
+        title:'Opps Wait!',
+        text:'Do you want to remove this loan classification',
+        icon:'warning',
+        buttons: ["No", "Yes, I want"],
+        closeOnClickOutside:false
+    }).then(function(value){
+        if(value){
+            $.ajax({
+                url:'/admin/classifications/'+id,
+                type:'delete',
+                dataType: 'json',
+                success:function(res){
+                    ajaxSuccessResponse(res).then(function(value){
+                        location.reload();
+                    });
+                },
+                error:function(xhr){
+                    ajaxErrorDisplay(xhr);
+                }
+            });
         }
     });
+
 }
 
 function format ( d ) {

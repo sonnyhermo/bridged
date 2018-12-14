@@ -21,6 +21,7 @@
 
 </head>
 <body>
+
     <div class="wrapper">
         <div class="sidebar" data-image="{{ asset('images/building.jpeg')}}">
             <!--

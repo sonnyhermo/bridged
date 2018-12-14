@@ -8,7 +8,7 @@ use App\Bank;
 use App\Loan;
 use App\Offer;
 use App\Term;
-use App\Http\Requests\StoreNewOfferRequest;
+use App\Http\Requests\StoreOfferRequest;
 use Rap2hpoutre\FastExcel\FastExcel;
 
 class OfferController extends Controller
@@ -48,7 +48,7 @@ class OfferController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-	public function store(StoreNewOfferRequest $request, Offer $offer)
+	public function store(StoreOfferRequest $request, Offer $offer)
     {
 
         $data = $request->validated();

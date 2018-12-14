@@ -12,6 +12,7 @@ use App\Bank;
 use App\Offer;
 use App\Creditor;
 use App\Branch;
+use App\Admin;
 
 class DataTableController extends Controller
 {
@@ -57,5 +58,9 @@ class DataTableController extends Controller
        $model = Branch::where('bank_id',$bank->id);
        return Datatables::of($model)->make();
 
+    }
+
+    public function fetchAdmins(){
+        return Datatables::of(Admin::all())->make();
     }
 }

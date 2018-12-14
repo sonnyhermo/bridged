@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreNewOfferRequest extends FormRequest
+class StoreSpec extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,14 +24,18 @@ class StoreNewOfferRequest extends FormRequest
     public function rules()
     {
         return [
-            'bank_id' => 'required|integer',
-            'classification_id' => 'required|integer',
-            'product' => 'required',
-            'min' => 'required|numeric',
-            'max' => 'required|numeric',
-            'min_income' => 'required|numeric',
-            'requirements' => 'required|string',
-            'terms_rates' => 'required|mimes:xlsx,xls'
+            'loan_id' => 'required',
+            'classification' => 'required',
+            'collateral' => 'required',
+            'description' => 'required'
         ];
+    }
+
+    public function attributes()
+    {
+        return[
+            'loan_id' => 'loan type'
+        ];
+
     }
 }

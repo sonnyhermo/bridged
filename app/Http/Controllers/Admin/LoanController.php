@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreNewLoan;
+use App\Http\Requests\StoreLoan;
 use App\Loan;
 use App\Classification;
 use App\Purpose;
@@ -51,7 +51,7 @@ class LoanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreNewLoan $request)
+    public function store(StoreLoan $request)
     {
 
         $data = $request->validated();
@@ -96,7 +96,7 @@ class LoanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreNewLoan $request, Loan $loan)
+    public function update(StoreLoan $request, Loan $loan)
     {
         $data = $request->validated();
 

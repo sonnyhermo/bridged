@@ -68,6 +68,7 @@ Route::prefix('admin')->group(function() {
     Route::get('/all_offers', 'Admin\DataTableController@fetchOffers')->name('datatable.offers');
     Route::get('/all_creditors', 'Admin\DataTableController@fetchCreditors')->name('datatable.creditors');
     Route::get('/bank_branches','Admin\DataTableController@fetchBranches')->name('datatable.branches');
+    Route::get('all-admins', 'Admin\DataTableController@fetchAdmins')->name('datatable.admins');
     
 });
 
