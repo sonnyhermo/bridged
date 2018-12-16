@@ -105,9 +105,9 @@ class PurposeController extends Controller
         $is_deleted = $purpose->delete();
         
         if(!$is_deleted){
-            return json_encode(['code' => 0, 'message' => 'Deleting purpose Failed']);
+            return response()->json(['code' => 0, 'message' => 'Deleting purpose Failed']);
         }
 
-        return json_encode(['code' => 1, 'message' => 'Purpose Deleted']);
+        return response()->json(['code' => 1, 'message' => 'Purpose Deleted']);
     }
 }

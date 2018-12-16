@@ -121,9 +121,9 @@ class ClassificationController extends Controller
         $is_deleted = $classification->delete();
         
         if(!$is_deleted){
-            return json_encode(['status' => 0, 'message' => 'Deleting Classification Failed']);
+            return response()->json(['status' => 0, 'message' => 'Deleting Classification Failed']);
         }
 
-        return json_encode(['status' => 1, 'message' => 'Classification Deleted']);
+        return response()->json(['status' => 1, 'message' => 'Classification Deleted']);
     }
 }

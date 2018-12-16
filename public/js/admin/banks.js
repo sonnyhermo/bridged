@@ -29,19 +29,21 @@ $(document).ready(function(){
 
 
 			$.ajax({
-				url: (typeof method != 'undefined')? '/admin/banks/'+res.slug:'/admin/banks',
-				type: (typeof method != 'undefined')? 'put':'post',
+				url: url,
+				type: 'post',
 				data: formData,
 				dataType:'json',
 				processData: false,
 				contentType: false,
 				success:function(res){
-					ajaxSuccessResponse(res).then(function(value){
-						location.reload();
-					});
+					console.log(res);
+					// ajaxSuccessResponse(res).then(function(value){
+					// 	location.reload();
+					// });
 				},
 				error:function(xhr){
-					ajaxErrorDisplay(xhr.responseText);
+					console.log(xhr.responseText);
+					//ajaxErrorDisplay(xhr.responseText);
 				}
 			});
 		}

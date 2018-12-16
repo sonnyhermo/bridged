@@ -31,4 +31,12 @@ class UpdateBankRequest extends FormRequest
             'logo' => 'mimes:jpeg,bmp,png'
         ];
     }
+
+    public function attributes()
+    {
+        return[
+            'name' => 'bank name'
+        ];
+
+    }
 }

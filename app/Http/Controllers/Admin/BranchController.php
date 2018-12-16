@@ -72,10 +72,10 @@ class BranchController extends Controller
         
             $newBranch = $branch->create($data);
             if(!$newBranch){
-                return json_encode(['status' => 0, 'message' => 'Adding Branch Failed']);
+                return response()->json(['status' => 0, 'message' => 'Adding Branch Failed']);
             }
     
-            return json_encode(['status' => 1, 'message' => 'Branch Added']);
+            return response()->json(['status' => 1, 'message' => 'Branch Added']);
         }
 
         $tempfile = $request->file('branches')->store('tmp');
@@ -142,9 +142,9 @@ class BranchController extends Controller
         $is_deleted = $branch->delete();
 
         if(!$is_deleted){
-            return json_encode(['status' => 0, 'message' => 'Failed to Remove Branch']);
+            return response()->json(['status' => 0, 'message' => 'Failed to Remove Branch']);
         }
 
-        return json_encode(['status' => 1, 'message' => 'Branch moved in archived']);
+        return response()->json(['status' => 1, 'message' => 'Branch moved in archived']);
     }
 }

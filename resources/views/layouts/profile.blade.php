@@ -29,7 +29,7 @@
 					<div class="card-header" id="headingTwo">
 						<h5 class="mb-0">
 						<button class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-							<strong>Existing Loans</strong>
+							<strong>LOAN APP STATUS</strong>
 						</button>
 						</h5>
 					</div>
@@ -41,6 +41,16 @@
 							<a class="card-link" src="sign-check-icon.png" data-toggle="collapse"  ><a class="fas fa-check-circle mr-2" href="/barrowerattachments"></a>Approved</a><br>
 							<a class="card-link" src="sign-check-icon.png" data-toggle="collapse"  ><a class="fas fa-check-circle mr-2" href="/barrowerattachments"></a>Declined</a><br>
 						</div>
+					</div>
+				</div>
+
+				<div class="card">
+					<div class="card-header" id="headingThree">
+						<h5 class="mb-0">
+						<button class="btn btn-link">
+							<strong>EXISTING LOANS</strong>
+						</button>
+						</h5>
 					</div>
 				</div>
 			</div>

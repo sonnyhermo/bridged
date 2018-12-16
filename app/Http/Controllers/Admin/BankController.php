@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreBankRequest;
+use App\Http\Requests\UpdateBankRequest;
 use App\Bank;
 use Storage;
 use App\Branch;
@@ -62,7 +63,7 @@ class BankController extends Controller
         $isExist = $this->dataChecker->isExist($bank, $data['slug']);
 
         if($isExist){
-            return ['status' => 0, 'title' => 'Error', 'message' => 'Bank already exist or in archieved'];
+            return response()->json(['status' => 0, 'title' => 'Error', 'message' => 'Bank already exist or in archieved']);
         }
 
         $newBank = $bank->create($data);
@@ -81,9 +82,9 @@ class BankController extends Controller
 
             Storage::delete('app/'.$tempfile);
 
-            return ['status' => 1, 'title' => 'Success','message' => 'New Bank Partners has been added!'];
+            return response()->json(['status' => 1, 'title' => 'Success','message' => 'New Bank Partners has been added!']);
         }else{
-            return ['status' => 0, 'title' => 'Error', 'message' => 'Failed to add Bank!'];
+            return response()->json(['status' => 0, 'title' => 'Error', 'message' => 'Failed to add Bank!']);
         }
 
     }
@@ -119,15 +120,24 @@ class BankController extends Controller
      */
     public function update(UpdateBankRequest $request, Bank $bank)
     {
+
         $data = $request->validated();
+        $data['slug'] = str_slug($data['name']);
+        $data['coverage'] = implode(', ',$data['coverage']);
 
-        return $request->file('logo');
+        if($request->hasFile('logo')){
+            Storage::disk('public')->delete($bank->logo);
+            $path = $request->file('logo')->store('banks_logo','public');
+            $data['logo'] = $path;
+        }
 
-        /*$bank->name = $data['name'];
-        $bank->email = $data['email'];
-        $bank->description = $data['description'];
-        $bank->coverage = $data['name'];
-        $bank->slug = str_slug($data['name']);*/
+        $is_updated = $bank->update($data);
+
+        if(!$is_updated){
+            return response()->json(['status' => 0, 'message' => 'Bank Update Failed']);
+        }
+
+        return response()->json(['status' => 1, 'message' => 'Bank Updated Successfully']);
     }
 
     /**
