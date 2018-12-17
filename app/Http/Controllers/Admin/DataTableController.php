@@ -13,6 +13,7 @@ use App\Offer;
 use App\Creditor;
 use App\Branch;
 use App\Admin;
+use App\Term;
 
 class DataTableController extends Controller
 {
@@ -39,9 +40,14 @@ class DataTableController extends Controller
             'bank:id,name',
             'classification:id,loan_id,classification', 
             'classification.loan:id,type',
-            'terms'
         ]))
         ->make();
+    }
+
+    public function fetchTerms(Request $request){
+        $offer = Offer::select('id')->where('id', $request->query('offer'))->first();
+        $model = Term::where('offer_id', $offer->id);
+        return Datatables::of($model)->make();
     }
 
     public function fetchCreditors(){

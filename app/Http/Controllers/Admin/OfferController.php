@@ -10,6 +10,7 @@ use App\Offer;
 use App\Term;
 use App\Http\Requests\StoreOfferRequest;
 use Rap2hpoutre\FastExcel\FastExcel;
+use App\Http\Requests\UpdateOfferRequest;
 
 class OfferController extends Controller
 {
@@ -90,9 +91,9 @@ class OfferController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Offer $offer)
     {
-        //
+        return $offer->load('classification:id,loan_id')->toJson();
     }
 
     /**
@@ -102,9 +103,17 @@ class OfferController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateOfferRequest $request, Offer $offer)
     {
-        //
+        $data = $request->validated();
+
+        $is_updated = $offer->update($data);
+
+        if($is_updated){
+            return response()->json(['status' => 1, 'message' => 'Offer updated successfully']);
+        }
+
+        return response()->json(['status' => 0, 'message' => 'Failed to update offer']);
     }
 
     /**
@@ -113,8 +122,14 @@ class OfferController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Offer $offer)
     {
-        //
+        $is_deleted = $offer->delete();
+
+        if($is_deleted){
+            return response()->json(['status' => 1, 'message' => 'Offer moved in archieve']);
+        }
+
+        return response()->json(['status' => 0, 'message' => 'Failed to remove offer']);
     }
 }

@@ -36,10 +36,9 @@ $(document).ready(function(){
 				processData: false,
 				contentType: false,
 				success:function(res){
-					console.log(res);
-					// ajaxSuccessResponse(res).then(function(value){
-					// 	location.reload();
-					// });
+					ajaxSuccessResponse(res).then(function(value){
+						location.reload();
+					});
 				},
 				error:function(xhr){
 					console.log(xhr.responseText);
@@ -113,7 +112,7 @@ $(document).ready(function(){
             }
             
             //instantiate child table
-           childTable = $('#childTable').DataTable({
+           	childTable = $('#childTable').DataTable({
 		        pagingType: 'simple',
 		        pageLength: 5,
 		        lengthChange: false,
@@ -152,6 +151,7 @@ $(document).ready(function(){
 			text:'Remove this partner?',
 			icon:'warning',
 			buttons: ["Cancel", "Okay"],
+			closeOnClickOutside: false,
 		}).then(function(value){
 			if(value){
 				$.ajax({
@@ -207,6 +207,7 @@ $(document).ready(function(){
 			text:'Remove this branch partner?',
 			icon:'warning',
 			buttons: ["Cancel", "Okay"],
+			closeOnClickOutside: false,
 		}).then(function(value){
 			if(value){
 				$.ajax({
@@ -227,20 +228,44 @@ $(document).ready(function(){
 	});
 
 	$('#banksTable tbody').on( 'click', 'tr .bank-branch-edit', function() {
-		$('#newBranchModal .modal-title').html('Edit Branch');
-		$('#addthru').remove();
-		$('#txtBank').remove();
-		$('#bank-branches').remove();
-		$('#branchForm').prepend(manualAddBranch);
-		$('#branchForm').removeClass('d-none');
-		$('#branchForm').attr('data-process','edit');
-		$('#newBranchModal').modal('show');
+		let branch = $(this).data('id');
+		$.ajax({
+			url:'/admin/branches/'+branch+'/edit',
+			type:'get',
+			dataType: 'json',
+			success:function(res){
 
+				console.log(res);
+				$('#newBranchModal .modal-title').html('Edit Branch');
+				$('#addthru').remove();
+				$('#txtBank').remove();
+				$('#bank-branches').remove();
+				$('#branchForm').attr('action','/admin/branches/'+res.id);
+				$('#branchForm').prepend(manualAddBranch);
+				$('#branchForm').prepend('<input type="hidden" name="_method" value="PUT">');
+				$('#branchForm').removeClass('d-none');
+
+				$('#branchForm').find('input[name=branch]').val(res.branch);
+				$('#branchForm').find('input[name=address]').val(res.address);
+				$('#branchForm').find('input[name=telephone]').val(res.telephone);
+				$('#branchForm').find('input[name=region]').val(res.region);
+
+				$('#newBranchModal').modal('show');
+			},
+			error:function(xhr){
+				ajaxErrorDisplay(xhr.responseText);
+			}
+		});
 	});
 
     $('#newBankModal').on('hidden.bs.modal', function () {
         $("#newBankModal").replaceWith(bankModalClone);
         $('#bankForm').attr('action','/admin/banks');
+	});
+
+	$('#newBranchModal').on('hidden.bs.modal', function () {
+        $("#newBranchModal").replaceWith(branchModalClone);
+        $('#branchForm').attr('action','/admin/branches');
 	});
 	
 	$('input[name=addOption]').on('click',function(){
@@ -261,7 +286,7 @@ $(document).ready(function(){
 
 	$('#branchForm').validate({
 		submitHandler: function(){
-			let data, contentType, processData, type = 'post';
+			let data, contentType, processData;
 			if($('#fileBranches').length){
 				data = new FormData($('#branchForm')[0]);
 				contentType = false;
@@ -271,27 +296,22 @@ $(document).ready(function(){
 				data = $('#branchForm').serialize();
 				contentType = "application/x-www-form-urlencoded; charset=UTF-8";
 				processData = true;
-				if($('#branchForm').data('process') == 'edit'){
-					type = 'put';
-				}
 			}
-			console.log(type);
+	
 			$.ajax({
 				url: '/admin/branches',
-				type: type,
+				type: 'post',
 				data: data,
 				dataType: 'json',
 				contentType: contentType,
 				processData: processData,
 				success:function(res){
-					console.log(res);
-					/*ajaxSuccessResponse(res).then(function(value){
+					ajaxSuccessResponse(res).then(function(value){
 						location.reload();
-					});*/
+					});
 				},
 				error:function(xhr){
-					console.log(xhr.responseText);
-					//ajaxErrorDisplay(xhr.responseText);
+					ajaxErrorDisplay(xhr.responseText);
 				}
 			});
 		}
@@ -302,18 +322,6 @@ $(document).ready(function(){
 
 function format ( d ) {
 	$('#txtBank').val(d.slug);
-	console.log($('#txtBank').val());
-	let rows = '';
-	$.each(d.branches, function(key,val){
-		rows += `<tr>
-			<td>${val.branch}</td>
-			<td>${val.address}</td>
-			<td>${val.telephone}</td>
-			<td>${val.region}</td>
-            <td><button class="btn btn-sm btn-danger bank-branch-delete" data-id="${val.slug}"><span class="fa fa-trash"></span></button>
-	        <button class="btn btn-sm btn-info bank-branch-edit" data-id="${val.slug}"><span class="fa fa-pencil-square-o"></span></button></td>
-        </tr>`;
-	})
 	return `<table id="childTable" class="text-center" width="100%">
 		<thead>
 			<tr>
@@ -325,7 +333,7 @@ function format ( d ) {
 			</tr>
 		</thead>
 		<tbody>
-			${rows}
+			
 		</tbody>
 	</table>
 	<div class="col-md-12 mt-5">

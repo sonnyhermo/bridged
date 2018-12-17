@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Validator;
 use App\Bank;
 use App\Branch;
+use App\Http\Requests\UpdateBranchRequest;
 
 class BranchController extends Controller
 {
@@ -114,9 +115,9 @@ class BranchController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Branch $branch)
     {
-        //
+        return $branch->toJson();
     }
 
     /**
@@ -126,9 +127,17 @@ class BranchController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateBranchRequest $request, Branch $branch)
     {
-        //
+        $data = $request->validated();
+
+        $is_updated = $branch->update($data);
+
+        if(!$is_updated){
+            return response()->json(['status' => 0, 'message' => 'Failed to Update Branch']);
+        }
+
+        return response()->json(['status' => 1, 'message' => 'Branch updated successfully']);
     }
 
     /**

@@ -1,24 +1,19 @@
 $(document).ready(function(){
-	$('#selectLoan').on('change',function(){
-		$.ajax({
-			url: '/admin/loans/'+$(this).val(),
-			type: 'get',
-			dataType: 'json',
-			success: function(res){
-                console.log(res);
-				let options = "<option value=''>Select Loan Type</option>";
-				//$.each(res, function(key, val){
-					$.each(res, function(skey, sval){
-						options += "<option value='"+sval.id+"'>"+sval.classification+"</option>"
-					})
-				//});
+    let childTable;
+    let offerModalClone = $('#newOfferModal').clone();
+    let manualAddTerm = `<div class="row">
+                                <div class="form-group col-md-6">
+                                    <label>Term</label>
+                                    <input type="number" class="form-control" name="term" required>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Interest</label>
+                                    <input type="text" class="form-control" name="interest" required>
+                                </div>
+                            </div>`;
 
-				$('#selectClassification').html(options);
-			},
-			error: function(xhr){
-				console.log(xhr.responseText);
-			}
-		})
+	$('#selectLoan').on('change',function(){
+        getClassifications();
 	});
 
 	let dt = $('#offersTable').DataTable({
@@ -35,7 +30,10 @@ $(document).ready(function(){
                 "orderable":      false,
                 "data":           null,
                 "defaultContent": "",
-                "width":"8%"
+                "width":"8%",
+                render: function(data, type, row){
+                    return '<p class="d-none">'+row.id+'</p>';
+                }
             },
             {data: 'bank.name', name: 'bank.name',width:"12%"},
             {data: 'classification.classification', name: 'classification.classification',width:"17%"},
@@ -46,8 +44,8 @@ $(document).ready(function(){
             {
             	data: null,
 			    render: function ( data, type, row ) {
-                    return '<button class="btn btn-sm btn-danger spec-delete" onclick="removeSpec('+row['id']+')"><span class="fa fa-trash"></span></button>'+
-			        '<button class="btn btn-sm btn-info spec-edit" onclick="retrieveSpec('+row['id']+')"><span class="fa fa-edit"></span></button>';;
+                    return '<button class="btn btn-sm btn-danger offer-delete" data-offer="'+row.id+'" ><span class="fa fa-trash"></span></button>'+
+			        '<button class="btn btn-sm btn-info offer-edit" data-offer="'+row.id+'" ><span class="fa fa-edit"></span></button>';;
 		    	},
 		    	width:"8%"
 		    }
@@ -60,6 +58,7 @@ $(document).ready(function(){
     $('#offersTable tbody').on( 'click', 'tr td.details-control', function () {
         var tr = $(this).closest('tr');
         var row = dt.row( tr );
+        let offer = $(this).find('p').html();
         var idx = $.inArray( tr.attr('id'), detailRows );
  
         if ( row.child.isShown() ) {
@@ -77,8 +76,92 @@ $(document).ready(function(){
             if ( idx === -1 ) {
                 detailRows.push( tr.attr('id') );
             }
+
+            //instantiate child table
+            childTable = $('#childTable').DataTable({
+                pagingType: 'simple',
+                pageLength: 5,
+                lengthChange: false,
+                ajax:{
+                    url:'/admin/offer_terms',
+                    data: { offer: offer}
+                },
+                columns:[
+                    {data: 'term', name: 'term'},
+                    {
+                        data: 'interest_rate', 
+                        name: 'interest_rate',
+                        render: function(data, type, row){
+                            return data+' %';
+                        }
+                    },
+                    {
+                        data: null,
+                        render: function ( data, type, row ) {
+                            return `<button class="btn btn-sm btn-danger term-delete" data-id="${row['slug']}"><span class="fa fa-trash"></span></button>
+                            <button class="btn btn-sm btn-info term-edit" data-id="${row['slug']}"><span class="fa fa-pencil-square-o"></span></button>`;
+                        }
+                    }
+                ]
+            });
         }
     } );
+
+    $('#offersTable tbody').on('click','tr .offer-edit', function(){
+        let offer = $(this).data('offer');
+
+        $.ajax({
+            url: '/admin/offers/'+offer+'/edit',
+            type: 'get',
+            dataType: 'json',
+            success:function(res){
+                console.log(res);
+
+                $('#selectLoan').val(res.classification.loan_id);
+                
+                $.when(getClassifications()).done(function(){
+                    $('#selectClassification').val(res.classification_id);
+                });
+
+                $('#newOfferModal .modal-title').html('Edit Offer');
+                $('#offerForm').attr('action', '/admin/offers/'+offer);
+                $('#offerForm').prepend('<input type="hidden" name="_method" value="PUT">');
+                $('#selectBank').val(res.bank_id);
+                $('#txtProduct').val(res.product);
+                $('#txtMinIncome').val(res.min_income);
+                $('#txtMinLoan').val(res.min);
+                $('#txtMaxLoan').val(res.max);
+                $('#txtRequirements').val(res.requirements);
+                $('#divTerms').remove();
+
+                $('#newOfferModal').modal('show');
+            },
+            error:function(xhr){
+                ajaxErrorDisplay(xhr.responseText);
+            }
+        });
+    });
+
+    $('#offersTable tbody').on('click','tr .offer-delete', function(){
+        let offer = $(this).data('offer');
+        $.ajax({
+            url: '/admin/offers/'+offer,
+            type:'delete',
+            dataType:'json',
+            success:function(res){
+                ajaxSuccessResponse(res).then(function(value){
+                    location.reload();
+                });
+            },
+            error:function(xhr){
+                ajaxErrorDisplay(xhr.responseText);
+            }
+        })
+    });
+
+    $('#newOfferModal').on('hidden.bs.modal', function () {
+        $("#newOfferModal").replaceWith(offerModalClone);
+    });
 
 	dt.on( 'draw', function () {
         $.each( detailRows, function ( i, id ) {
@@ -89,9 +172,9 @@ $(document).ready(function(){
     $('#offerForm').submit(function(e){
         e.preventDefault();
         let formData = new FormData($(this)[0]);
-        console.log(formData);
+        let url = $(this).attr('action');
             $.ajax({
-            url:'/admin/offers',
+            url:url,
             type:'post',
             dataType:'json',
             data:formData,
@@ -99,8 +182,6 @@ $(document).ready(function(){
             contentType: false,
             success:function(res){
                 ajaxSuccessResponse(res).then(function(value){
-                    $('#offerForm')[0].reset();
-                    $('#newBankModal').hide();
                     location.reload();
                 });
             },
@@ -109,21 +190,65 @@ $(document).ready(function(){
             }
 
         })
-    })
+    });
+
+    $('input[name=addOption]').on('click',function(){
+        let innerHtml; 
+        if($(this).val() == 'excel'){
+            innerHtml = `<div class="form-group">
+                            <label>Terms & Interests</label>
+                            <input type="file" name="terms" class="form-control-file" id="fileTerms" required>
+                        </div>`;
+        }else{
+            innerHtml = manualAddTerm;
+        }
+
+        $('#termForm #inner').html(innerHtml);
+        $('#termForm').removeClass('d-none');;
+    });
 
 });
 
 
 function format ( d ) {
-    let terms = '';
-    let interests = '';
-    $.each(d.terms,function(key, value){
-        terms += value.term+', ';
-        interests += value.interest_rate+', ';
-    });
-
-    return 'Set of Terms: '+terms.substring(0, terms.length - 2)+'<br>'+
-        'Set of rates %: '+interests.substring(0, interests.length - 2)+'<br>'+
-        'Minimum Income Required: '+d.min_income+'<br>';
+    return `<table id="childTable" class="text-center" width="100%">
+        <thead>
+            <tr>
+                <th>Terms</th>
+                <th>Interest</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+          
+        </tbody>
+    </table>
+    <div class="col-md-12 mt-5">
+        <strong>Minimum Income Required: ${d.min_income}</strong><br/>
+        <strong>Requirements: </strong>${d.requirements}
+    </div>
+    <div class="col-md-12 mt-3">
+        <button class="btn btn-warning btn-sm btn-fill mt-4" data-toggle="modal" data-target="#newTermsModal">Add More Terms & Interests</button>
+    </div>`;
 }
 
+
+function getClassifications(){
+    return $.ajax({
+        url: '/admin/loans/'+$('#selectLoan').val(),
+        type: 'get',
+        dataType: 'json',
+        success: function(res){
+            console.log(res);
+            let options = "<option value=''>Select Loan Type</option>";
+                $.each(res, function(skey, sval){
+                    options += "<option value='"+sval.id+"'>"+sval.classification+"</option>"
+                })
+
+            $('#selectClassification').html(options);
+        },
+        error: function(xhr){
+            console.log(xhr.responseText);
+        }
+    });
+}

@@ -110,8 +110,8 @@ $(document).ready(function(){
           title: "Are you sure?",
           text: "Once deleted, it may affect other datas",
           icon: "warning",
-          buttons: true,
-          dangerMode: true,
+          buttons: ['No', 'Yes'],
+          closeOnClickOutside: false,
         }).then(function(proceed){
             if(proceed){
                 $.ajax({

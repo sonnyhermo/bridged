@@ -58,7 +58,7 @@ Route::prefix('admin')->group(function() {
     Route::resource('/offers','Admin\OfferController');
 
     //routes for branch
-    Route::resource('/branches','Admin\BranchController')->only(['store', 'update', 'destroy']);
+    Route::resource('/branches','Admin\BranchController')->only(['edit', 'store', 'update', 'destroy']);
 
     //routes for datatables
     Route::get('/all_banks', 'Admin\DataTableController@fetchBanks')->name('datatable.banks');
@@ -68,6 +68,7 @@ Route::prefix('admin')->group(function() {
     Route::get('/all_offers', 'Admin\DataTableController@fetchOffers')->name('datatable.offers');
     Route::get('/all_creditors', 'Admin\DataTableController@fetchCreditors')->name('datatable.creditors');
     Route::get('/bank_branches','Admin\DataTableController@fetchBranches')->name('datatable.branches');
+    Route::get('/offer_terms','Admin\DataTableController@fetchTerms')->name('datatable.terms');
     Route::get('all-admins', 'Admin\DataTableController@fetchAdmins')->name('datatable.admins');
     
 });
