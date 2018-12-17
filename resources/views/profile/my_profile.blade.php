@@ -86,10 +86,10 @@
 							@include('profile.entity')
 						</div>
 						<div id="step-entity-income-source" class="content">
-							asdad
+						@include('profile.entity_reference')
 						</div>
 						<div id="step-entity-attachment" class="content">
-							asdad
+						@include('profile.entity_attachments')
 						</div>
 					</div>
 				</div>
