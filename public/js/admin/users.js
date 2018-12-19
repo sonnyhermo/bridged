@@ -7,10 +7,10 @@ $(document).ready(function(){
 	}).validate({
 		submitHandler: function(){
 			let url = $('#creditorForm').attr('action');
-			let type = ($('#creditorForm').find('input[name=_method]').length > 0)?'put':'post';
+		;
 			$.ajax({
 				url: url,
-				type: type,
+				type: 'post',
 				data: $('#creditorForm').serialize(),
 				dataType: 'json',
 				success: function(res){
@@ -110,10 +110,10 @@ $(document).ready(function(){
 	}).validate({
 		submitHandler: function(){
 			let url = $('#adminForm').attr('action');
-			let type = ($('#adminForm').find('input[name=_method]').length > 0)?'put':'post';
+			
 			$.ajax({
 				url: url,
-				type: type,
+				type: 'post',
 				data: $('#adminForm').serialize(),
 				dataType: 'json',
 				success: function(res){

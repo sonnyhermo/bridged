@@ -57,7 +57,7 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<form id="adminForm">
+					<form id="adminForm" action="/admin/users">
 						@csrf
 
                         <div class="form-group row">
@@ -158,7 +158,7 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<form id="creditorForm">
+					<form id="creditorForm" action="/admin/creditors">
 						@csrf
 
 						<div class="form-group row">

@@ -52,9 +52,9 @@ class AdminController extends Controller
         $data = $request->validated();
         $data['password'] = Hash::make($data['password']);
 
-        $new_admin = $admin->create($data);
+        $new_admin = $user->create($data);
 
-        if($admin){
+        if($new_admin){
             return response()->json(['status' => 1, 'title' => 'Success','message' => 'New Admin has been added!']);
         }else{
             return response()->json(['status' => 0, 'title' => 'Error', 'message' => 'Failed to add Admin!']);

@@ -9,18 +9,12 @@
 			<button type="button" class="btn btn-primary btn-fill" data-toggle="modal" data-target="#newBankModal">
 				Add Banks <span class="fa fa-plus" aria-hidden="true"></span>
 			</button>
-			<button type="button" class="btn btn-primary btn-fill" data-toggle="modal" data-target="#branchListModal">
-				Banks List <span class="fa fa-list-alt" aria-hidden="true"></span>
-			</button>
 		</div>
 
 		<div class="col-md-12">
 			<div class="card">
 		        <div class="card-header">
 		            <div class="clearfix">
-						<button type="button" class="btn btn-primary btn-sm float-right" data-toggle="modal" data-target="#newPurposeModal">
-							<i class="fa fa-plus" aria-hidden="true"></i>
-						</button>
 			            <h4 class="card-title">Banks</h4>
 					</div>
 		            <p class="card-category">List of Banks and Coverage</p>

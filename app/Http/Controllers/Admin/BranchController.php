@@ -8,6 +8,8 @@ use Validator;
 use App\Bank;
 use App\Branch;
 use App\Http\Requests\UpdateBranchRequest;
+use Rap2hpoutre\FastExcel\FastExcel;
+use Storage;
 
 class BranchController extends Controller
 {
@@ -81,7 +83,7 @@ class BranchController extends Controller
 
         $tempfile = $request->file('branches')->store('tmp');
 
-        (new FastExcel)->import(storage_path('app/'.$tempfile), function ($line) use ($newBank) {
+        (new FastExcel)->import(storage_path('app/'.$tempfile), function ($line) use ($bank) {
             Branch::create([
                 'bank_id' => $bank->id,
                 'branch' => $line['Branch'],

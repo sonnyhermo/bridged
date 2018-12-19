@@ -39,7 +39,7 @@ Route::prefix('admin')->group(function() {
     Route::resource('/users','Admin\AdminController');
 
     //routes for creditor
-    Route::resource('/creditor','Admin\CreditorController');
+    Route::resource('/creditors','Admin\CreditorController');
 
     //routes for loans
     Route::resource('/loans', 'Admin\LoanController', ['except' => [ 'create' ] ]);
