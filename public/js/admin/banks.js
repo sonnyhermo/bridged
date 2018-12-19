@@ -178,7 +178,11 @@ $(document).ready(function(){
             dataType:'json',
             success:function(res){
                 $('#newBankModal .modal-title').html('Edit Bank');
-                $('#newBankModal').find('form').prepend('<input type="hidden" name="_method" value="PUT">');
+
+                if($('#newBankModal').find('form').find('input[name=_method]').length == 0) {
+                	$('#newBankModal').find('form').prepend('<input type="hidden" name="_method" value="PUT">');
+                }
+
                 $('#newBankModal').find('form').attr('action','/admin/banks/'+res.slug);
                 $('#bank-branches').remove();
 
@@ -241,8 +245,8 @@ $(document).ready(function(){
 				$('#txtBank').remove();
 				$('#bank-branches').remove();
 				$('#branchForm').attr('action','/admin/branches/'+res.id);
-				$('#branchForm').prepend(manualAddBranch);
-				$('#branchForm').prepend('<input type="hidden" name="_method" value="PUT">');
+				$('#branchForm #inner').html(manualAddBranch);
+				$('#branchForm #inner').prepend('<input type="hidden" name="_method" value="PUT">');
 				$('#branchForm').removeClass('d-none');
 
 				$('#branchForm').find('input[name=branch]').val(res.branch);
@@ -291,7 +295,6 @@ $(document).ready(function(){
 				data = new FormData($('#branchForm')[0]);
 				contentType = false;
 				processData = false;
-				console.log('hey');
 			}else{
 				data = $('#branchForm').serialize();
 				contentType = "application/x-www-form-urlencoded; charset=UTF-8";

@@ -1,14 +1,15 @@
 $(document).ready(function(){
     let childTable;
     let offerModalClone = $('#newOfferModal').clone();
+    let termModalClone = $('#newTermsModal').clone(false);
     let manualAddTerm = `<div class="row">
                                 <div class="form-group col-md-6">
                                     <label>Term</label>
-                                    <input type="number" class="form-control" name="term" required>
+                                    <input type="number" class="form-control" name="term" id="term" required>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label>Interest</label>
-                                    <input type="text" class="form-control" name="interest" required>
+                                    <input type="number" class="form-control" name="interest_rate" id="interest" required>
                                 </div>
                             </div>`;
 
@@ -98,8 +99,8 @@ $(document).ready(function(){
                     {
                         data: null,
                         render: function ( data, type, row ) {
-                            return `<button class="btn btn-sm btn-danger term-delete" data-id="${row['slug']}"><span class="fa fa-trash"></span></button>
-                            <button class="btn btn-sm btn-info term-edit" data-id="${row['slug']}"><span class="fa fa-pencil-square-o"></span></button>`;
+                            return `<button class="btn btn-fill btn-sm btn-danger term-delete" data-id="${row['id']}"><span class="fa fa-trash"></span></button>
+                            <button class="btn btn-fill btn-sm btn-info term-edit" data-id="${row['id']}"><span class="fa fa-pencil-square-o"></span></button>`;
                         }
                     }
                 ]
@@ -163,6 +164,51 @@ $(document).ready(function(){
         $("#newOfferModal").replaceWith(offerModalClone);
     });
 
+    $('#offersTable tbody').on('click','tr .term-edit', function(){
+        let term = $(this).data('id');
+        $.ajax({
+            url:'/admin/terms/'+term+'/edit',
+            type:'get',
+            dataType:'json',
+            success:function(res){
+                $('#newTermsModal .modal-title').html('Edit Branch');
+                $('#addthru').remove();
+                $('#txtBank').remove();
+                $('#termForm').attr('action','/admin/terms/'+res.id);
+                $('#termForm #inner').html(manualAddTerm);
+                $('#termForm #inner').prepend('<input type="hidden" name="_method" value="PUT">');
+                $('#termForm').removeClass('d-none');
+                $('#termForm').find('#term').val(res.term);
+                $('#termForm').find('#interest').val(res.interest_rate);
+                $('#newTermsModal').modal('show');
+            },
+            error:function(xhr){
+                ajaxErrorDisplay(xhr.responseText);
+            }
+        });
+    });
+
+    $('#offersTable tbody').on('click', 'tr .term-delete', function(){
+        let term = $(this).data('id');
+        $.ajax({
+            url:'/admin/terms/'+term,
+            type:'destroy',
+            dataType:'json',
+            success:function(res){
+                ajaxSuccessResponse(res).then(function(value){
+                    location.reload();
+                });
+            },
+            error: function(xhr){
+                ajaxErrorDisplay(xhr.responseText);
+            }
+        })
+    })
+
+    $('#newTermsModal').on('hide.bs.modal', function () {
+        $("#newTermsModal").replaceWith(termModalClone);
+    });
+
 	dt.on( 'draw', function () {
         $.each( detailRows, function ( i, id ) {
             $('#'+id+' td.details-control').trigger( 'click' );
@@ -207,10 +253,43 @@ $(document).ready(function(){
         $('#termForm').removeClass('d-none');;
     });
 
+    $('#termForm').validate({
+        submitHandler: function(form){
+            let data, contentType, processData;
+            if($('#fileTerms').length){
+                data = new FormData($(form)[0]);
+                contentType = false;
+                processData = false;
+            }else{
+                data = $(form).serialize();
+                contentType = "application/x-www-form-urlencoded; charset=UTF-8";
+                processData = true;
+            }
+    
+            $.ajax({
+                url: $(form).attr('action'),
+                type: 'post',
+                data: data,
+                dataType: 'json',
+                contentType: contentType,
+                processData: processData,
+                success:function(res){
+                    ajaxSuccessResponse(res).then(function(value){
+                        location.reload();
+                    });
+                },
+                error:function(xhr){
+                    ajaxErrorDisplay(xhr.responseText);
+                }
+            });
+        }
+    })
+
 });
 
 
 function format ( d ) {
+    $('#txtOffer').val(d.id);
     return `<table id="childTable" class="text-center" width="100%">
         <thead>
             <tr>

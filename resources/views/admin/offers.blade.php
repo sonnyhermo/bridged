@@ -145,7 +145,7 @@
 					</div>
 					<form action="/admin/terms" method="POST" id="termForm" enctype="multipart/form-data" class="d-none">
 						@csrf
-						<input type="hidden" name="bank" id="txtBank">
+						<input type="hidden" name="offer_id" id="txtOffer">
 						<div id="inner">
 						</div>
 

@@ -60,6 +60,9 @@ Route::prefix('admin')->group(function() {
     //routes for branch
     Route::resource('/branches','Admin\BranchController')->only(['edit', 'store', 'update', 'destroy']);
 
+    //routes for term
+    Route::resource('/terms','Admin\TermController');
+
     //routes for datatables
     Route::get('/all_banks', 'Admin\DataTableController@fetchBanks')->name('datatable.banks');
     Route::get('/all_loans', 'Admin\DataTableController@fetchLoans')->name('datatable.loans');

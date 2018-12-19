@@ -108,6 +108,7 @@
     <script src="{{ asset('js/light-bootstrap-dashboard.js?v=2.0.1') }}"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="{{ asset('js/utility.js') }}" defer></script>
+    <script src="{{ asset('js/jquery.validate.min.js') }}"></script>
     <script type="text/javascript">
         $.ajaxSetup({
             headers: {
