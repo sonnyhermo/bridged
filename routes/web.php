@@ -21,13 +21,18 @@ Route::resource('/offers','OfferController');//->middleware('verified');
 
 Route::get('/search_offers', 'OfferController@search')->middleware('auth');
 
-Route::resource('/my-profile','BorrowerController');//->middleware('verified');
+Route::prefix('/my-profile')->group(function(){
+    Route::get('/', 'BorrowerController@index');
+    Route::resource('/borrower','BorrowerController');//->middleware('verified');
+});
 
 Route::resource('/incomes', 'IncomeController');
 
 Route::resource('/applications', 'ApplicationController');
 
 Route::resource('/attachments', 'AttachmentController');
+
+Route::resource('/comments', 'CommentController');
 
 Route::prefix('admin')->group(function() {
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
@@ -86,6 +91,9 @@ Route::prefix('/creditor')->group(function(){
 
     Route::match(['put', 'patch'], '/application/update-status/{application}', 'Creditor\ApplicationController@updateApplication');
 
+    Route::get('/borrower/{borrower}', 'Creditor\BorrowerController@getBorrower');
+
+    //datatables for creditor portal
     Route::get('/all_unassigned', 'Creditor\DataTableController@getUnassigned');
 
 });

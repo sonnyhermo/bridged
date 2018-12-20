@@ -25,20 +25,20 @@ $(document).ready(function(){
 
 	$('#personal-form').validate({
 		submitHandler:function(){
-			// $.ajax({
-			// 	url: '/profile/user',
-			// 	type: 'post',
-			// 	data: $('#personal-form').serialize(),
-			// 	dataType: 'json',
-			// 	success: function(res){
-			// 		console.log(res);
-			// 		profileStepper.next();
-			// 	},
-			// 	error: function(xhr){
-			// 		console.log(xhr.responseText);
-			// 		//ajaxErrorDisplay(xhr.responseText);
-			// 	}
-			// });
+			$.ajax({
+				url: '/my-profile/borrower',
+				type: 'post',
+				data: $('#personal-form').serialize(),
+				dataType: 'json',
+				success: function(res){
+					console.log(res);
+					profileStepper.next();
+				},
+				error: function(xhr){
+					console.log(xhr.responseText);
+					//ajaxErrorDisplay(xhr.responseText);
+				}
+			});
 
 			profileStepper.next();
 		}
