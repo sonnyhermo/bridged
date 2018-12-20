@@ -92,6 +92,6 @@ Route::prefix('/creditor')->group(function(){
     Route::match(['put', 'patch'], '/application/update-status/{application}', 'Creditor\ApplicationController@updateApplication');
 
     Route::get('/all_unassigned', 'Creditor\DataTableController@getUnassigned');
-
+    Route::get('/user/{id}','Creditor\UserController@getUserInfo');
 
 });

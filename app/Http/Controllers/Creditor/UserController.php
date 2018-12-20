@@ -17,6 +17,6 @@ class UserController extends Controller
     	->where('id', 1)
     	->first();
 
-    	return view('creditor.user', ['user' => $user]);
+    	return view('creditor.creditor-info', ['user' => $user]);
     }
 }

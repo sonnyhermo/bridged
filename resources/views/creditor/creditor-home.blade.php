@@ -51,41 +51,240 @@
   <!-- Tab panes 
   <br><button type="submit" class="btn btn-primary" >Edit</button>
           <button type="submit" class="btn btn-primary" >Save</button><br>-->
-  <div class="card-header">
-    Loan Details
-  </div>
-  <div class="tab-content border mb-3">
-    <div id="home" class="container tab-pane active"><br>
+
+          <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+      
+        <button class="btn col-md-12"  >
+        Loan Details
+        </button>
+      </h5>
+    </div>
     
-      Barrower Type: <br>
-      Availment Type: <br> 
-      Date Applied: <br> 
-      Loan Stage : <br> 
-      Loan Status : <br> <br>
-      <br>
+
+    <div class="row">
+      <div class="col-md-6">
+			<div class="form-group">
+      Barrower Type:
+			</div>
+		</div>
+   
+    <div class="col-md-6">
+			<div class="form-group">
+      Loan Type:
+			</div>
+		</div>
+   
+    </div>
+    
+    <div class="row">
+    <div class="col-md-6">
+			<div class="form-group">
+      Availment Type
+			</div>
+		</div>
+   
+    <div class="col-md-6">
+			<div class="form-group">
+      Loan Classification
+			</div>
+		</div>
+   
+    </div>
+
+    <div class="row">
+    <div class="col-md-6">
+			<div class="form-group">
+      Date Applied
+			</div>
+		</div>
+    <div class="col-md-6">
+			<div class="form-group">
+      Loan Amount
+			</div>
+		</div>
+    </div>
+
+    <div class="row">
+    <div class="col-md-6">
+			<div class="form-group">
+      Loan Stage
+			</div>
+		</div>
+  
+    <div class="col-md-6">
+			<div class="form-group">
+      Loan Purpose
+			</div>
+		</div>
+  
+    </div>
+
+    <div class="row">
+    <div class="col-md-6">
+			<div class="form-group">
+      Loan Status
+			</div>
+		</div>
+  
+    <div class="col-md-6">
+			<div class="form-group">
+      Loan Term
+			</div>
+		</div>
+    
+    </div>
+
+    <div class="row">
+    <div class="col-md-6">
+			<div class="form-group">
+      Approve Amount
+			</div>
+		</div>
+   
+    <div class="col-md-6">
+			<div class="form-group">
+      Collateral
+			</div>
+		</div>
+    </div>
+    <div class="row">
+    <div class="col-md-6">
+			<div class="form-group">
+      Date Approved
+			</div>
+		</div>
+   
+    <div class="col-md-6">
+			<div class="form-group">
+      Interest Applied
+			</div>
+		</div>
+  </div>
+    </div>
+
+    <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+      
+        <button class="btn col-md-12"  >
+        Credit Checking
+        </button>
+      </h5>
+    </div>
+    
+
+    <div class="row">
+      <div class="col-md-6">
+			<div class="form-group">
+      Overall Credit Score
+			</div>
+		</div>
+    <div class="col-md-6">
+			<div class="form-group">
+      Income Verification
+			</div>
+		</div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+			<div class="form-group">
+      Risk Profile
+			</div>
+		</div>
+    <div class="col-md-6">
+			<div class="form-group">
+     Trade Cheking:Supplier
+			</div>
+		</div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+			<div class="form-group">
+      CIC/CMAP/NFIS records
+			</div>
+		</div>
+    <div class="col-md-6">
+			<div class="form-group">
+      Trade Cheking:Customer
+			</div>
+		</div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+			<div class="form-group">
+      
+			</div>
+		</div>
+    <div class="col-md-6">
+			<div class="form-group">
+      Neighborhood Cheking
+			</div>
+		</div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+			<div class="form-group">
+      
+			</div>
+		</div>
+    <div class="col-md-6">
+			<div class="form-group">
+      Brgy. Cheking
+			</div>
+		</div>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-6">
+			<div class="form-group">
+      
+			</div>
+		</div>
+    <div class="col-md-6">
+			<div class="form-group">
+      Bank Relationship
+			</div>
+		</div>
+    </div>
+    </div>
+    <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+      
+        <button class="btn col-md-12"  >
+        Notes and Comments
+        </button>
+      </h5>
+    </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+			<div class="form-group">
+      Frontline Coordinator
+			</div>
+		</div>
+    </div>
+    <div class="row">
+    <div class="col-md-6">
+			<div class="form-group">
+      Approver
+			</div>
+		</div>
+    </div>
+    </div>
+   
    
    
    
 
 	  
-			
-	 
-     <div class="card-header">
-    Credit Checking
-  </div><br>
-      
-      Overall Credit Store: <br>
-      Risk Profile : <br> 
-      CIC / CMAP/ NFIS records : <br> 
-      <br>
-      <br>  
-       
-     <div class="card-header">
-    Notes and Comments
-  </div><br> 
-  Frontline Coordinator: <br>
-      Approver : <br> <br>
-      </div>
       </form>
   </div>
 </div>
