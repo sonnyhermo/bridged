@@ -23,7 +23,7 @@ $(document).ready(function(){
 		            {
 		            	data: 'fullname',
 		            	render: function(data, type, row){
-		            		return `<a href="/creditor/borrower/${row.id}">${data}</a>`;
+		            		return `<a href="/creditor/borrower/${row.id}/${row.type}">${data}</a>`;
 		            	}
 		            },
 		            {data: 'classification'},

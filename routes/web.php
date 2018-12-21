@@ -91,7 +91,8 @@ Route::prefix('/creditor')->group(function(){
 
     Route::match(['put', 'patch'], '/application/update-status/{application}', 'Creditor\ApplicationController@updateApplication');
 
-    Route::get('/borrower/{borrower}', 'Creditor\BorrowerController@getBorrower');
+    Route::get('/borrower/{borrower}/{type}', 'Creditor\BorrowerController@getBorrower');
+    
 
     //datatables for creditor portal
     Route::get('/all_unassigned', 'Creditor\DataTableController@getUnassigned');

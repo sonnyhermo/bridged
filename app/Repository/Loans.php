@@ -21,7 +21,7 @@ class Loans{
                     $loans->whereRaw('applications.status = ?',[$status]);
                 }
 
-                $loans->select('applications.created_at','users.id', DB::raw('CONCAT(users.firstname," ",users.middlename," ",users.lastname) as fullname'),'classifications.classification','applications.amount','applications.term', DB::raw('IF (applications.status IS NULL, "Unassigned", applications.status) as status'))
+                $loans->select('applications.created_at','users.id', DB::raw('CONCAT(users.firstname," ",users.middlename," ",users.lastname) as fullname'),'classifications.classification','applications.amount','applications.term','applications.borrower_type as type', DB::raw('IF (applications.status IS NULL, "Unassigned", applications.status) as status'))
                 ->orderBy($sort['key'], $sort['value'])
                 ->get();
 
