@@ -24,15 +24,17 @@ $(document).ready(function(){
 	});
 
 	$('#personal-form').validate({
-		submitHandler:function(){
+		submitHandler:function(form){
 			$.ajax({
-				url: '/my-profile/borrower',
+				url: $(form).attr('action'),
 				type: 'post',
-				data: $('#personal-form').serialize(),
+				data: $(form).serialize(),
 				dataType: 'json',
 				success: function(res){
 					console.log(res);
-					profileStepper.next();
+					// ajaxSuccessResponse(res).then(function(value){
+					// 	location.reload();
+					// });
 				},
 				error: function(xhr){
 					console.log(xhr.responseText);
@@ -40,7 +42,6 @@ $(document).ready(function(){
 				}
 			});
 
-			profileStepper.next();
 		}
 	});
 
@@ -86,7 +87,7 @@ $(document).ready(function(){
 		});
 		console.log(serialize);
 		$.ajax({
-			url: '/income',
+			url: '/incomes',
 			type: 'post',
 			data: {income:serialize},
 			dataType: 'json',

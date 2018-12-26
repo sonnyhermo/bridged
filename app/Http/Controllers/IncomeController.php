@@ -41,6 +41,7 @@ class IncomeController extends Controller
     
         for($i = 0 ; $i < count($data); $i++){
             $data['income'][$i]['user_id'] = Auth::user()->id;
+            $data['income'][$i]['operation_length'] = (substr($data['income'][$i]['operation_length'],0,1) * 12) + substr($data['income'][$i]['operation_length'],-1);
         }
         
         //return $data['income'];

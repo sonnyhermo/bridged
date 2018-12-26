@@ -2,9 +2,10 @@
 
 namespace App\Repository;
 use DB;
+use Auth;
 
 class Loans{
-    public function getApplication($loan_id, $bank_id, $status, $sort){
+    public function getApplications($loan_id, $bank_id, $status, $sort){
 
         $loans = DB::table('applications')
                 ->join('offers', 'applications.offer_id', '=', 'offers.id')
@@ -26,5 +27,27 @@ class Loans{
                 ->get();
 
         return $loans;
+    }
+
+    public function getBorrowerApplications($borrower, $bank){
+        $applications = DB::table('users')
+                        ->join('applications', 'users.id', '=', 'applications.user_id')
+                        ->join('offers', 'applications.offer_id', '=', 'offers.id')
+                        ->join('banks', 'banks.id','=','offers.bank_id')
+                        ->join('classifications', 'classifications.id', '=', 'offers.classification_id')
+                        ->join('loans', 'classifications.loan_id', '=', 'loans.id')
+                        ->select(
+                            'applications.created_at',
+                            DB::raw('IF (applications.status IS NULL, "Unassigned", applications.status) as status'),
+                            'loans.type',
+                            'classifications.classification',
+                            'applications.amount',
+                            'applications.term'
+                            )
+                        ->whereRaw('users.id = ?',[$borrower])
+                        ->whereRaw('banks.id = ?',[$bank])
+                        ->get();
+
+        return $applications;
     }
 }

@@ -68,6 +68,11 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">Profile</a>
+                                    <a class="dropdown-item" href="#">Loan App Status</a>
+                                    <a class="dropdown-item" href="#">Existing Loans</a>
+                                    <a class="dropdown-item" href="#">Reward Points</a>
+                                    <a class="dropdown-item" href="#">Credit Score</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -190,8 +195,6 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/popper.min.js') }}"></script>
     <script src="{{ asset('js/utility.js') }}" defer></script>
-    
-    @stack('scripts')
     <script type="text/javascript">
 
         $.ajaxSetup({
@@ -237,5 +240,6 @@
             });
         });
     </script>
+     @stack('scripts')
 </body>
 </html>

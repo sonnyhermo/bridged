@@ -16,9 +16,11 @@ class CreateIncomesTable extends Migration
         Schema::create('incomes', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
+            $table->boolean('borrower_type');
             $table->string('source');
             $table->string('employer_name');
             $table->string('industry');
+            $table->string('employer_address');
             $table->string('position');
             $table->integer('operation_length');
             $table->integer('monthly_income');

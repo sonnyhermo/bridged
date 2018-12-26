@@ -119,7 +119,7 @@ $(document).ready(function(){
                     type:'delete',
                     dataType:'json',
                     success:function(res){
-                        if(res.code == 1){
+                        if(res.status == 1){
                             swal('Success', res.message, 'success')
                             .then(function(val){ location.reload() });
                         }else{

@@ -19,7 +19,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <strong>
-                                        {{ ($details->borrower_type == 0)?"Individual" : "Entity" }}
+                                       
                                     </strong>
                                 </div>
                             </div>
@@ -193,7 +193,7 @@
             </h5>
         </div>
 
-        <div id="collapseCredit" class="collapse" aria-labelledby="headingCredit" data-parent="#accordionSummary">
+        <div id="collapseCredit" class="collapse show" aria-labelledby="headingCredit" data-parent="#accordionSummary">
             <div class="card-body">
                 <div class="col-md-12">
                     <div class="row">
@@ -309,7 +309,7 @@
             </h5>
         </div>
 
-        <div id="collapseNotes" class="collapse" aria-labelledby="headingNotes" data-parent="#accordionSummary">
+        <div id="collapseNotes" class="collapse show" aria-labelledby="headingNotes" data-parent="#accordionSummary">
             <div class="card-body">
                 <div class="col-md-6">
                     <div class="row">

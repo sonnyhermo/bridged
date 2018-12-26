@@ -74,6 +74,9 @@
 
         <main class="py-4">
             <div class="container">
+                <div class="col-md-12 mb-3">
+                    
+                </div>
                 <ul class="nav nav-tabs mb-3">
                     <li class="nav-item">
                         <a class="nav-link active" data-toggle="tab" href="#summary">Summary</a>
@@ -82,10 +85,10 @@
                         <a class="nav-link" data-toggle="tab" href="#profile">Profile</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#menu1">Documents</a>
+                        <a class="nav-link" data-toggle="tab" href="#document">Documents</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#menu1">Inquiries</a>
+                        <a class="nav-link" data-toggle="tab" href="#inquiries">Inquiries</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="tab" href="#menu1">Credit Checking</a>
@@ -107,8 +110,17 @@
                     </div>
                 
                     <div class="tab-pane container" id="profile">
-                        
+                        @include('creditor.details.profile')
                     </div>
+
+                    <div class="tab-pane container" id="document">
+                      
+                    </div>
+
+                    <div class="tab-pane container" id="inquiries">
+                        @include('creditor.details.application')
+                    </div>
+
                 </div>
 
             </div>
@@ -117,5 +129,8 @@
     <script src="{{ asset('js/jquery.3.2.1.min.js') }}" type="text/javascript"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script>
+        var borrower = {{$details->id}};
+    </script>
 </body>
 </html>

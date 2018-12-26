@@ -96,5 +96,5 @@ Route::prefix('/creditor')->group(function(){
 
     //datatables for creditor portal
     Route::get('/all_unassigned', 'Creditor\DataTableController@getUnassigned');
-
+    Route::get('/borrower-applications/{borrower}', 'Creditor\DataTableController@fetchBorrowerLoans');
 });

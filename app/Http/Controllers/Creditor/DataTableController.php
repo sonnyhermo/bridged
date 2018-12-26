@@ -22,6 +22,11 @@ class DataTableController extends Controller
     
     }
 
+    public function fetchBorrowerLoans($borrower){
+        $model = $this->loan->getBorrowerApplications($borrower, Auth::guard('creditor')->user()->bank_id);
+        return Datatables::of($model)->make(true);
+    }
+
     private function fetchApplications($loan, $status, $order){
     	$bank = Auth::guard('creditor')->user()->bank_id;
 
@@ -47,7 +52,8 @@ class DataTableController extends Controller
                 break;
         }
 
-        $model = $this->loans->getApplication($loan,$bank,$status, $sort);
+        $model = $this->loans->getApplications($loan,$bank,$status, $sort);
         return Datatables::of($model)->make(true);
     }
+
 }
