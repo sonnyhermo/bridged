@@ -8,7 +8,7 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<form action="/incomes" id="income-form">	
+				<form action="/incomes" id="individual-income-form">	
 					<div class="row">
 						<div class="col-md-4">
 							<div class="form-group">

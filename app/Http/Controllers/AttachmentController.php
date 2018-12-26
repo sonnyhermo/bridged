@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreAttachmentRequest;
+use File;
+use App\Attachment;
 
 class AttachmentController extends Controller
 {
@@ -32,9 +35,24 @@ class AttachmentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreAttachmentRequest $request, Attachment $attachment)
     {
-        return $request;
+        $data = $request->validated();
+
+        if(!File::exists(storage_path('app/users/').auth()->user()->id)){
+            File::makeDirectory(storage_path('app/users/').auth()->user()->id,true,true);
+        }
+        
+        $data['user_id'] = auth()->user()->id;
+        $data['path'] = $request->file('file')->store(auth()->user()->id,'users');
+
+        $is_created = $attachment->create($data);
+
+        if(!$is_created){
+            return response()->json(['status' => 0, 'message' => 'Failed to upload file']);
+        }
+
+        return response()->json(['status' => 1, 'message' => 'File uploaded successfully']);
     }
 
     /**
