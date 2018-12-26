@@ -10,7 +10,7 @@
 				<div id="personal">
 					<div class="row">
 						<div class="col-md-12">
-							<p><strong>Name: {{$user->firstname.' '.$user->middlename.' '.$user->lastname}}</strong></p>
+							<p><strong>Name: {{$user->getFullName()}}</strong></p>
 						</div>
 						<div class="col-md-6">
 							<p><strong>Gender: {{($user->borrower->gender == 0)?'Male':'Female'}}</strong></p>
@@ -81,9 +81,10 @@
 						<div class="col-md-12">
 							<p><strong>Two Gov't Issued Id (Front & Back)</strong></p>
 							<div class="attach-files">
+								@foreach($files['individual']['issued_id'] as $file)
 								<div class="file">
 									<span class="badge badge-pill badge-primary">
-										Postal ID Front
+										{{$file['filename']}}
 										<button class="btn btn-sm">
 											<i class="fas fa-trash"></i>
 										</button>
@@ -92,17 +93,7 @@
 										</button>
 									</span>
 								</div>
-								<div class="file">
-									<span class="badge badge-pill badge-primary">
-										Postal ID Back
-										<button class="btn btn-sm">
-											<i class="fas fa-trash"></i>
-										</button>
-										<button class="btn btn-sm">
-											<i class="fas fa-pencil-alt"></i>
-										</button>
-									</span>
-								</div>
+								@endforeach
 							</div>
 						</div>
 						<!--<div class="col-md-12">

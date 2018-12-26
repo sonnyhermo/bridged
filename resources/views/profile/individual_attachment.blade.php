@@ -8,10 +8,10 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<form id="attachment-form" enctype="multipart/form-data">
+				<form id="individual-attachment-form" enctype="multipart/form-data">
 					<div class="form-group">
 						<label>Document Type</label>
-						<select name="fileClass" class="form-control">
+						<select name="document_type" class="form-control">
 							<option value="">Select Document Type</option>
 							<option value="issued_id">Gov't Issued Id</option>
 							<option value="company_id">Company ID</option>

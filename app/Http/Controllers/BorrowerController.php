@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Borrower;
 use Illuminate\Http\Request;
 use App\Http\Requests\StorePersonalInfoRequest;
-use Auth;
 use App\User;
 use Storage;
+use App\Attachment;
 
 class BorrowerController extends Controller
 {
@@ -20,10 +20,12 @@ class BorrowerController extends Controller
     {
 
         $industries = Storage::get('industries.json');
-        $user = User::with(['borrower'])->find(Auth::user()->id);
+        $user = User::with(['borrower'])->find(auth()->user()->id);
         $incomes = $user->incomes()->get();
         $individualIncomes = [];
         $entityIncomes = [];
+        $attachments = $user->attachments()->get();
+        $files = [];
 
         foreach($incomes as $income){
             if($income->borrower_type == 0){
@@ -33,13 +35,26 @@ class BorrowerController extends Controller
             }
         }
 
+        foreach($attachments as $attachment){
+            switch($attachment->document_type){
+                case 'issued_id':
+                    if($attachment->borrower_type == 0){
+                        $files['individual']['issued_id'][] = $attachment->toArray();
+                    }else{
+                        $files['entity']['issued_id'][] = $attachment->toArray();
+                    }
+            }
+        }
+
+        //return $files;
         return view(
                     'profile.my_profile', 
                     [
                         'user' => $user, 
                         'individualIncomes' => $individualIncomes,
                         'entityIncomes' => $entityIncomes,
-                        'industries' => json_decode($industries)
+                        'industries' => json_decode($industries),
+                        'files' => $files
                     ]
                 );
     }
@@ -63,7 +78,7 @@ class BorrowerController extends Controller
     public function store(StorePersonalInfoRequest $request, Borrower $borrower)
     {
         $data = $request->validated();
-        $data['user_id'] = Auth::user()->id;
+        $data['user_id'] = auth()->user()->id;
         $newBorrower = $borrower->updateOrCreate($data);
         
         if(!$newBorrower){

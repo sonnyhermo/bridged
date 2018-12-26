@@ -32,6 +32,9 @@ class User extends Authenticatable implements MustVerifyEmail
 
     protected $dates = ['deleted_at'];
 
+    public function getFullName(){
+        return "{$this->firstname} {$this->middlename} {$this->lastname}";
+    }
 
     public function borrower(){
         return $this->hasOne('App\Borrower');
@@ -49,7 +52,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany('App\Income');
     }
 
-    public function getFullNameAttribute(){
-        return "{$this->firstname} {$this->middlename} {$this->lastname}";
+    public function attachments(){
+        return $this->hasMany('App\Attachment');
     }
 }
