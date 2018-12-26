@@ -39,19 +39,16 @@ class IncomeController extends Controller
     {
         $data = $request->validated();
     
-        for($i = 0 ; $i < count($data); $i++){
-            $data['income'][$i]['user_id'] = Auth::user()->id;
-            $data['income'][$i]['operation_length'] = (substr($data['income'][$i]['operation_length'],0,1) * 12) + substr($data['income'][$i]['operation_length'],-1);
-        }
-        
-        //return $data['income'];
-        $is_inserted = $income->insert($data['income']);
+        $data['user_id'] = Auth::user()->id;
+        $data['operation_length'] = (substr($data['operation_length'],0,1) * 12) + substr($data['operation_length'],-1);
 
-         if(!$is_inserted){
-            return ['status' => 0, 'title' => 'Error', 'message' => 'Failed to add your profile!'];
+        $is_inserted = $income->create($data);
+
+        if(!$is_inserted){
+            return ['status' => 0, 'message' => 'Failed to add source of income!'];
         }
         
-        return ['status' => 1, 'title' => 'Success', 'message' => ''];
+        return ['status' => 1, 'message' => 'You successfully add a source of income'];
     }
 
     /**

@@ -15,14 +15,6 @@ $(document).ready(function(){
 		}
 	});
 
-	$('#btnAddIncome').click(function(e){
-		e.preventDefault();
-		let incomeLayout = $("#divSourceFund").clone();
-
-		$('#divMoreIncome').append(incomeLayout);
-		$('#divMoreIncome').append('<hr>');
-	});
-
 	$('#personal-form').validate({
 		submitHandler:function(form){
 			$.ajax({
@@ -45,28 +37,30 @@ $(document).ready(function(){
 		}
 	});
 
-	// $('.income-form').validate({
-	// 	submitHandler:function(){
-			// console.log($('.income-form').serialize());
-			// $.ajax({
-			// 	url: '/income',
-			// 	type: 'post',
-			// 	data: $('#income-form').serialize(),
-			// 	dataType: 'json',
-			// 	success: function(res){
-			// 		console.log(res);
-			// 		//profileStepper.next();
-			// 	},
-			// 	error: function(xhr){
-			// 		console.log(xhr.responseText);
-			// 		//ajaxErrorDisplay(xhr.responseText);
-			// 	}
-			// });
+	$('#income-form').validate({
+		submitHandler:function(form){
+			//console.log($(form).serialize());
+			$.ajax({
+				url: $(form).attr('action'),
+				type: 'post',
+				data: $(form).serialize(),
+				dataType: 'json',
+				success: function(res){
+					console.log(res);
+					// ajaxSuccessResponse(res).then(function(value){
+					// 	location.reload();
+					// });
+				},
+				error: function(xhr){
+					console.log(xhr.responseText);
+					//ajaxErrorDisplay(xhr.responseText);
+				}
+			});
 
-	// 	}
-	// })
+		}
+	})
 
-	$('#btn-fund-submit').click(function(e){
+	/*s$('#btn-fund-submit').click(function(e){
 		e.preventDefault();
 
 		let data = [];
@@ -100,7 +94,7 @@ $(document).ready(function(){
 				//ajaxErrorDisplay(xhr.responseText);
 			}
 		});
-	});
+	});*/
 
 	$('#btn-iattach').click(function(e){
 		e.preventDefault();

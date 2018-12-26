@@ -32,7 +32,7 @@
 		<div class="card mt-3">
 			<div class="card-body">
 				<h5 class="card-title float-left">Source of Income</h5>
-				<button class="btn btn-sm float-right" data-toggle="modal" data-target="#fundModal"><i class="fas fa-pen"></i></button>
+				<button class="btn btn-sm float-right" data-toggle="modal" data-target="#ifundModal"><i class="fas fa-plus"></i></button>
 				<div class="clearfix"></div>
 				<hr>
 				<div id="funds">
@@ -43,9 +43,26 @@
 							</div>
 						@else
 							@foreach($individualIncomes as $income)
-								<div class="col-md-6">
-									<p><strong>Source of Fund: {{$income['source']}}
+							<div class="col-md-12 mb-2">
+								<button class="btn btn-sm float-right btn-edit-income" data-income="{{$income['id']}}"><i class="fas fa-pen"></i></button>
+								<div class="incomes">
+									<div class="row">
+										<div class="col-md-6">
+											<p><strong>Source of Fund: {{strtoupper($income['source'])}}</strong></p>
+											<p><strong>Employer/Business Name: {{ucwords($income['employer_name'])}}</strong></p>
+											<p><strong>Employer/Business Tel No.: {{$income['employer_tel']}}</strong></p>
+											<p><strong>Employer/Business Email: {{$income['employer_email']}}</strong></p>
+											<p><strong>Employer/Business Address: {{ucwords($income['employer_address'])}}</strong></p>
+										</div>
+										<div class="col-md-6">
+											<p><strong>Industry: {{$income['industry']}}</strong></p>
+											<p><strong>Job/Position: {{$income['position']}}</strong></p>
+											<p><strong>Length of Operation: {{floor($income['operation_length'] / 12)}} Yr/s {{$income['operation_length']%12}} month/s</strong></p>
+											<p><strong>Monthly Income: {{$income['monthly_income']}}</strong></p>
+										</div>
+									</div>
 								</div>
+							</div>
 							@endforeach
 						@endif
 					</div>
@@ -56,14 +73,68 @@
 		<div class="card mt-3">
 			<div class="card-body">
 				<h5 class="card-title float-left">Attachments</h5>
-				<button class="btn btn-sm float-right"><i class="fas fa-pen"></i></button>
+				<button class="btn btn-sm float-right" data-toggle="modal" data-target="#iattachmentModal"><i class="fas fa-plus"></i></button>
 				<div class="clearfix"></div>
 				<hr>
 				<div id="funds">
 					<div class="row">
 						<div class="col-md-12">
-							<p><strong>No Data to Show</strong></p>
+							<p><strong>Two Gov't Issued Id (Front & Back)</strong></p>
+							<div class="attach-files">
+								<div class="file">
+									<span class="badge badge-pill badge-primary">
+										Postal ID Front
+										<button class="btn btn-sm">
+											<i class="fas fa-trash"></i>
+										</button>
+										<button class="btn btn-sm">
+											<i class="fas fa-pencil-alt"></i>
+										</button>
+									</span>
+								</div>
+								<div class="file">
+									<span class="badge badge-pill badge-primary">
+										Postal ID Back
+										<button class="btn btn-sm">
+											<i class="fas fa-trash"></i>
+										</button>
+										<button class="btn btn-sm">
+											<i class="fas fa-pencil-alt"></i>
+										</button>
+									</span>
+								</div>
+							</div>
 						</div>
+						<!--<div class="col-md-12">
+							<p><strong>Company ID - Front & Back</strong></p>
+							<div class="attach-files">
+								<p><strong>No files attached</strong></p>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<p><strong>Latest Proof of Billing</strong></p>
+							<div class="attach-files">
+								<p><strong>No files attached</strong></p>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<p><strong>Payslip (Ideally 3 Months)</strong></p>
+							<div class="attach-files">
+								<p><strong>No files attached</strong></p>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<p><strong>Certificate of Employment (COE)</strong></p>
+							<div class="attach-files">
+								<p><strong>No files attached</strong></p>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<p><strong>Latest Income Tax Return (ITR)</strong></p>
+							<div class="attach-files">
+								<p><strong>No files attached</strong></p>
+							</div>
+						</div>-->
 					</div>
 				</div>
 			</div>
@@ -73,3 +144,4 @@
 
 @include('profile.personal')
 @include('profile.individual_income')
+@include('profile.individual_attachment')

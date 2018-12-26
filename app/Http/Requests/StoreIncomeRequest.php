@@ -24,7 +24,15 @@ class StoreIncomeRequest extends FormRequest
     public function rules()
     {
         return [
-            'income.*.*' => 'required'
+            'employer_address' => 'required',
+            'employer_email' => 'required',
+            'employer_name' => 'required',
+            'employer_tel' => 'required',
+            'industry' => 'required',
+            'monthly_income' => 'required',
+            'operation_length' => 'required',
+            'position' => 'required',
+            'source' => 'required'
         ];
     }
 }
