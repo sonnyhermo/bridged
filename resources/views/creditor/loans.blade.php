@@ -51,7 +51,7 @@
 	<!--modal for loan comments-->
 	<div class="modal fade" id="loanCommentModal" tabindex="-1" role="dialog" aria-hidden="true">
 		<div class="modal-dialog" role="document">
-			<div class="modal-content">
+			<div class="modal-content ">
 				<div class="modal-header">
 					<h5 class="modal-title">Loan Tracking Progress</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -59,7 +59,19 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					
+					<div id="loan-messages" class="mb-2">
+					</div>
+
+					<form id="loan-message-form">
+						@csrf
+						<input type="hidden" name="application_id" id="application" value="">
+						<div class="input-group input-group-sm mb-3">
+							<input type="text" class="form-control" name="comment" placeholder="Your message here" required autocomplete="off">
+							<div class="input-group-append">
+								<button class="btn btn-outline-secondary" type="submit">Send</button>
+							</div>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>

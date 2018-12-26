@@ -2,21 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Income;
+use App\Comment;
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreIncomeRequest;
-use Auth;
+use App\Http\Requests\StoreCommentRequest;
 
-class IncomeController extends Controller
+class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request, Comment $comment)
     {
-        //
+        return $comment->where('application_id', $request->query('application'))->get()->toJson();
     }
 
     /**
@@ -35,40 +34,38 @@ class IncomeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreIncomeRequest $request, Income $income)
+    public function store(StoreCommentRequest $request, Comment $comment)
     {
         $data = $request->validated();
-    
-        $data['user_id'] = Auth::user()->id;
-        $data['operation_length'] = (substr($data['operation_length'],0,1) * 12) + substr($data['operation_length'],-1);
 
-        $is_inserted = $income->create($data);
+        $is_created = $comment->create($data);
 
-        if(!$is_inserted){
-            return ['status' => 0, 'message' => 'Failed to add source of income!'];
+        if($is_created){
+            return $is_created;
         }
-        
-        return ['status' => 1, 'message' => 'You successfully add a source of income'];
+
+        return response()->json(['status' => 0, 'message' => 'System Error, Please contact Admin']);
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Income  $income
+     * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function show(Income $income)
+    public function show(Comment $comment)
     {
-        //
+
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Income  $income
+     * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function edit(Income $income)
+    public function edit(Comment $comment)
     {
         //
     }
@@ -77,10 +74,10 @@ class IncomeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Income  $income
+     * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Income $income)
+    public function update(Request $request, Comment $comment)
     {
         //
     }
@@ -88,10 +85,10 @@ class IncomeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Income  $income
+     * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Income $income)
+    public function destroy(Comment $comment)
     {
         //
     }

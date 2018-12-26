@@ -110,10 +110,45 @@
 							<label>Requirements</label>
 							<textarea class="form-control" name="requirements" id="txtRequirements" placeholder="Enter Offer Requirements"></textarea>
 						</div>
-						<div class="form-group">
+						<div class="form-group" id="divTerms">
 							<label>Terms and Interest</label>
 							<input type="file" name="terms_rates" class="form-control-file" id="fileIntTerm">
 						</div>
+						<button type="submit" class="btn btn-primary">Submit</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--Modal for term and interest-->
+	<div class="modal fade" id="newTermsModal" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">New Terms & Interest</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="form-group" id="addthru">
+						<label class="col-md-3">Add Thru</label>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio" name="addOption" id="addOption1" value="excel">
+							<label class="form-check-label" for="addOption1">Excel</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio" name="addOption" id="addOption2" value="manual">
+							<label class="form-check-label" for="addOption2">Manual</label>
+						</div>
+					</div>
+					<form action="/admin/terms" method="POST" id="termForm" enctype="multipart/form-data" class="d-none">
+						@csrf
+						<input type="hidden" name="offer_id" id="txtOffer">
+						<div id="inner">
+						</div>
+
 						<button type="submit" class="btn btn-primary">Submit</button>
 					</form>
 				</div>

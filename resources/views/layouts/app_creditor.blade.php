@@ -15,14 +15,15 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/creditor.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="{{ asset('css/light-bootstrap-dashboard.css?v=2.0.1') }}" rel="stylesheet" />
 
 </head>
 <body>
+
     <div class="wrapper">
-        <div class="sidebar" data-image="{{ asset('images/building.jpeg')}}" data-color="orange">
+        <div class="sidebar" data-image="/storage/{{ auth()->guard('creditor')->user()->bank->logo}}" data-color="orange">
             <!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
 
@@ -113,6 +114,7 @@
     <script src="{{ asset('js/light-bootstrap-dashboard.js?v=2.0.1') }}"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="{{ asset('js/utility.js') }}" defer></script>
+    <script src="{{ asset('js/jquery.validate.min.js') }}"></script>
     <script type="text/javascript">
         $.ajaxSetup({
             headers: {

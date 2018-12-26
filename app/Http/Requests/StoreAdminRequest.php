@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreNewPurpose extends FormRequest
+class StoreAdminRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,16 +24,11 @@ class StoreNewPurpose extends FormRequest
     public function rules()
     {
         return [
-            'loan_id' => 'required',
-            'purpose' => 'required',
+            'firstname' => 'required',
+            'middlename' => 'required',
+            'lastname' => 'required',
+            'email' => 'required',
+            'password' => 'required|confirmed',
         ];
-    }
-
-    public function attributes()
-    {
-        return[
-            'loan_id' => 'loan type'
-        ];
-
     }
 }

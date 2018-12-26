@@ -9,8 +9,9 @@
 			<button type="button" class="btn btn-primary btn-fill" data-toggle="modal" data-target="#newAdminModal">
 				Add Admin <span class="fa fa-plus" aria-hidden="true"></span>
 			</button>
-			<button type="button" class="btn btn-primary btn-fill" data-toggle="modal" data-target="#">
-				Admin List <span class="fa fa-list-alt" aria-hidden="true"></span>
+
+			<button type="button" class="btn btn-warning btn-fill" data-toggle="modal" data-target="#adminListModal">
+				Admin List <span class="fa fa-list" aria-hidden="true"></span>
 			</button>
 		</div>
 
@@ -44,6 +45,108 @@
 		</div>
 	</div>
 
+	<!-- Modal for adding admin -->
+	
+	<div class="modal fade" id="newAdminModal" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">New Admin</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form id="adminForm" action="/admin/users">
+						@csrf
+
+                        <div class="form-group row">
+                            <label class="col-md-4 text-right col-form-label">Firstname</label>
+
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" name="firstname" id="txtAdminFirstname" placeholder="Enter Firstname" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-4 text-right col-form-label">Middle Name</label>
+
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" name="middlename" placeholder="Enter Middle Name" id="txtAdminMiddlename" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-4 text-right col-form-label">Last Name</label>
+
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" name="lastname" id="txtAdminLastname" placeholder="Enter Last Name" required>
+                            </div>
+                        </div>
+						
+						<div class="form-group row">
+                            <label class="col-md-4 text-right col-form-label">Email Address</label>
+
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" name="email" id="txtAdminEmail" placeholder="Enter Email" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-4 text-right col-form-label">Password</label>
+
+                            <div class="col-md-8">
+                                <input type="password" class="form-control" name="password" id="txtAdminPassword" placeholder="Enter Password" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-4 text-right col-form-label">Confirm Password</label>
+
+                            <div class="col-md-8">
+                                <input type="password" class="form-control" name="password_confirmation" id="txtAdminCofirmPass" placeholder="Re-Enter Password" required>
+                            </div>
+                        </div>
+
+						<button type="submit" class="btn btn-primary btn-fill">Submit</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal for Admin List -->
+	<div class="modal fade" id="adminListModal" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Admin List</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<table class="table table-striped" id="adminTable">
+						<thead>
+							<tr>
+								<th>First Name</th>
+								<th>Middle Name</th>
+								<th>Surname</th>
+								<th>Email</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							
+						</tbody>
+					</table> 
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
 	<!-- Modal For Adding Creditor -->
 	<div class="modal fade" id="newCreditorModal" tabindex="-1" role="dialog" aria-hidden="true">
 		<div class="modal-dialog" role="document">
@@ -55,14 +158,14 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<form id="creditorForm">
+					<form id="creditorForm" action="/admin/creditors">
 						@csrf
 
 						<div class="form-group row">
                             <label class="col-md-4 text-right col-form-label">Bank</label>
 
                             <div class="col-md-8">
-                                <select class="form-control" name="bank_id" required>
+                                <select class="form-control" name="bank_id" id="selectBank" required>
                                 	<option value="">Choose Creditor Bank</option>
                                 	@foreach($banks as $bank)
                                 	<option value="{{ $bank->id }}">{{ $bank->name }}</option>
@@ -75,7 +178,7 @@
                             <label class="col-md-4 text-right col-form-label">Firstname</label>
 
                             <div class="col-md-8">
-                                <input type="text" class="form-control" name="firstname" placeholder="Enter Firstname" required>
+                                <input type="text" class="form-control" name="firstname" id="txtFirstname" placeholder="Enter Firstname" required>
                             </div>
                         </div>
 
@@ -83,7 +186,7 @@
                             <label class="col-md-4 text-right col-form-label">Middle Name</label>
 
                             <div class="col-md-8">
-                                <input type="text" class="form-control" name="middlename" placeholder="Enter Middle Name" required>
+                                <input type="text" class="form-control" name="middlename" placeholder="Enter Middle Name" id="txtMiddlename" required>
                             </div>
                         </div>
 
@@ -91,7 +194,7 @@
                             <label class="col-md-4 text-right col-form-label">Last Name</label>
 
                             <div class="col-md-8">
-                                <input type="text" class="form-control" name="lastname" placeholder="Enter Last Name" required>
+                                <input type="text" class="form-control" name="lastname" id="txtLastname" placeholder="Enter Last Name" required>
                             </div>
                         </div>
 						
@@ -99,7 +202,7 @@
                             <label class="col-md-4 text-right col-form-label">Email Address</label>
 
                             <div class="col-md-8">
-                                <input type="text" class="form-control" name="email" placeholder="Enter Email" required>
+                                <input type="text" class="form-control" name="email" id="txtEmail" placeholder="Enter Email" required>
                             </div>
                         </div>
 
@@ -107,7 +210,7 @@
                             <label class="col-md-4 text-right col-form-label">Password</label>
 
                             <div class="col-md-8">
-                                <input type="password" class="form-control" name="password" placeholder="Enter Password" required>
+                                <input type="password" class="form-control" name="password" id="txtPassword" placeholder="Enter Password" required>
                             </div>
                         </div>
 
@@ -115,7 +218,7 @@
                             <label class="col-md-4 text-right col-form-label">Confirm Password</label>
 
                             <div class="col-md-8">
-                                <input type="password" class="form-control" name="password_confirmation" placeholder="Re-Enter Password" required>
+                                <input type="password" class="form-control" name="password_confirmation" id="txtCofirmPass" placeholder="Re-Enter Password" required>
                             </div>
                         </div>
 

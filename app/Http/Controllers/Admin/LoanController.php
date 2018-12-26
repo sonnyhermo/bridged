@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreNewLoan;
+use App\Http\Requests\StoreLoan;
 use App\Loan;
 use App\Classification;
 use App\Purpose;
@@ -51,7 +51,7 @@ class LoanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreNewLoan $request)
+    public function store(StoreLoan $request)
     {
 
         $data = $request->validated();
@@ -96,7 +96,7 @@ class LoanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreNewLoan $request, Loan $loan)
+    public function update(StoreLoan $request, Loan $loan)
     {
         $data = $request->validated();
 
@@ -123,10 +123,10 @@ class LoanController extends Controller
         $is_deleted = $loan->delete();
         
         if(!$is_deleted){
-            return json_encode(['status' => 0, 'message' => 'Deleting Loan Failed']);
+            return response()->json(['status' => 0, 'message' => 'Deleting Loan Failed']);
         }
 
-        return json_encode(['status' => 1, 'message' => 'Loan moved in archieved']);
+        return response()->json(['status' => 1, 'message' => 'Loan moved in archieved']);
     }
 
 }

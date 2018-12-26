@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateBankRequest extends FormRequest
+class StoreTermRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,19 +24,9 @@ class UpdateBankRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'email' => 'required',
-            'description' => 'required',
-            'coverage' => 'required',
-            'logo' => 'mimes:jpeg,bmp,png'
+            'offer_id' => 'required|numeric',
+            'term' => 'required|numeric',
+            'interest_rate' => 'required|numeric'
         ];
-    }
-
-    public function attributes()
-    {
-        return[
-            'name' => 'bank name'
-        ];
-
     }
 }

@@ -21,7 +21,27 @@ class BorrowerController extends Controller
 
         $industries = Storage::get('industries.json');
         $user = User::with(['borrower'])->find(Auth::user()->id);
-        return view('profile.my_profile', ['user' => $user, 'industries' => json_decode($industries)]);
+        $incomes = $user->incomes()->get();
+        $individualIncomes = [];
+        $entityIncomes = [];
+
+        foreach($incomes as $income){
+            if($income->borrower_type == 0){
+                array_push($individualIncomes, $income->toArray());
+            }else{
+                array_push($entityIncomes, $income->toArray());
+            }
+        }
+
+        return view(
+                    'profile.my_profile', 
+                    [
+                        'user' => $user, 
+                        'individualIncomes' => $individualIncomes,
+                        'entityIncomes' => $entityIncomes,
+                        'industries' => json_decode($industries)
+                    ]
+                );
     }
 
     /**
@@ -44,7 +64,7 @@ class BorrowerController extends Controller
     {
         $data = $request->validated();
         $data['user_id'] = Auth::user()->id;
-        $newBorrower = $borrower->create($data);
+        $newBorrower = $borrower->updateOrCreate($data);
         
         if(!$newBorrower){
             return ['status' => 0, 'title' => 'Error', 'message' => 'Failed to add your profile!'];
@@ -83,9 +103,16 @@ class BorrowerController extends Controller
      * @param  \App\Borrower  $borrower
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Borrower $borrower)
+    public function update(StorePersonalInfoRequest $request, Borrower $borrower)
     {
-        //
+        $data = $request->validated();
+        $is_updated = $borrower->update($data);
+
+        if(!$is_updated){
+            return response()->json(['status' => 0, 'message' => 'Failed to update information']);
+        }
+
+        return response()->json(['status' => 0, 'message' => 'Information Updated']);
     }
 
     /**

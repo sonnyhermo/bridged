@@ -11,6 +11,7 @@ use App\Classification;
 use App\Purpose;
 use App\Branch;
 use App\Application;
+use App\Creditor;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -79,6 +80,7 @@ class RouteServiceProvider extends ServiceProvider
         });
 
         Route::model('application', Application::class);
+        Route::model('creditor', Creditor::class);
 
         parent::boot();
     }

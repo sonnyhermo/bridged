@@ -23,7 +23,7 @@ $(document).ready(function(){
 		            {
 		            	data: 'fullname',
 		            	render: function(data, type, row){
-		            		return `<a href="/creditor/user/${row.id}">${data}</a>`;
+		            		return `<a href="/creditor/borrower/${row.id}/${row.type}">${data}</a>`;
 		            	}
 		            },
 		            {data: 'classification'},
@@ -44,7 +44,7 @@ $(document).ready(function(){
 		            {
 		            	data: null,
 		            	render: function(data, type, row){
-		            		return '<button class="btn btn-sm" data-toggle="modal" data-target="#loanCommentModal"><i class="fa fa-comment"></i></button>';
+		            		return '<button class="btn btn-sm messages" data-application="'+row.id+'" data-toggle="modal" data-target="#loanCommentModal"><i class="fa fa-comment"></i></button>';
 		            	}
 		            }
 		        ],
@@ -81,5 +81,54 @@ $(document).ready(function(){
         		optionVal.val(previous);
         	}
         })
+    });
+
+    $('#applicationTable tbody').on('click', '.messages', function(){
+    	let application = $(this).data('application');
+    	$('#loan-message-form #application').val(application);
+        $.ajax({
+            url:'/comments',
+            type: 'get',
+            dataType: 'json',
+            data: {application: application},
+            success:function(res){
+              $.each(res, function(key, val){
+                    let objDiv = $("#loan-messages");
+                    let h = objDiv.get(0).scrollHeight;
+                    let comment = `<p class="comments ${((val.user_type == 0)?'fromCreditor':'fromBorrower')}">${val.created_at} ${val.comment}</p>`;
+                    
+                    objDiv.append(comment); 
+                    objDiv.animate({scrollTop: h});
+
+              });
+            },
+            error:function(xhr){
+                console.log(xhr.responseText);
+            }
+        })
+    });
+
+    $('#loan-message-form').validate({
+    	submitHandler: function(form){
+    		let data = new FormData($(form)[0]);
+    		data.append('user_type', 0);
+    		$.ajax({
+    			url:'/comments',
+    			type: 'post',
+    			data: data,
+    			dataType: 'json',
+    			contentType: false,
+    			processData: false,
+    			success: function(res){
+    				let comment = `<p class="comments fromCreditor">${res.created_at} ${res.comment}</p>
+                    <hr>`;
+                    console.log(comment);
+    				$('#loan-messages').append(comment);
+    			},
+    			error:function(xhr){
+    				console.log(xhr.responseText);
+    			}
+    		});
+    	}
     });
 })

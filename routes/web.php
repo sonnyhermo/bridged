@@ -21,13 +21,18 @@ Route::resource('/offers','OfferController');//->middleware('verified');
 
 Route::get('/search_offers', 'OfferController@search')->middleware('auth');
 
-Route::resource('/my-profile','BorrowerController');//->middleware('verified');
+Route::prefix('/my-profile')->group(function(){
+    Route::get('/', 'BorrowerController@index');
+    Route::resource('/borrower','BorrowerController');//->middleware('verified');
+});
 
 Route::resource('/incomes', 'IncomeController');
 
 Route::resource('/applications', 'ApplicationController');
 
 Route::resource('/attachments', 'AttachmentController');
+
+Route::resource('/comments', 'CommentController');
 
 Route::prefix('admin')->group(function() {
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
@@ -39,7 +44,7 @@ Route::prefix('admin')->group(function() {
     Route::resource('/users','Admin\AdminController');
 
     //routes for creditor
-    Route::resource('/creditor','Admin\CreditorController');
+    Route::resource('/creditors','Admin\CreditorController');
 
     //routes for loans
     Route::resource('/loans', 'Admin\LoanController', ['except' => [ 'create' ] ]);
@@ -58,7 +63,10 @@ Route::prefix('admin')->group(function() {
     Route::resource('/offers','Admin\OfferController');
 
     //routes for branch
-    Route::resource('/branches','Admin\BranchController')->only(['store', 'update', 'destroy']);
+    Route::resource('/branches','Admin\BranchController')->only(['edit', 'store', 'update', 'destroy']);
+
+    //routes for term
+    Route::resource('/terms','Admin\TermController');
 
     //routes for datatables
     Route::get('/all_banks', 'Admin\DataTableController@fetchBanks')->name('datatable.banks');
@@ -68,6 +76,8 @@ Route::prefix('admin')->group(function() {
     Route::get('/all_offers', 'Admin\DataTableController@fetchOffers')->name('datatable.offers');
     Route::get('/all_creditors', 'Admin\DataTableController@fetchCreditors')->name('datatable.creditors');
     Route::get('/bank_branches','Admin\DataTableController@fetchBranches')->name('datatable.branches');
+    Route::get('/offer_terms','Admin\DataTableController@fetchTerms')->name('datatable.terms');
+    Route::get('all-admins', 'Admin\DataTableController@fetchAdmins')->name('datatable.admins');
     
 });
 
@@ -93,5 +103,10 @@ Route::prefix('/creditor')->group(function(){
 
     Route::get('/all_unassigned', 'Creditor\DataTableController@getUnassigned');
     Route::get('/user/{id}','Creditor\UserController@getUserInfo');
+    Route::get('/borrower/{borrower}/{type}', 'Creditor\BorrowerController@getBorrower');
+    
 
+    //datatables for creditor portal
+    Route::get('/all_unassigned', 'Creditor\DataTableController@getUnassigned');
+    Route::get('/borrower-applications/{borrower}', 'Creditor\DataTableController@fetchBorrowerLoans');
 });

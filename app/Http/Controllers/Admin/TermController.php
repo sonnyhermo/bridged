@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StorePurpose;
-use App\Purpose;
+use App\Term;
+use App\Http\Requests\StoreTermRequest;
 
-class PurposeController extends Controller
+class TermController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,7 +26,7 @@ class PurposeController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -35,16 +35,17 @@ class PurposeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorePurpose $request, Purpose $purpose)
+    public function store(StoreTermRequest $request, Term $term)
     {
         $data = $request->validated();
-        $data['slug'] = str_slug($data['purpose'].' '.$data['loan_id'], '-');
 
-        $newPurpose = $purpose->create($data);
+        $is_created = $term->create($data);
 
-        if( $newPurpose ){
-            return redirect()->route('loans.index')->with('success','New loan purpose has been added!');
+        if(!$is_created){
+            return response()->json(['status' => 0, 'message' => 'Failed to add new Term']);
         }
+
+        return response()->json(['status' => 1, 'message' => 'Successfully to add term']);
     }
 
     /**
@@ -55,7 +56,7 @@ class PurposeController extends Controller
      */
     public function show($id)
     {
-        return $id;
+        //
     }
 
     /**
@@ -64,9 +65,9 @@ class PurposeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Purpose $purpose)
+    public function edit(Term $term)
     {
-        return $purpose;
+        return $term->toJson();
     }
 
     /**
@@ -76,22 +77,17 @@ class PurposeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StorePurpose $request, Purpose $purpose)
+    public function update(StoreTermRequest $request, Term $term)
     {
         $data = $request->validated();
-        $data['slug'] = str_slug($data['purpose'].' '.$data['loan_id'], '-');
 
-        $purpose->loan_id = $data['loan_id'];
-        $purpose->purpose = $data['purpose'];
-        $purpose->slug = str_slug($data['purpose'].' '.$data['loan_id'], '-');
+        $is_updated = $term->update($data);
 
-        $is_updated = $purpose->save();
-        
         if(!$is_updated){
-            return redirect()->route('loans.index')->with('error','Purpose failed to update');
+            return response()->json(['status' => 0, 'message' => 'Failed to update term']);
         }
-        
-        return redirect()->route('loans.index')->with('success','Purpose Updated');
+
+        return response()->json(['status' => 1, 'message' => 'Successfully to update term']);
     }
 
     /**
@@ -100,14 +96,14 @@ class PurposeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Purpose $purpose)
+    public function destroy(Term $term)
     {
-        $is_deleted = $purpose->delete();
-        
+        $is_deleted = $term->delete();
+
         if(!$is_deleted){
-            return response()->json(['code' => 0, 'message' => 'Deleting purpose Failed']);
+            return response()->json(['status' => 0, 'message' => 'Term failed to remove']);
         }
 
-        return response()->json(['code' => 1, 'message' => 'Purpose Deleted']);
+        return response()->json(['status' => 1, 'message' => 'Term removed successfully']);
     }
 }

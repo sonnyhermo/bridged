@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use Validator;
 use App\Bank;
 use App\Branch;
+use App\Http\Requests\UpdateBranchRequest;
+use Rap2hpoutre\FastExcel\FastExcel;
+use Storage;
 
 class BranchController extends Controller
 {
@@ -72,15 +75,15 @@ class BranchController extends Controller
         
             $newBranch = $branch->create($data);
             if(!$newBranch){
-                return json_encode(['status' => 0, 'message' => 'Adding Branch Failed']);
+                return response()->json(['status' => 0, 'message' => 'Adding Branch Failed']);
             }
     
-            return json_encode(['status' => 1, 'message' => 'Branch Added']);
+            return response()->json(['status' => 1, 'message' => 'Branch Added']);
         }
 
         $tempfile = $request->file('branches')->store('tmp');
 
-        (new FastExcel)->import(storage_path('app/'.$tempfile), function ($line) use ($newBank) {
+        (new FastExcel)->import(storage_path('app/'.$tempfile), function ($line) use ($bank) {
             Branch::create([
                 'bank_id' => $bank->id,
                 'branch' => $line['Branch'],
@@ -114,9 +117,9 @@ class BranchController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Branch $branch)
     {
-        //
+        return $branch->toJson();
     }
 
     /**
@@ -126,9 +129,17 @@ class BranchController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateBranchRequest $request, Branch $branch)
     {
-        //
+        $data = $request->validated();
+
+        $is_updated = $branch->update($data);
+
+        if(!$is_updated){
+            return response()->json(['status' => 0, 'message' => 'Failed to Update Branch']);
+        }
+
+        return response()->json(['status' => 1, 'message' => 'Branch updated successfully']);
     }
 
     /**
@@ -142,9 +153,9 @@ class BranchController extends Controller
         $is_deleted = $branch->delete();
 
         if(!$is_deleted){
-            return json_encode(['status' => 0, 'message' => 'Failed to Remove Branch']);
+            return response()->json(['status' => 0, 'message' => 'Failed to Remove Branch']);
         }
 
-        return json_encode(['status' => 1, 'message' => 'Branch moved in archived']);
+        return response()->json(['status' => 1, 'message' => 'Branch moved in archived']);
     }
 }

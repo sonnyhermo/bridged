@@ -15,57 +15,52 @@ $(document).ready(function(){
 		}
 	});
 
-	$('#btnAddIncome').click(function(e){
-		e.preventDefault();
-		let incomeLayout = $("#divSourceFund").clone();
-
-		$('#divMoreIncome').append(incomeLayout);
-		$('#divMoreIncome').append('<hr>');
-	});
-
 	$('#personal-form').validate({
-		submitHandler:function(){
-			// $.ajax({
-			// 	url: '/profile/user',
-			// 	type: 'post',
-			// 	data: $('#personal-form').serialize(),
-			// 	dataType: 'json',
-			// 	success: function(res){
-			// 		console.log(res);
-			// 		profileStepper.next();
-			// 	},
-			// 	error: function(xhr){
-			// 		console.log(xhr.responseText);
-			// 		//ajaxErrorDisplay(xhr.responseText);
-			// 	}
-			// });
+		submitHandler:function(form){
+			$.ajax({
+				url: $(form).attr('action'),
+				type: 'post',
+				data: $(form).serialize(),
+				dataType: 'json',
+				success: function(res){
+					console.log(res);
+					// ajaxSuccessResponse(res).then(function(value){
+					// 	location.reload();
+					// });
+				},
+				error: function(xhr){
+					console.log(xhr.responseText);
+					//ajaxErrorDisplay(xhr.responseText);
+				}
+			});
 
-			profileStepper.next();
 		}
 	});
 
-	// $('.income-form').validate({
-	// 	submitHandler:function(){
-			// console.log($('.income-form').serialize());
-			// $.ajax({
-			// 	url: '/income',
-			// 	type: 'post',
-			// 	data: $('#income-form').serialize(),
-			// 	dataType: 'json',
-			// 	success: function(res){
-			// 		console.log(res);
-			// 		//profileStepper.next();
-			// 	},
-			// 	error: function(xhr){
-			// 		console.log(xhr.responseText);
-			// 		//ajaxErrorDisplay(xhr.responseText);
-			// 	}
-			// });
+	$('#income-form').validate({
+		submitHandler:function(form){
+			//console.log($(form).serialize());
+			$.ajax({
+				url: $(form).attr('action'),
+				type: 'post',
+				data: $(form).serialize(),
+				dataType: 'json',
+				success: function(res){
+					console.log(res);
+					// ajaxSuccessResponse(res).then(function(value){
+					// 	location.reload();
+					// });
+				},
+				error: function(xhr){
+					console.log(xhr.responseText);
+					//ajaxErrorDisplay(xhr.responseText);
+				}
+			});
 
-	// 	}
-	// })
+		}
+	})
 
-	$('#btn-fund-submit').click(function(e){
+	/*s$('#btn-fund-submit').click(function(e){
 		e.preventDefault();
 
 		let data = [];
@@ -86,7 +81,7 @@ $(document).ready(function(){
 		});
 		console.log(serialize);
 		$.ajax({
-			url: '/income',
+			url: '/incomes',
 			type: 'post',
 			data: {income:serialize},
 			dataType: 'json',
@@ -99,32 +94,41 @@ $(document).ready(function(){
 				//ajaxErrorDisplay(xhr.responseText);
 			}
 		});
-	});
+	});*/
 
 	$('#btn-iattach').click(function(e){
 		e.preventDefault();
-		/*let formData = new FormData();
-		let data = [];
-		$('.i-requirement').each(function(){
-			data.push({'filename':$(this).find('input[name=filename]').val(),'files':$(this).find('input[type=file]').get(0).files});
+
+		let arrImages = [];
+		let formData = new FormData();
+		
+		$('.i-requirement').each(function(i, div){
+			let filename = $(div).find('input[name=filename]').val();
+			let images = $(div).find('input[name=files]')[0].files;
+			if(images.length != 0){
+				$.each(images, function(key, val){
+					console.log(images[key]);
+					formData.append(filename+'[]', images[key], images[key].filename );
+				})
+			}
+		
 		});
-		formData.append('requirements', data);
+
 
 		$.ajax({
-			url: '/attachments',
+			url:'/attachments',
 			type: 'post',
-			data: data,
-			contentType: 'false',
-			processData: false,
+			data: formData,
 			dataType: 'json',
-			success: function(res){
+			processData: false,
+			contentType: false,
+			success:function(res){
 				console.log(res);
 			},
 			error:function(xhr){
 				console.log(xhr.responseText);
 			}
-		})*/
-
+		})
 	})
 
 	$('.previous').click(function(e){
