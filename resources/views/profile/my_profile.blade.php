@@ -25,6 +25,11 @@
 @endsection
 
 @push('scripts')
+		@if(!is_null($user->spouse))
+		<script>
+			let spouse = @json(array_except($user->spouse, ['id','user_id']));
+		</script>
+		@endif
     <script src="{{ asset('js/jquery.validate.min.js') }}"></script>
     <script src="{{ asset('js/borrower/profile.js') }}"></script>
 @endpush

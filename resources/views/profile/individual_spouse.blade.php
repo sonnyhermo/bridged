@@ -15,6 +15,13 @@
 					@endif
 					
 					@include('profile.spouse_coborrower_form')
+					
+					<div class="form-check mb-3">
+						<input class="form-check-input" name="duplicate" type="checkbox" value="1" id="checkCoBorrower">
+						<label class="form-check-label" for="checkCoBorrower">
+							Check the box if Spouse is also the Co-Borrower
+						</label>
+					</div>
 
 					<button type="submit" class="btn btn-primary btn-spouse-submit">Next</button>
 				</form>

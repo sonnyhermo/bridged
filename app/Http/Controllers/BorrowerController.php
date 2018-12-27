@@ -20,13 +20,12 @@ class BorrowerController extends Controller
     {
 
         $industries = Storage::get('industries.json');
-        $user = User::with(['borrower'])->find(auth()->user()->id);
+        $user = User::with(['borrower', 'spouse'])->find(auth()->user()->id);
         $incomes = $user->incomes()->get();
         $individualIncomes = [];
         $entityIncomes = [];
         $attachments = $user->attachments()->get();
         $files = [];
-
         foreach($incomes as $income){
             if($income->borrower_type == 0){
                 array_push($individualIncomes, $income->toArray());

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSpouseTable extends Migration
+class CreateCoBorrowersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateSpouseTable extends Migration
      */
     public function up()
     {
-        Schema::create('spouse', function (Blueprint $table) {
+        Schema::create('co_borrowers', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
             $table->string('firstname');
@@ -39,6 +39,6 @@ class CreateSpouseTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('spouse');
+        Schema::dropIfExists('co_borrowers');
     }
 }

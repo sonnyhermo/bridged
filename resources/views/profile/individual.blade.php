@@ -259,18 +259,18 @@
 				<div id="spouse-info">
 					<div class="row">
 						<div class="col-md-6">
-							<p><strong>Name: </strong></p>
-							<p><strong>Gender: </strong></p>
-							<p><strong>Nationality: </strong></p>
-							<p><strong>Birth Date: </strong></p>
-							<p><strong>Residence Address: </strong></p>
+							<p><strong>Name: {{(!is_null($user->spouse))?$user->spouse->getFullName():''}}</strong></p>
+							<p><strong>Gender: {{(!is_null($user->spouse))?'male':''}}</strong></p>
+							<p><strong>Nationality: {{(!is_null($user->spouse))?$user->spouse->nationality:''}}</strong></p>
+							<p><strong>Birth Date: {{(!is_null($user->spouse))?$user->spouse->birth_date:''}}</strong></p>
+							<p><strong>Residence Address: {{(!is_null($user->spouse))?$user->spouse->residence_address:''}}</strong></p>
 						</div>
 						<div class="col-md-6">
-							<p><strong>Employer/Business Name: </strong></p>
-							<p><strong>Job Title/Position: </strong></p>
-							<p><strong>Tenure: </strong></p>
-							<p><strong>Industry: </strong></p>
-							<p><strong>Employer/Business Address: </strong></p>
+							<p><strong>Employer/Business Name: {{(!is_null($user->spouse))?$user->spouse->employer:''}}</strong></p>
+							<p><strong>Job Title/Position: {{(!is_null($user->spouse))?$user->spouse->position:''}}</strong></p>
+							<p><strong>Tenure: {{(!is_null($user->spouse))?$user->spouse->tenure:''}}</strong></p>
+							<p><strong>Industry: {{(!is_null($user->spouse))?$user->spouse->industry:''}}</strong></p>
+							<p><strong>Employer/Business Address: {{(!is_null($user->spouse))?$user->spouse->employer_address:''}}</strong></p>
 						</div>
 					</div>
 				</div>

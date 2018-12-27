@@ -14,7 +14,7 @@ class Income extends Model
         'created_at', 'updated_at'
     ];
 
-    public function borrower(){
-        return $this->belongsTo('App\Borrower');
+    public function user(){
+        return $this->belongsTo('App\User');
     }
 }

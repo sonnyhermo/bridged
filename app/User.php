@@ -55,4 +55,12 @@ class User extends Authenticatable implements MustVerifyEmail
     public function attachments(){
         return $this->hasMany('App\Attachment');
     }
+
+    public function spouse(){
+        return $this->hasOne('App\Spouse');
+    }
+
+    public function coBorrower(){
+        return $this->hasOne('App\CoBorrower');
+    }
 }

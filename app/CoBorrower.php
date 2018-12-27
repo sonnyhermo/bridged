@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Spouse extends Model
+class CoBorrower extends Model
 {
     protected $fillable = [
         'user_id',

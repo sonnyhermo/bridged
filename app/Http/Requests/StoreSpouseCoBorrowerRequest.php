@@ -24,17 +24,17 @@ class StoreSpouseCoBorrowerRequest extends FormRequest
     public function rules()
     {
         return [
-            'firstname' => 'required'
-            'middlename' => 'required'
-            'lastname' => 'required'
-            'gender' => 'required'
-            'nationality' => 'required'
-            'birth_date' => 'required'
-            'residence_address' => 'required'
-            'employer' => 'required'
-            'industry' => 'required'
-            'employer_address' => 'required'
-            'position' => 'required'
+            'firstname' => 'required',
+            'middlename' => 'required',
+            'lastname' => 'required',
+            'gender' => 'required',
+            'nationality' => 'required',
+            'birth_date' => 'required',
+            'residence_address' => 'required',
+            'employer' => 'required',
+            'industry' => 'required',
+            'employer_address' => 'required',
+            'position' => 'required',
             'tenure' => 'required'
         ];
     }

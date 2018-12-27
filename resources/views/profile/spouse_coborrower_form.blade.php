@@ -53,7 +53,7 @@
 	<div class="col-md-12">
 		<div class="form-group">
 			<label>Residence Address<span class="text-danger">*</span></label>
-			<input type="text" class="form-control txtSpouseCoBorrowerResidence" name="address" placeholder="Enter Residence Address" required>
+			<input type="text" class="form-control txtSpouseCoBorrowerResidence" name="residence_address" placeholder="Enter Residence Address" required>
 		</div>
 	</div>
 </div>
@@ -61,7 +61,7 @@
 	<div class="col-md-8">
 		<div class="form-group">
 			<label>Employer/Business Name<span class="text-danger">*</span></label>
-			<input type="text" class="form-control txtSpouseCoBorrowerEmployer" name="employer_name" placeholder="Enter Employer Name" required>
+			<input type="text" class="form-control txtSpouseCoBorrowerEmployer" name="employer" placeholder="Enter Employer Name" required>
 		</div>
 	</div>
 	<div class="col-md-4">
