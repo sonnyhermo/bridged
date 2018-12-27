@@ -38,16 +38,16 @@
 							<div class="form-group row">
 								<div class="col-md-12">Gender<span class="text-danger">*</span></div>
 								<div class="col-md-12">
-										<div class="form-check-inline">
-											<label class="form-check-label">
-											<input type="radio" class="form-check-input" name="gender" value="0" {{($user->borrower->gender==0)?'checked':''}}>Male
-											</label>
-										</div>
-										<div class="form-check-inline">
-											<label class="form-check-label">
-											<input type="radio" class="form-check-input" name="gender" value="1" {{($user->borrower->gender==1)?'checked':''}}>Female
-											</label>
-										</div>
+									<div class="form-check-inline">
+										<label class="form-check-label">
+										<input type="radio" class="form-check-input" name="gender" value="0" {{($user->borrower->gender==0)?'checked':''}}>Male
+										</label>
+									</div>
+									<div class="form-check-inline">
+										<label class="form-check-label">
+										<input type="radio" class="form-check-input" name="gender" value="1" {{($user->borrower->gender==1)?'checked':''}}>Female
+										</label>
+									</div>
 								</div>
 							</div>
 						</div>

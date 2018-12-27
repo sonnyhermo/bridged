@@ -211,14 +211,23 @@ footer ul li:not(:first-child), footer p{
 	border-bottom: 1px solid rgba(0,0,0,.1)
 }
 
+#attachments p{
+	margin-bottom: 0 !important;
+	margin-top:
+}
+
 .badge button{
 	border-radius: 50%;
 }
 
 .file{
-	display: inline;
+	display: inline-block;
 }
 
 .file .btn-sm{
 	line-height: .5 !important;
+}
+
+.badge-secondary{
+	line-height: 2.1 !important;
 }

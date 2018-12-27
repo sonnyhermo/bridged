@@ -76,13 +76,13 @@
 				<button class="btn btn-sm float-right" data-toggle="modal" data-target="#iattachmentModal"><i class="fas fa-plus"></i></button>
 				<div class="clearfix"></div>
 				<hr>
-				<div id="funds">
+				<div id="attachments">
 					<div class="row">
-						<div class="col-md-12">
+						<div class="col-md-4 mb-3">
 							<p><strong>Two Gov't Issued Id (Front & Back)</strong></p>
-							<div class="attach-files">
+							@if(array_key_exists('individual', $files) && array_key_exists('issued_id', $files['individual']))
 								@foreach($files['individual']['issued_id'] as $file)
-								<div class="file">
+								<div class="file pl-2 pt-2">
 									<span class="badge badge-pill badge-primary">
 										{{$file['filename']}}
 										<button class="btn btn-sm">
@@ -94,38 +94,210 @@
 									</span>
 								</div>
 								@endforeach
-							</div>
+							@else
+								<div class="file pl-2 pt-2">
+									<span class="badge badge-pill badge-secondary">
+										No Files Available
+									</span>
+								</div>
+							@endif
 						</div>
-						<!--<div class="col-md-12">
+						<div class="col-md-4 mb-3">
 							<p><strong>Company ID - Front & Back</strong></p>
-							<div class="attach-files">
-								<p><strong>No files attached</strong></p>
-							</div>
+							@if(array_key_exists('individual', $files) && array_key_exists('company_id', $files['individual']))
+								@foreach($files['individual']['company_id'] as $file)
+								<div class="file pl-2 pt-2">
+									<span class="badge badge-pill badge-primary">
+										{{$file['filename']}}
+										<button class="btn btn-sm">
+											<i class="fas fa-trash"></i>
+										</button>
+										<button class="btn btn-sm">
+											<i class="fas fa-pencil-alt"></i>
+										</button>
+									</span>
+								</div>
+								@endforeach
+							@else
+								<div class="file pl-2 pt-2">
+									<span class="badge badge-pill badge-secondary">
+										No Files Available
+									</span>
+								</div>
+							@endif
 						</div>
-						<div class="col-md-12">
+						<div class="col-md-4 mb-3">
 							<p><strong>Latest Proof of Billing</strong></p>
-							<div class="attach-files">
-								<p><strong>No files attached</strong></p>
-							</div>
+							@if(array_key_exists('individual', $files) && array_key_exists('billing', $files['individual']))
+								@foreach($files['individual']['billing'] as $file)
+								<div class="file pl-2 pt-2">
+									<span class="badge badge-pill badge-primary">
+										{{$file['filename']}}
+										<button class="btn btn-sm">
+											<i class="fas fa-trash"></i>
+										</button>
+										<button class="btn btn-sm">
+											<i class="fas fa-pencil-alt"></i>
+										</button>
+									</span>
+								</div>
+								@endforeach
+							@else
+								<div class="file pl-2 pt-2">
+									<span class="badge badge-pill badge-secondary">
+										No Files Available
+									</span>
+								</div>
+							@endif
 						</div>
-						<div class="col-md-12">
+						<div class="col-md-4 mb-3">
 							<p><strong>Payslip (Ideally 3 Months)</strong></p>
-							<div class="attach-files">
-								<p><strong>No files attached</strong></p>
-							</div>
+							@if(array_key_exists('individual', $files) && array_key_exists('payslip', $files['individual']))
+								@foreach($files['individual']['payslip'] as $file)
+								<div class="file pl-2 pt-2">
+									<span class="badge badge-pill badge-primary">
+										{{$file['filename']}}
+										<button class="btn btn-sm">
+											<i class="fas fa-trash"></i>
+										</button>
+										<button class="btn btn-sm">
+											<i class="fas fa-pencil-alt"></i>
+										</button>
+									</span>
+								</div>
+								@endforeach
+							@else
+								<div class="file pl-2 pt-2">
+									<span class="badge badge-pill badge-secondary">
+										No Files Available
+									</span>
+								</div>
+							@endif
 						</div>
-						<div class="col-md-12">
+						<div class="col-md-4 mb-3">
 							<p><strong>Certificate of Employment (COE)</strong></p>
-							<div class="attach-files">
-								<p><strong>No files attached</strong></p>
-							</div>
+							@if(array_key_exists('individual', $files) && array_key_exists('coe', $files['individual']))
+								@foreach($files['individual']['coe'] as $file)
+								<div class="file pl-2 pt-2">
+									<span class="badge badge-pill badge-primary">
+										{{$file['filename']}}
+										<button class="btn btn-sm">
+											<i class="fas fa-trash"></i>
+										</button>
+										<button class="btn btn-sm">
+											<i class="fas fa-pencil-alt"></i>
+										</button>
+									</span>
+								</div>
+								@endforeach
+							@else
+								<div class="file pl-2 pt-2">
+									<span class="badge badge-pill badge-secondary">
+										No Files Available
+									</span>
+								</div>
+							@endif
 						</div>
-						<div class="col-md-12">
+						<div class="col-md-4 mb-3">
 							<p><strong>Latest Income Tax Return (ITR)</strong></p>
-							<div class="attach-files">
-								<p><strong>No files attached</strong></p>
-							</div>
-						</div>-->
+							@if(array_key_exists('individual', $files) && array_key_exists('itr', $files['individual']))
+								@foreach($files['individual']['itr'] as $file)
+								<div class="file pl-2 pt-2">
+									<span class="badge badge-pill badge-primary">
+										{{$file['filename']}}
+										<button class="btn btn-sm">
+											<i class="fas fa-trash"></i>
+										</button>
+										<button class="btn btn-sm">
+											<i class="fas fa-pencil-alt"></i>
+										</button>
+									</span>
+								</div>
+								@endforeach
+							@else
+								<div class="file pl-2 pt-2">
+									<span class="badge badge-pill badge-secondary">
+										No Files Available
+									</span>
+								</div>
+							@endif
+						</div>
+						<div class="col-md-12 mb-3">
+							<p><strong>Other Attachments</strong></p>
+							@if(array_key_exists('individual', $files) && array_key_exists('other', $files['individual']))
+								@foreach($files['individual']['other'] as $file)
+								<div class="file pl-2 pt-2">
+									<span class="badge badge-pill badge-primary">
+										{{$file['filename']}}
+										<button class="btn btn-sm">
+											<i class="fas fa-trash"></i>
+										</button>
+										<button class="btn btn-sm">
+											<i class="fas fa-pencil-alt"></i>
+										</button>
+									</span>
+								</div>
+								@endforeach
+							@else
+								<div class="file pl-2 pt-2">
+									<span class="badge badge-pill badge-secondary">
+										No Files Available
+									</span>
+								</div>
+							@endif
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="card mt-3">
+			<div class="card-body">
+				<h5 class="card-title float-left">Spouse Info</h5>
+				<button class="btn btn-sm float-right" data-toggle="modal" data-target="#ispouseModal"><i class="fas fa-plus"></i></button>
+				<div class="clearfix"></div>
+				<hr>
+				<div id="spouse-info">
+					<div class="row">
+						<div class="col-md-6">
+							<p><strong>Name: </strong></p>
+							<p><strong>Gender: </strong></p>
+							<p><strong>Nationality: </strong></p>
+							<p><strong>Birth Date: </strong></p>
+							<p><strong>Residence Address: </strong></p>
+						</div>
+						<div class="col-md-6">
+							<p><strong>Employer/Business Name: </strong></p>
+							<p><strong>Job Title/Position: </strong></p>
+							<p><strong>Tenure: </strong></p>
+							<p><strong>Industry: </strong></p>
+							<p><strong>Employer/Business Address: </strong></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="card mt-3">
+			<div class="card-body">
+				<h5 class="card-title float-left">Co-Borrower Info</h5>
+				<button class="btn btn-sm float-right" data-toggle="modal" data-target="#icoborrowerModal"><i class="fas fa-plus"></i></button>
+				<div class="clearfix"></div>
+				<hr>
+				<div id="coborrower-info">
+					<div class="row">
+						<div class="col-md-6">
+							<p><strong>Name: </strong></p>
+							<p><strong>Gender: </strong></p>
+							<p><strong>Nationality: </strong></p>
+							<p><strong>Birth Date: </strong></p>
+							<p><strong>Residence Address: </strong></p>
+						</div>
+						<div class="col-md-6">
+							<p><strong>Employer/Business Name: </strong></p>
+							<p><strong>Job Title/Position: </strong></p>
+							<p><strong>Tenure: </strong></p>
+							<p><strong>Industry: </strong></p>
+							<p><strong>Employer/Business Address: </strong></p>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -136,3 +308,5 @@
 @include('profile.personal')
 @include('profile.individual_income')
 @include('profile.individual_attachment')
+@include('profile.individual_spouse')
+@include('profile.individual_coborrower')

@@ -72,7 +72,9 @@ $(document).ready(function(){
 				contentType: false,
 				processData: false,
 				success: function(res){
-					console.log(res);
+					ajaxSuccessResponse(res).then(function(value){
+						location.reload();
+					});
 				},
 				error: function(xhr){
 					console.log(xhr.responseText);
@@ -80,4 +82,10 @@ $(document).ready(function(){
 			})
 		}
 	});
+
+	$('#individual-spouse-form').validate({
+		submitHandler: function(form){
+			console.log($(form).serialize());
+		}
+	})
 });
