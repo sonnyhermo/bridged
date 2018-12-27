@@ -66,8 +66,13 @@
 	</div>
 	<div class="col-md-4">
 		<div class="form-group">
-			<label>Industry<span class="text-danger">*</span></label>
-			<input type="text" class="form-control txtSpouseCoBorrowerIndustry" name="industry" placeholder="Enter Industry" required>
+			<label >Industry <span class="text-danger">*</span></label>
+			<select class="form-control" name="industry" required>
+				<option value="">Select Industry</option>
+				@foreach($industries->industries as $industry)
+				<option value="{{ $industry }}">{{ $industry }}</option>
+				@endforeach
+			</select>
 		</div>
 	</div>
 </div>

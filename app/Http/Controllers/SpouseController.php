@@ -6,6 +6,7 @@ use App\Spouse;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreSpouseCoBorrowerRequest;
 
+
 class SpouseController extends Controller
 {
     /**
@@ -39,13 +40,13 @@ class SpouseController extends Controller
         $data = $request->validated();
         $data['user_id'] = auth()->user()->id;
 
-        $is_created = $spouse->create($data);
+        $is_created = $spouse->updateOrCreate($data);
 
         if(!$is_created){
-            return response()->json(['status' => 0, 'message' => 'Spouse information has been saved']);
+            return response()->json(['status' => 0, 'message' => 'Saving spouse information failed']);
         }
 
-        return response()->json(['status' => 1, 'message' => 'Saving spouse information failed']);
+        return response()->json(['status' => 1, 'message' => 'Spouse information has been saved']);
     }
 
     /**

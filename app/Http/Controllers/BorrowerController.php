@@ -82,10 +82,10 @@ class BorrowerController extends Controller
         $newBorrower = $borrower->updateOrCreate($data);
         
         if(!$newBorrower){
-            return ['status' => 0, 'title' => 'Error', 'message' => 'Failed to add your profile!'];
+            return ['status' => 0, 'message' => 'Failed to add your profile!'];
         }
         
-        return ['status' => 1, 'title' => 'Success', 'message' => ''];
+        return ['status' => 1, 'message' => 'Your information is updated'];
 
     }
 

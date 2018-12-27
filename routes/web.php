@@ -24,6 +24,7 @@ Route::get('/search_offers', 'OfferController@search')->middleware('auth');
 Route::prefix('/my-profile')->group(function(){
     Route::get('/', 'BorrowerController@index');
     Route::resource('/borrower','BorrowerController');//->middleware('verified');
+    Route::resource('/spouse', 'SpouseController');
 });
 
 Route::resource('/incomes', 'IncomeController');

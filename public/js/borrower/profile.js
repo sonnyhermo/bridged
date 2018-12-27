@@ -86,6 +86,19 @@ $(document).ready(function(){
 	$('#individual-spouse-form').validate({
 		submitHandler: function(form){
 			console.log($(form).serialize());
+			$.ajax({
+				url: '/my-profile/spouse',
+				type: 'post',
+				dataType: 'json',
+				data: $(form).serialize(),
+				success:function(res){
+					console.log(res);
+				},
+				error: function(xhr){
+					ajaxErrorDisplay(xhr.responseText);
+				}
+
+			});
 		}
 	})
 });
